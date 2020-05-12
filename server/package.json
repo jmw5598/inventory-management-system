@@ -18,15 +18,30 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "migration:create": "ts-node node_modules/.bin/typeorm migration:create",
+    "migration:generate": "ts-node node_modules/.bin/typeorm migration:generate",
+    "migration:run": "ts-node node_modules/.bin/typeorm migration:run",
+    "migration:revert": "ts-node node_modules/.bin/typeorm migration:revert"
   },
   "dependencies": {
     "@nestjs/common": "^7.0.0",
+    "@nestjs/config": "^0.4.2",
     "@nestjs/core": "^7.0.0",
+    "@nestjs/jwt": "^7.0.0",
+    "@nestjs/passport": "^7.0.0",
     "@nestjs/platform-express": "^7.0.0",
+    "@nestjs/typeorm": "^7.0.0",
+    "@types/bcrypt": "^3.0.0",
+    "bcrypt": "^4.0.1",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "pg": "^8.1.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^6.5.4"
+    "rxjs": "^6.5.4",
+    "typeorm": "^0.2.24"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.0.0",
@@ -35,6 +50,8 @@
     "@types/express": "^4.17.3",
     "@types/jest": "25.1.4",
     "@types/node": "^13.9.1",
+    "@types/passport-jwt": "^3.0.3",
+    "@types/passport-local": "^1.0.33",
     "@types/supertest": "^2.0.8",
     "@typescript-eslint/eslint-plugin": "^2.23.0",
     "@typescript-eslint/parser": "^2.23.0",
