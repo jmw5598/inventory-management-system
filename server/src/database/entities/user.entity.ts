@@ -3,10 +3,10 @@ import { BaseEntity } from './base.entity';
 import { Role } from './role.entity';
 import { Account } from './account.entity';
 
-@Entity()
+@Entity({ name: 'app_user' })
 export class User extends BaseEntity {
   @Column({ nullable: false, unique: true })
-  public email: string;
+  public username: string;
 
   @Column({ nullable: false })
   public password: string;

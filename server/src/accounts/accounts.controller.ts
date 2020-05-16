@@ -2,10 +2,15 @@ import { Controller, UseGuards, Get, Post, Request } from '@nestjs/common';
 import { AuthenticationService } from '../authentication/authentication.service';
 import { LocalAuthenticationGuard } from '../authentication/guards/local-authentication.guard';
 import { JwtAuthenticationGuard } from '../authentication/guards/jwt-authentication.guard';
+import { UsersService } from '../common/users/users.service';
+import { User } from '../database/entities/user.entity';
 
 @Controller('accounts')
 export class AccountsController {
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(
+    private authenticationService: AuthenticationService,
+    private usersService: UsersService
+   ) {}
 
   @UseGuards(LocalAuthenticationGuard)
   @Post('login')
@@ -19,10 +24,12 @@ export class AccountsController {
     return req.user;
   }
 
-  @Get('register')
+  @Post('register')
   public async registerAccount(@Request() req) {
-    // @@@ create account and send email verification
-    return "Registered"
+    const user: User = await this.usersService.create(req.body);
+    user.password = "";
+
+    return user;
   }
 
   //@@@ Verify email endpoint

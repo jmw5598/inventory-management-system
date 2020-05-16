@@ -10,6 +10,9 @@ export class Profile extends BaseEntity {
   @Column({ name: 'last_name', nullable: false })
   public lastName: string;
 
+  @Column({ nullable: false })
+  public email: string;
+
   @OneToOne(type => Address)
   @JoinColumn({ name: 'address_id' })
   public address: Address;
