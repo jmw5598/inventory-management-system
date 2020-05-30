@@ -5,6 +5,11 @@
   "projects": {
     "core": {
       "projectType": "library",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "root": "projects/core",
       "sourceRoot": "projects/core/src",
       "prefix": "inv",

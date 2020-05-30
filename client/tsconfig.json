@@ -16,7 +16,7 @@
       "dom"
     ],
     "paths": {
-      "core": [
+      "@inv/core": [
         "dist/core/core",
         "dist/core"
       ]
