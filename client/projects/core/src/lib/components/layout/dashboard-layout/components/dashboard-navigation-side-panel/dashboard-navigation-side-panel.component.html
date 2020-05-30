@@ -1,0 +1,13 @@
+<div class="navigation-panel">
+  <div class="navigation-panel-brand">L<span [ngClass]="currentPanelState">ogo</span></div>
+  <ul class="navigation-panel-menu" *ngIf="links && links.length > 0">
+    <li *ngFor="let link of links">
+      <a [routerLink]="link.url" 
+          [routerLinkActive]="['active']"
+          [routerLinkActiveOptions]="{exact: true}">
+        <i class="fas fa-home" [ngClass]="link.iconClass"></i>
+        <span [ngClass]="currentPanelState">{{ link.text }}</span>
+      </a>
+    </li>
+  </ul>
+</div>

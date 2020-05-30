@@ -1,0 +1,28 @@
+$background: #F6F6F8;
+$background-nav-top: #FFFFFF;
+$nav-panel-hover: #38495F;
+$nav-panel-active: darken(#38495F, 2%);
+
+.navigation-top-bar {
+  background: $background-nav-top;
+  width: 100%;
+  height: 75px;
+  line-height: 75px;
+  border-bottom: 1px solid darken($background, 5%);
+
+  .toggler {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    width: 75px;
+    border-right: 1px solid darken($background, 5%);
+    text-align: center;
+
+    svg {
+      fill: darken($background, 10%);
+      cursor: pointer;
+    }
+  }
+}

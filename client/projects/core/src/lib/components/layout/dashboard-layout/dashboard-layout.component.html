@@ -1,0 +1,13 @@
+<div class="container" [ngClass]="sidePanelPosition">
+  <div class="left-column"[ngClass]="sidePanelState">
+    <ng-content select="[container=sidePanel]"></ng-content>
+  </div>
+  <div class="right-column">
+    <div class="navigation-bar">
+      <ng-content select="[container=navigationBar]"></ng-content>
+    </div>
+    <div class="main-content">
+      <ng-content select="[container=mainContent]"></ng-content>
+    </div>
+  </div>
+</div>
