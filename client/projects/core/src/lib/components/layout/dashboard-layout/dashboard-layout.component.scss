@@ -1,3 +1,6 @@
+$panel-expanded-width: 250px;
+$panel-collapsed-width: 75px;
+
 @mixin sticky {
     position: -webkit-sticky;
     position: sticky;
@@ -23,7 +26,7 @@
     overflow: hidden;
 
     &.open {
-      flex: 0 0 350px;
+      flex: 0 0 $panel-expanded-width;
     }
 
     &.close {
@@ -31,7 +34,7 @@
     }
 
     &.collapse {
-      flex: 0 0 75px;
+      flex: 0 0 $panel-collapsed-width;
     }
   }
 

@@ -34,6 +34,9 @@ export class DashboardLayoutComponent implements OnInit, OnDestroy {
       .subscribe((state: DashboardLayoutSidePanelState) => this.sidePanelState = state);
   }
 
+  // @@@ remove this from the dashboard layout.
+  
+  // @@@ listend and store the current width.  Use this width to change the panel state
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     const width: number = window.innerWidth;

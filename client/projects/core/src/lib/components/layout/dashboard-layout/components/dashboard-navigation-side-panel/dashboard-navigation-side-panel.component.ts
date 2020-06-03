@@ -22,10 +22,38 @@ export class DashboardNavigationSidePanelComponent implements OnInit {
     this._subscriptionsSubject$ = new Subject<void>();
   }
 
+  // @@@ TODO listen for pane changes, on collapse/close contract the submenus
+
+
   ngOnInit(): void {
     this._sidePanelService.panelStateChanges
       .pipe(takeUntil(this._subscriptionsSubject$))
-      .subscribe((state: DashboardLayoutSidePanelState) => this.currentPanelState = state);
+      .subscribe((state: DashboardLayoutSidePanelState) => this._updateCurrentPanelState(state));
+  }
+
+  public handleLinkExpansion(link: NavigationLink): void {
+    if (this.currentPanelState === DashboardLayoutSidePanelState.CLOSE 
+        || this.currentPanelState === DashboardLayoutSidePanelState.COLLAPSE) {
+      this._sidePanelService.changeState(DashboardLayoutSidePanelState.OPEN);
+      this.links.forEach(e => e.isExpanded = true);
+    } else {
+
+    }
+
+    // @@@ on open expand all submenus
+    // @@@ on collapse/close close all submenues
+
+    
+    link.isExpanded = !link.isExpanded;
+  }
+
+  private _updateCurrentPanelState(state: DashboardLayoutSidePanelState) {
+    if (state === DashboardLayoutSidePanelState.CLOSE || state === DashboardLayoutSidePanelState.COLLAPSE) {
+      this.links.forEach(e => e.isExpanded ? e.isExpanded = !e.isExpanded : e);
+    } else {
+      this.links.forEach(e => e.isExpanded = true);
+    }
+    this.currentPanelState = state;
   }
 
   ngOnDestroy(): void {
