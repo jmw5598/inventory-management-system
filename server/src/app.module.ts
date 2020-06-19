@@ -11,6 +11,7 @@ import { User } from './database/entities/user.entity';
 import { ProfilesModule } from './common/profiles/profiles.module';
 import { StockroomsModule } from './stockrooms/stockrooms.module';
 import { PlatformsModule } from './platforms/platforms.module';
+import { ItemConditionsModule } from './item-conditions/item-conditions.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { PlatformsModule } from './platforms/platforms.module';
     ProfilesModule,
     StockroomsModule,
     PlatformsModule,
+    ItemConditionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,0 +1,10 @@
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ItemCondition } from '../database/entities/item-condition.entity';
+import { ItemConditionsController } from './item-conditions.controller';
+
+@Module({
+  controllers: [ItemConditionsController],
+  imports: [TypeOrmModule.forFeature([ItemCondition])]
+})
+export class ItemConditionsModule {}
