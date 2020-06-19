@@ -2,8 +2,8 @@ import { Controller, Get, Post, Body, Put, NotFoundException, Param } from '@nes
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Platform } from '../database/entities/platform.entity';
-import { CreatePlatformDto } from './dto/create-platform.dto';
-import { UpdatePlatformDto } from './dto/update-platform.dto';
+import { CreatePlatformDto } from './dtos/create-platform.dto';
+import { UpdatePlatformDto } from './dtos/update-platform.dto';
 
 @Controller('platforms')
 export class PlatformsController {

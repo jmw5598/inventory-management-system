@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Param, NotFoundException } from '@nestjs/c
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ItemCondition } from '../database/entities/item-condition.entity';
-import { CreateItemConditionDto } from './dto/create-item-condition.dto';
+import { CreateItemConditionDto } from './dtos/create-item-condition.dto';
 
 @Controller('item-conditions')
 export class ItemConditionsController {
