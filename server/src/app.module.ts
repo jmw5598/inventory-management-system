@@ -9,6 +9,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Role } from './database/entities/role.entity';
 import { User } from './database/entities/user.entity';
 import { ProfilesModule } from './common/profiles/profiles.module';
+import { StockroomsModule } from './stockrooms/stockrooms.module';
+import { PlatformsModule } from './platforms/platforms.module';
 
 @Module({
   imports: [
@@ -18,6 +20,8 @@ import { ProfilesModule } from './common/profiles/profiles.module';
     TypeOrmModule.forRoot(),
     TypeOrmModule.forFeature([Role, User]),
     ProfilesModule,
+    StockroomsModule,
+    PlatformsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

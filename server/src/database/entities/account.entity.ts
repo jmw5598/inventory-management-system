@@ -4,6 +4,7 @@ import { Plan } from './plan.entity';
 import { User } from './user.entity';
 import { Invoice } from './invoice.entity';
 import { StripeCustomer } from './stripe-customers.entity';
+import { Stockroom } from './stockroom.entity';
 
 @Entity()
 export class Account extends BaseEntity {
@@ -31,4 +32,7 @@ export class Account extends BaseEntity {
   @OneToOne(type => StripeCustomer)
   @JoinColumn({ name: 'stripe_customer_id' })
   public stripeCustomer: StripeCustomer;
+
+  @OneToMany(type => Stockroom, stockroom => stockroom.account)
+  public stockrooms: Stockroom[];
 }
