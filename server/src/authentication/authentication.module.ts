@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
-import { AuthenticationService } from './authentication.service';
-import { JwtStrategy } from './strategies/jwt.strategy';
-import { LocalStrategy } from './strategies/local.strategy';
 import { PassportModule, IAuthModuleOptions } from '@nestjs/passport';
 import { JwtModule, JwtModuleOptions } from '@nestjs/jwt';
-import { UsersModule } from '../common/users/users.module';
+
+import { AuthenticationService } from './authentication.service';
+import { UsersModule } from '../users/users.module';
+import { JwtStrategy } from './strategies/jwt.strategy';
+import { LocalStrategy } from './strategies/local.strategy';
 import { jwtConstants } from './constants';
+import { AuthenticationController } from './authentication.controller';
 
 const passportModuleOptions: IAuthModuleOptions = { defaultStrategy: 'jwt' };
 const jwtModuleOptions: JwtModuleOptions = {
@@ -20,12 +22,13 @@ const jwtModuleOptions: JwtModuleOptions = {
     JwtModule.register(jwtModuleOptions)
   ],
   providers: [
-    AuthenticationService, 
+    AuthenticationService,
     LocalStrategy,
     JwtStrategy
   ],
   exports: [
     AuthenticationService
-  ]
+  ],
+  controllers: [AuthenticationController]
 })
 export class AuthenticationModule {}
