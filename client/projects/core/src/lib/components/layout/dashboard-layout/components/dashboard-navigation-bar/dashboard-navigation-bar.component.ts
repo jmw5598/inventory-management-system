@@ -29,7 +29,7 @@ export class DashboardNavigationBarComponent implements OnInit, OnDestroy {
         || this.currentPanelState === DashboardLayoutSidePanelState.COLLAPSE) {
       this._sidePanelService.changeState(DashboardLayoutSidePanelState.OPEN);
     } else {
-      this._sidePanelService.changeState(DashboardLayoutSidePanelState.CLOSE);
+      this._sidePanelService.changeState(DashboardLayoutSidePanelState.COLLAPSE);
     }
   }
 

@@ -37,23 +37,19 @@ export class DashboardNavigationSidePanelComponent implements OnInit {
       this._sidePanelService.changeState(DashboardLayoutSidePanelState.OPEN);
       this.links.forEach(e => e.isExpanded = true);
     } else {
-
+      link.isExpanded = !link.isExpanded;
     }
-
-    // @@@ on open expand all submenus
-    // @@@ on collapse/close close all submenues
-
-    
-    link.isExpanded = !link.isExpanded;
   }
 
   private _updateCurrentPanelState(state: DashboardLayoutSidePanelState) {
     if (state === DashboardLayoutSidePanelState.CLOSE || state === DashboardLayoutSidePanelState.COLLAPSE) {
-      this.links.forEach(e => e.isExpanded ? e.isExpanded = !e.isExpanded : e);
+      this.links.forEach(e => e.isExpanded ? e.isExpanded = false: e);
+      setTimeout(() => this.currentPanelState = state, 0.3);
     } else {
-      this.links.forEach(e => e.isExpanded = true);
+      this.currentPanelState = state;
+      setTimeout(() => this.links.forEach(e => e.isExpanded = true), 0.3);
     }
-    this.currentPanelState = state;
+    
   }
 
   ngOnDestroy(): void {

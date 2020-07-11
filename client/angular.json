@@ -73,7 +73,9 @@
               "projects/dashboard/src/assets"
             ],
             "styles": [
-              "projects/dashboard/src/styles.scss"
+              "projects/dashboard/src/styles.scss",
+              "node_modules/ng-zorro-antd/src/ng-zorro-antd.min.css",
+              "node_modules/ng-zorro-antd/resizable/style/index.min.css"
             ],
             "scripts": []
           },
