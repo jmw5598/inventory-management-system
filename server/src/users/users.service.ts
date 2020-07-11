@@ -12,7 +12,8 @@ export class UsersService {
   ) {}
   
   public async findByUsername(username: string): Promise<User | undefined> {
-    return (await this.usersRepository.find({ 
+    return (await this.usersRepository.find({
+      relations: ['roles', 'account'],
       where: { username: username },
       take: 1
     }))[0];
