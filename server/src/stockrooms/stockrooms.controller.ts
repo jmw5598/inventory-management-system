@@ -6,7 +6,7 @@ import { Item } from '../items/entities/item.entity';
 import { JwtAuthenticationGuard } from '../authentication/guards/jwt-authentication.guard';
 
 @Controller('stockrooms')
-@UseGuards(JwtAuthenticationGuard)  /// @@@ TODO ADD THIS TO ALL CONTROLLERS!!!!!
+@UseGuards(JwtAuthenticationGuard)
 export class StockroomsController {
   constructor(
     @InjectRepository(Stockroom)

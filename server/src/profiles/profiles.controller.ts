@@ -1,12 +1,15 @@
-import { Controller, Get, Post, Body, Param, NotFoundException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, NotFoundException, UseGuards } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
 import { Profile } from './entities/profile.entity';
 import { CreateProfileDto } from './dtos/create-profile.dto';
 import { CreateCategoryDto } from 'src/categories/dtos/create-category.dto';
 import { EmailerService } from '../common/services/emailer/emailer.service';
+import { JwtAuthenticationGuard } from '../authentication/guards/jwt-authentication.guard';
 
 @Controller('profiles')
+@UseGuards(JwtAuthenticationGuard)
 export class ProfilesController {
   constructor(
     @InjectRepository(Profile)

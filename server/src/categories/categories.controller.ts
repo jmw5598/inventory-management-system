@@ -1,10 +1,13 @@
-import { Controller, Get, Post, Body, NotFoundException, Param, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, NotFoundException, Param, Put, UseGuards } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
 import { Category } from './entities/category.entity';
 import { CreateCategoryDto } from './dtos/create-category.dto';
+import { JwtAuthenticationGuard } from '../authentication/guards/jwt-authentication.guard';
 
 @Controller('categories')
+@UseGuards(JwtAuthenticationGuard)
 export class CategoriesController {
   constructor(
     @InjectRepository(Category)

@@ -1,11 +1,14 @@
-import { Controller, Get, Post, Body, Put, NotFoundException, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, NotFoundException, Param, UseGuards, UseFilters } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
 import { Platform } from './entities/platform.entity';
 import { CreatePlatformDto } from './dtos/create-platform.dto';
+import { JwtAuthenticationGuard } from '../authentication/guards/jwt-authentication.guard';
 import { UpdatePlatformDto } from './dtos/update-platform.dto';
 
 @Controller('platforms')
+@UseGuards(JwtAuthenticationGuard)
 export class PlatformsController {
   constructor(
     @InjectRepository(Platform)
