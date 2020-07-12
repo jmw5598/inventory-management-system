@@ -1,15 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'inv-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  template: `<router-outlet></router-outlet>`,
+  styles: [``]
 })
-export class AppComponent implements OnInit {
-  public isCollapsed: boolean = false;
-
-  constructor() {}
-
-  ngOnInit() {
-  }
-}
+export class AppComponent { }
