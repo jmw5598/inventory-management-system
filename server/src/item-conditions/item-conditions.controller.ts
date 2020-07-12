@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Param, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { ItemCondition } from '../database/entities/item-condition.entity';
+import { ItemCondition } from './entities/item-condition.entity';
 import { CreateItemConditionDto } from './dtos/create-item-condition.dto';
 
 @Controller('item-conditions')

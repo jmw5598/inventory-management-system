@@ -1,31 +1,36 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { AuthenticationModule } from './authentication/authentication.module'
-import { AccountsModule } from './accounts/accounts.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { Role } from './database/entities/role.entity';
-import { User } from './database/entities/user.entity';
-import { ProfilesModule } from './common/profiles/profiles.module';
-import { StockroomsModule } from './stockrooms/stockrooms.module';
-import { PlatformsModule } from './platforms/platforms.module';
+import { AccountsModule } from './accounts/accounts.module';
+import { AuthenticationModule } from './authentication/authentication.module'
+import { CategoriesModule } from './categories/categories.module';
 import { ItemConditionsModule } from './item-conditions/item-conditions.module';
+import { PlatformsModule } from './platforms/platforms.module';
+import { ProfilesModule } from './profiles/profiles.module';
+import { StockroomsModule } from './stockrooms/stockrooms.module';
+import { UsersModule } from './users/users.module';
+import { ItemsModule } from './items/items.module';
+import { InvoicesModule } from './invoices/invoices.module';
+import { ListedItemsModule } from './listed-items/listed-items.module';
 
 @Module({
   imports: [
     AccountsModule,
     AuthenticationModule,
+    CategoriesModule,
     ConfigModule.forRoot({ isGlobal: true }),
-    TypeOrmModule.forRoot(),
-    TypeOrmModule.forFeature([Role, User]),
+    ItemConditionsModule,
+    PlatformsModule,
     ProfilesModule,
     StockroomsModule,
-    PlatformsModule,
-    ItemConditionsModule,
+    TypeOrmModule.forRoot(),
+    UsersModule,
+    ItemsModule,
+    InvoicesModule,
+    ListedItemsModule
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

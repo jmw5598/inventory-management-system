@@ -1,10 +1,12 @@
-import { Controller, Get, Post, Put, Param, NotFoundException } from '@nestjs/common';
+import { Controller, Get, Post, Put, Param, NotFoundException, Request, UseGuards } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Stockroom } from '../database/entities/stockroom.entity';
-import { Item } from '../database/entities/item.entity';
+import { Stockroom } from './entities/stockroom.entity';
+import { Item } from '../items/entities/item.entity';
+import { JwtAuthenticationGuard } from '../authentication/guards/jwt-authentication.guard';
 
 @Controller('stockrooms')
+@UseGuards(JwtAuthenticationGuard)  /// @@@ TODO ADD THIS TO ALL CONTROLLERS!!!!!
 export class StockroomsController {
   constructor(
     @InjectRepository(Stockroom)
@@ -12,9 +14,10 @@ export class StockroomsController {
     @InjectRepository(Item)
     private readonly stockroomItemRepository: Repository<Item>
   ) {}
-
+  
   @Get()
-  public async getStockrooms(): Promise<any> {
+  public async getStockrooms(@Request() req): Promise<any> {
+    console.log("users id is... ", req.user);
     return this.stockroomRepository.find();
   }
 
@@ -24,8 +27,7 @@ export class StockroomsController {
   }
 
   @Get(':id')
-  public async getStockroomById(
-      @Param('id') id: number): Promise<any> {
+  public async getStockroomById(@Param('id') id: number): Promise<any> {
     const stockroom: Stockroom =  await this.stockroomRepository.findOne(id);
     if (!stockroom) {
       throw new NotFoundException();

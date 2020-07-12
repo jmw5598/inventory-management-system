@@ -1,36 +1,24 @@
-import { Controller, UseGuards, Get, Post, Request } from '@nestjs/common';
+import { Controller, UseGuards, Get, Post, Request, Query, Redirect, Body } from '@nestjs/common';
 import { AuthenticationService } from '../authentication/authentication.service';
-import { LocalAuthenticationGuard } from '../authentication/guards/local-authentication.guard';
-import { JwtAuthenticationGuard } from '../authentication/guards/jwt-authentication.guard';
-import { UsersService } from '../common/users/users.service';
-import { User } from '../database/entities/user.entity';
+import { EmailerService } from '../common/services/emailer/emailer.service';
+import { CreateAccountDto } from './dtos/create-account.dto';
+import { RegistrationDto } from './dtos/registration.dto';
 
 @Controller('accounts')
 export class AccountsController {
   constructor(
-    private authenticationService: AuthenticationService,
-    private usersService: UsersService
+    private readonly authenticationService: AuthenticationService,
+    private readonly emailerService: EmailerService,
    ) {}
 
-  @UseGuards(LocalAuthenticationGuard)
-  @Post('login')
-  public async login(@Request() req): Promise<any> {
-    return this.authenticationService.login(req.user);
-  }
-
-  @UseGuards(JwtAuthenticationGuard)
-  @Get('profile')
-  public async getProfile(@Request() req) {
-    return req.user;
-  }
-
   @Post('register')
-  public async registerAccount(@Request() req) {
-    const user: User = await this.usersService.create(req.body);
-    user.password = "";
-
-    return user;
+  public async registerAccount(@Body() registrationDto: RegistrationDto) {
+    return null;
   }
 
-  //@@@ Verify email endpoint
+  @Get('verify')
+  @Redirect('https://nestjs.com', 301)
+  public async verifyAccount(@Query('code') code: string): Promise<any> {
+    return null;
+  }
 }
