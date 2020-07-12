@@ -1,4 +1,5 @@
-export class Platform {
-  public id: number;
+import { BaseModel } from './base.model';
+
+export class Platform extends BaseModel {
   public description: string;
 }

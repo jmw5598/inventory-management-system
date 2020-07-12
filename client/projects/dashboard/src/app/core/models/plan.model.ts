@@ -1,5 +1,5 @@
 import { BaseModel } from './base.model';
 
-export class Stockroom extends BaseModel {
+export class Plan extends BaseModel {
   public name: string;
 }
