@@ -22,13 +22,15 @@
     "@angular/platform-browser-dynamic": "~9.1.0",
     "@angular/router": "~9.1.0",
     "@ant-design/icons-angular": "^9.0.1",
+    "@ngrx/effects": "^9.2.0",
+    "@ngrx/store": "^9.2.0",
     "ng-zorro-antd": "^9.2.2",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.901.5",
+    "@angular-devkit/build-angular": "^0.1000.2",
     "@angular-devkit/build-ng-packagr": "~0.901.5",
     "@angular/cli": "~9.1.0",
     "@angular/compiler-cli": "~9.1.0",
