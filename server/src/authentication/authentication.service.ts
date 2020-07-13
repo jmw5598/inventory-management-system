@@ -25,7 +25,7 @@ export class AuthenticationService {
     const roles: string[] = user.roles.map(e => e.name);
     const payload = { username: user.username, sub: user.id, roles: roles, account: user.account.id };
     return {
-      access_token: this.jwtService.sign(payload),
+      accessToken: this.jwtService.sign(payload),
       // @@@ TODO : Need to figure out refresh token.
     }
   }
