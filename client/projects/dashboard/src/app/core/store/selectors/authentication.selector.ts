@@ -1,4 +1,4 @@
 import { createFeatureSelector } from '@ngrx/store';
-import { IAppState } from '../state/app.state';
+import { IAuthenticationState } from '../state/authentication.state';
 
-export const selectAuthenticationState = createFeatureSelector<IAppState>('authentication');
+export const selectAuthenticationState = createFeatureSelector<IAuthenticationState>('authentication');
