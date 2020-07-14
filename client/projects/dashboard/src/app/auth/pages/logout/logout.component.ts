@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+
+import { IAppState } from '../../../core/store/state/app.state';
+import { logoutUser } from '../../../core/store/actions/authentication.actions';
 
 @Component({
   selector: 'inv-logout',
@@ -7,12 +10,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./logout.component.scss']
 })
 export class LogoutComponent implements OnInit {
-  constructor(private _router: Router) { }
+  constructor(private _store: Store<IAppState>) { }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      // @@@ TODO Do cleanup for login out here (ej clear localstorage)
-      this._router.navigate(['../login']);
-    }, 2000);
+    setTimeout(() => this._store.dispatch(logoutUser()), 2000);
   }
 }

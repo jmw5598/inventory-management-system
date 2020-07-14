@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { AuthenitcationService } from '../services/authenitcation.service';
+import { AuthenticationService } from '../services/authentication.service';
 import { AuthenticatedUser } from '../models/authenticated-user.model';
 
 @Injectable()
 export class JwtTokenInterceptor implements HttpInterceptor {
-  constructor(private _authenticationService: AuthenitcationService) { }
+  constructor(private _authenticationService: AuthenticationService) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const authenticatedUser: AuthenticatedUser = this._authenticationService.getAuthenticatedUser();

@@ -1,9 +1,3 @@
-.inner-content {
-  padding: 24px;
-  background: #fff;
-  min-height: 360px;
-}
-
 .login-form {
   max-width: 300px;
 }
@@ -34,6 +28,12 @@ nz-layout {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -70%);
+
+      form {
+        nz-alert {
+          margin-bottom: 24px;
+        }
+      }
     }
   }
 }

@@ -7,12 +7,14 @@ import { LoginComponent } from './pages/login/login.component';
 import { NgZorroModule } from '../nz-modules.module';
 import { RegisterComponent } from './pages/register/register.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { LogoutComponent } from './pages/logout/logout.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
     RegisterComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    LogoutComponent
   ],
   imports: [
     AuthRoutingModule,

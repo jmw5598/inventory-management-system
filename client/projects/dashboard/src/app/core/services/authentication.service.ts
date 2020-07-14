@@ -12,7 +12,7 @@ import { environment } from '../../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenitcationService {
+export class AuthenticationService {
   private _baseUrl: string;
   private _authenticatedUser: AuthenticatedUser;
   private _authenticatedUserSoruce: BehaviorSubject<AuthenticatedUser>;
