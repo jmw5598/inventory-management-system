@@ -59,7 +59,6 @@ export class AuthenticationService {
   }
 
   private _handleSuccessfulAuthentication(user: AuthenticatedUser): AuthenticatedUser {
-    console.log("user: ", user);
     this._authenticatedUser = user;
     this._authenticatedUserSoruce.next(this._authenticatedUser);
     this._authenticatedStatus = AuthenticatedStatus.AUTHENTICATED;
