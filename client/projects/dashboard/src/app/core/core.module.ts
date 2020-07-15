@@ -5,17 +5,23 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 import { AuthenticationEffects } from './store/effects/authentication.effects';
-import  { JwtTokenInterceptor } from './interceptors/jwt-token.interceptor';
+import { JwtTokenInterceptor } from './interceptors/jwt-token.interceptor';
 import { authenticationReducer } from './store/reducers/authentication.reducer';
+import { StockroomEffects } from './store/effects/stockroom.effects';
+import { stockroomReducer } from './store/reducers/stockroom.reducer';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
     StoreModule.forRoot({
-      authentication :authenticationReducer
+      authentication: authenticationReducer,
+      stockrooms: stockroomReducer 
     }),
-    EffectsModule.forRoot([AuthenticationEffects]),
+    EffectsModule.forRoot([
+      AuthenticationEffects,
+      StockroomEffects
+    ]),
     HttpClientModule,
   ],
   providers: [
