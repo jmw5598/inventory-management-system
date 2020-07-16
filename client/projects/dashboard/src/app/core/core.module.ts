@@ -7,6 +7,11 @@ import { EffectsModule } from '@ngrx/effects';
 import { AuthenticationEffects } from './store/effects/authentication.effects';
 import { JwtTokenInterceptor } from './interceptors/jwt-token.interceptor';
 import { authenticationReducer } from './store/reducers/authentication.reducer';
+import { HttpErrorEffects } from './store/effects/http-error.effects';
+import { PlatformEffects } from './store/effects/platform.effects';
+import { platformReducer } from './store/reducers/platform.reducer';
+import { ItemConditionEffects } from './store/effects/item-condition.effects';
+import { itemConditionReducer } from './store/reducers/item-condition.reducer';
 import { StockroomEffects } from './store/effects/stockroom.effects';
 import { stockroomReducer } from './store/reducers/stockroom.reducer';
 
@@ -16,11 +21,16 @@ import { stockroomReducer } from './store/reducers/stockroom.reducer';
     CommonModule,
     StoreModule.forRoot({
       authentication: authenticationReducer,
-      stockrooms: stockroomReducer 
+      stockrooms: stockroomReducer,
+      platforms: platformReducer,
+      itemConditions: itemConditionReducer,
     }),
     EffectsModule.forRoot([
       AuthenticationEffects,
-      StockroomEffects
+      PlatformEffects,
+      HttpErrorEffects,
+      StockroomEffects,
+      ItemConditionEffects,
     ]),
     HttpClientModule,
   ],
