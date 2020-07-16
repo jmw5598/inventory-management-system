@@ -4,6 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of, EMPTY } from 'rxjs';
 import { map, mergeMap, catchError, tap } from 'rxjs/operators'; 
 
+import { HttpErrorActions } from '../actions/http-error.actions';
 import { StockroomActions } from '../actions/stockroom.actions';
 import { StockroomsService } from '../../services/stockrooms.service';
 import { Stockroom } from '../../models/stockroom.model';
@@ -23,7 +24,7 @@ export class StockroomEffects {
     mergeMap(stockroom => this._stockroomsService.save(stockroom)
       .pipe(
         map(stockroom => ({ type: StockroomActions.CREATE_STOCKROOM_SUCCESS, payload: stockroom })),
-        catchError(error => of({ type: StockroomActions.CREATE_STOCKROOM_ERROR, payload: error }))
+        catchError(error => of({ type: HttpErrorActions.HANDLE_HTTP_ERROR, payload: error }))
       )
     )
   ));
@@ -37,21 +38,12 @@ export class StockroomEffects {
     })
   ), { dispatch: false });
 
-  createStockroomError$ = createEffect(() => this._actions.pipe(
-    ofType(StockroomActions.CREATE_STOCKROOM_ERROR),
-    tap(({ payload }) => {
-      this._openNewNotificationError(
-        'We encountered an error while creating your stockroom.  Please try again.'
-      );
-    })
-  ), { dispatch: false });
-
   deleteStockroom$ = createEffect(() => this._actions.pipe(
     ofType(StockroomActions.DELETE_STOCKROOM),
     mergeMap(({ id }) => this._stockroomsService.delete(id)
       .pipe(
         map(stockroom => ({ type: StockroomActions.DELETE_STOCKROOM_SUCCESS, payload: stockroom })),
-        catchError(error => of({ type: StockroomActions.DELETE_STOCKROOM_ERROR, payload: error }))
+        catchError(error => of({ type: HttpErrorActions.HANDLE_HTTP_ERROR, payload: error }))
       )
     )
   ));
@@ -63,15 +55,6 @@ export class StockroomEffects {
         'We successfully deleted your stockrom!'
       );
       this._router.navigate(['/dashboard', 'home']);
-    })
-  ), { dispatch: false });
-
-  deleteStockroomError$ = createEffect(() => this._actions.pipe(
-    ofType(StockroomActions.DELETE_STOCKROOM_ERROR),
-    tap(({ payload }) => {
-      this._openNewNotificationError(
-        'We encountered an error trying to delete your stockroom.  Please try again.'
-      );
     })
   ), { dispatch: false });
 
@@ -95,7 +78,7 @@ export class StockroomEffects {
     mergeMap(({ id, stockroom }) => this._stockroomsService.update(id, stockroom)
       .pipe(
         map(stockroom => ({ type: StockroomActions.UPDATE_STOCKROOM_SUCCESS, payload: stockroom })),
-        catchError(error => of({ type: StockroomActions.UPDATE_STOCKROOM_ERROR, payload: error }))
+        catchError(error => of({ type: HttpErrorActions.HANDLE_HTTP_ERROR, payload: error }))
       )
     )
   ));
@@ -105,15 +88,6 @@ export class StockroomEffects {
     tap(({ payload }) => {
       this._openNewNotificationSuccess(
         'We successfully updated your stockroom details!'
-      );
-    })
-  ), { dispatch: false });
-  
-  updateStockroomError$ = createEffect(() => this._actions.pipe(
-    ofType(StockroomActions.UPDATE_STOCKROOM_ERROR),
-    tap(({ payload }) => {
-      this._openNewNotificationError(
-        'We encountered an error trying to update your stockroom details.  Please try again.'
       );
     })
   ), { dispatch: false });
