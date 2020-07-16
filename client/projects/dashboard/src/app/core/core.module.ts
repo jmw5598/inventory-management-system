@@ -8,6 +8,8 @@ import { AuthenticationEffects } from './store/effects/authentication.effects';
 import { JwtTokenInterceptor } from './interceptors/jwt-token.interceptor';
 import { authenticationReducer } from './store/reducers/authentication.reducer';
 import { HttpErrorEffects } from './store/effects/http-error.effects';
+import { CategoryEffects } from './store/effects/category.effects';
+import { categoryReducer } from './store/reducers/category.reducer';
 import { PlatformEffects } from './store/effects/platform.effects';
 import { platformReducer } from './store/reducers/platform.reducer';
 import { ItemConditionEffects } from './store/effects/item-condition.effects';
@@ -24,6 +26,7 @@ import { stockroomReducer } from './store/reducers/stockroom.reducer';
       stockrooms: stockroomReducer,
       platforms: platformReducer,
       itemConditions: itemConditionReducer,
+      categories: categoryReducer,
     }),
     EffectsModule.forRoot([
       AuthenticationEffects,
@@ -31,6 +34,7 @@ import { stockroomReducer } from './store/reducers/stockroom.reducer';
       HttpErrorEffects,
       StockroomEffects,
       ItemConditionEffects,
+      CategoryEffects, 
     ]),
     HttpClientModule,
   ],
