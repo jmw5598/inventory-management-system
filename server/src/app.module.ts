@@ -13,6 +13,7 @@ import { UsersModule } from './users/users.module';
 import { ItemsModule } from './items/items.module';
 import { InvoicesModule } from './invoices/invoices.module';
 import { ListedItemsModule } from './listed-items/listed-items.module';
+import { PlansModule } from './plans/plans.module';
 
 @Module({
   imports: [
@@ -28,7 +29,8 @@ import { ListedItemsModule } from './listed-items/listed-items.module';
     UsersModule,
     ItemsModule,
     InvoicesModule,
-    ListedItemsModule
+    ListedItemsModule,
+    PlansModule
   ],
   controllers: [],
   providers: [],

@@ -1,6 +1,6 @@
 import { Entity, Column, JoinColumn, OneToOne, OneToMany } from 'typeorm';
 import { BaseEntity } from '../../database/entities/base.entity';
-import { Plan } from './plan.entity';
+import { Plan } from '../../plans/entities/plan.entity';
 import { User } from '../../users/entities/user.entity';
 import { Invoice } from '../../invoices/entities/invoice.entity';
 import { StripeCustomer } from './stripe-customers.entity';

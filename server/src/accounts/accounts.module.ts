@@ -5,7 +5,7 @@ import { Account } from './entities/account.entity';
 import { AccountsController } from './accounts.controller';
 import { AuthenticationModule } from '../authentication/authentication.module';
 import { EmailerModule } from '../common/services/emailer/emailer.module';
-import { Plan } from './entities/plan.entity';
+import { Plan } from '../plans/entities/plan.entity';
 import { StripeCustomer } from './entities/stripe-customers.entity';
 
 @Module({
@@ -16,8 +16,7 @@ import { StripeCustomer } from './entities/stripe-customers.entity';
     AuthenticationModule,
     EmailerModule,
     TypeOrmModule.forFeature([
-      Account, 
-      Plan,
+      Account,
       StripeCustomer
     ])
   ],
