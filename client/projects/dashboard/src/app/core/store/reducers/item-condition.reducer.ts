@@ -5,7 +5,6 @@ import { initialItemConditionState } from '../state/item-condition.state';
 const _itemConditionReducer = createReducer(
   initialItemConditionState,
   on(getItemConditionsSuccess, (state, { payload }) => {
-    console.log("new item condition states: ", payload);
     return {
       ...state,
       itemConditions: payload
