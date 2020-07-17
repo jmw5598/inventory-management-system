@@ -4,8 +4,8 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of, EMPTY } from 'rxjs';
 import { map, mergeMap, catchError, tap } from 'rxjs/operators'; 
 
-import { HttpErrorActions } from '../actions/http-error.actions';
-import { StockroomActions } from '../actions/stockroom.actions';
+import { handleHttpError } from '../actions/http-error.actions';
+import { StockroomActions, getStockroomsSuccess, createStockroomSuccess, deleteStockroomSuccess, updateStockroomSuccess } from '../actions/stockroom.actions';
 import { StockroomsService } from '../../services/stockrooms.service';
 import { Stockroom } from '../../models/stockroom.model';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
@@ -23,8 +23,8 @@ export class StockroomEffects {
     ofType(StockroomActions.CREATE_STOCKROOM),
     mergeMap(stockroom => this._stockroomsService.save(stockroom)
       .pipe(
-        map(stockroom => ({ type: StockroomActions.CREATE_STOCKROOM_SUCCESS, payload: stockroom })),
-        catchError(error => of({ type: HttpErrorActions.HANDLE_HTTP_ERROR, payload: error }))
+        map(stockroom => createStockroomSuccess(stockroom)),
+        catchError(error => of(handleHttpError(error)))
       )
     )
   ));
@@ -42,8 +42,8 @@ export class StockroomEffects {
     ofType(StockroomActions.DELETE_STOCKROOM),
     mergeMap(({ id }) => this._stockroomsService.delete(id)
       .pipe(
-        map(stockroom => ({ type: StockroomActions.DELETE_STOCKROOM_SUCCESS, payload: stockroom })),
-        catchError(error => of({ type: HttpErrorActions.HANDLE_HTTP_ERROR, payload: error }))
+        map(stockroom => deleteStockroomSuccess(stockroom)),
+        catchError(error => of(handleHttpError(error)))
       )
     )
   ));
@@ -62,7 +62,7 @@ export class StockroomEffects {
     ofType(StockroomActions.GET_STOCKROOMS),
     mergeMap(stockrooms => this._stockroomsService.findAll()
       .pipe(
-        map(stockrooms => ({ type: StockroomActions.GET_STOCKROOMS_SUCCESS, payload: stockrooms })),
+        map(stockrooms => getStockroomsSuccess(stockrooms)),
         catchError(error => {
           this._openNewNotificationError(
             'We encountered an error fetching your stockrooms.  Please try again.'
@@ -77,8 +77,8 @@ export class StockroomEffects {
     ofType(StockroomActions.UPDATE_STOCKROOM),
     mergeMap(({ id, stockroom }) => this._stockroomsService.update(id, stockroom)
       .pipe(
-        map(stockroom => ({ type: StockroomActions.UPDATE_STOCKROOM_SUCCESS, payload: stockroom })),
-        catchError(error => of({ type: HttpErrorActions.HANDLE_HTTP_ERROR, payload: error }))
+        map(stockroom => updateStockroomSuccess(stockroom)),
+        catchError(error => of(handleHttpError(error)))
       )
     )
   ));

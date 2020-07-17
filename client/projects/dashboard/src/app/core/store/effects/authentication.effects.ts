@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, mergeMap, catchError, tap } from 'rxjs/operators';
 
-import { AuthenticationActions } from '../actions/authentication.actions';
+import { AuthenticationActions, loginUserSuccess, loginUserError } from '../actions/authentication.actions';
 import { AuthenticationService } from '../../services/authentication.service';
 
 @Injectable()
@@ -19,10 +19,8 @@ export class AuthenticationEffects {
     ofType(AuthenticationActions.LOGIN_USER),
     mergeMap(credentials => this._authenticationService.authenticateUser(credentials)
       .pipe(
-        map(user => ({ type: AuthenticationActions.LOGIN_USER_SUCCESS, payload: user })),
-        catchError(error => {
-          return of({ type: AuthenticationActions.LOGIN_USER_ERROR, payload: error })
-        })
+        map(user => loginUserSuccess(user)),
+        catchError(error => of(loginUserError(error)))
       )
     )
   ));
