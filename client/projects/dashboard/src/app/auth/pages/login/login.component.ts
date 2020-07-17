@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { IAppState } from '../../../core/store/state/app.state';
 import { UserCredentials } from '../../../core/models/user-credentials.model';
 import { loginUser } from '../../../core/store/actions/authentication.actions';
-import { selectAuthenticationState } from '../../../core/store/selectors/authentication.selector';
+import { selectAuthenticationErrorMessage } from '../../../core/store/selectors/authentication.selector';
 
 @Component({
   selector: 'inv-login',
@@ -15,7 +15,7 @@ import { selectAuthenticationState } from '../../../core/store/selectors/authent
 })
 export class LoginComponent implements OnInit {
   public form: FormGroup;
-  public authenticationState: Observable<any>
+  public authenticationErrorMessage: Observable<string>
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.authenticationState = this._store.select(selectAuthenticationState);
+    this.authenticationErrorMessage = this._store.select(selectAuthenticationErrorMessage);
 
     this.form = this._formBuilder.group({
       username: ['', [Validators.required]],

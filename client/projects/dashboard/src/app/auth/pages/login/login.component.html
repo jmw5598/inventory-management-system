@@ -5,7 +5,7 @@
         <div style="background: #8A8C8F; width: 100%; height: 50px; margin-bottom: 36px;"></div>
       </div>
       <form nz-form [formGroup]="form" class="login-form" (ngSubmit)="submitForm(form.value)">
-        <nz-alert *ngIf="authenticationState && (authenticationState | async).errorMessage" nzType="error" [nzMessage]="(authenticationState | async).errorMessage" nzShowIcon></nz-alert>
+        <nz-alert *ngIf="(authenticationErrorMessage | async)" nzType="error" [nzMessage]="(authenticationErrorMessage | async)" nzShowIcon></nz-alert>
         <nz-form-item>
           <nz-form-control nzErrorTip="Please input your username!">
             <nz-input-group nzPrefixIcon="user">
