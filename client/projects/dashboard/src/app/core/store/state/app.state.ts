@@ -3,6 +3,7 @@ import { initialPlatformState, IPlatformState } from './platform.state';
 import { initialStockroomState, IStockroomState } from './stockroom.state';
 import { initialItemConditionState, IItemConditionState } from './item-condition.state';
 import { initialCategoryState, ICategoryState } from './category.state';
+import { initialPlanState, IPlanState } from './plan.state';
 
 export interface IAppState {  
   authentication: IAuthenticationState,
@@ -10,6 +11,7 @@ export interface IAppState {
   platforms: IPlatformState,
   itemConditions: IItemConditionState,
   categories: ICategoryState,
+  plans: IPlanState,
 }
 
 export const initialAppState: IAppState = {
@@ -18,6 +20,7 @@ export const initialAppState: IAppState = {
   platforms: initialPlatformState,
   itemConditions: initialItemConditionState,
   categories: initialCategoryState,
+  plans: initialPlanState,
 }
 
 export function getInitialState(): IAppState {
