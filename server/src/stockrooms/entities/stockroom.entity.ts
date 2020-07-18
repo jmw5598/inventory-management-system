@@ -11,7 +11,6 @@ export class Stockroom extends BaseEntity {
   @Column({ nullable: false })
   public description: string;
 
-  // Account it belongs to.....
   @ManyToOne(type => Account)
   @JoinColumn({ name: 'account_id' })
   public account: Account;
