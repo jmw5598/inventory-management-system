@@ -48,6 +48,7 @@ export class AuthenticationService {
       refreshToken: await this._getRefreshToken(user),
       prefix: 'Bearer',
       expiresIn: expiresIn,
+      userDetails: await this._getUserDetails(user)
     } as AuthenticatedUser;
   }
 
@@ -68,5 +69,14 @@ export class AuthenticationService {
       refreshToken = await this.refreshTokensService.createNewRefreshToken(user.id);
     }
     return refreshToken.refreshToken;
+  }
+
+  private async _getUserDetails(user: User): Promise<UserDetails> {
+    const roles: string[] = user.roles.map(e => e.name);
+    return {
+      id: user.id,
+      username: user.username,
+      roles: roles
+    } as UserDetails
   }
 }

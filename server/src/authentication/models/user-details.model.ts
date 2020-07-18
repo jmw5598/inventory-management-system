@@ -1,5 +1,5 @@
 export class UserDetails {
-  public firstname: string;
-  public lastname: string;
-  public email: string;
+  public id: number;
+  public username: string;
+  public roles: string[];
 }
