@@ -48,7 +48,6 @@ export class AuthenticationEffects {
     ofType(AuthenticationActions.REFRESH_TOKEN),
     withLatestFrom(this._store),
     mergeMap(([action, state]) => {
-      console.log("inside refresh token effect");
       const accessToken: string = state.authentication.authenticatedUser.accessToken;
       const refreshToken: string = state.authentication.authenticatedUser.refreshToken;
       return this._authenticationService.refreshToken(accessToken, refreshToken)
