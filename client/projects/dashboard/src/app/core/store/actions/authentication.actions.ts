@@ -8,7 +8,9 @@ export enum AuthenticationActions {
   LOGIN_USER_SUCCESS = '[Authentication] Login User Success',
   LOGIN_USER_ERROR = '[Authentication] Login User Error',
   LOGOUT_USER = '[Authentication] Logout User',
-  LOGOUT_USER_SUCCESS = '[Authentication] Logout User Success'
+  LOGOUT_USER_SUCCESS = '[Authentication] Logout User Success',
+  REFRESH_TOKEN = '[Authentication] Refresh Token',
+  REFRESH_TOKEN_SUCCESS = '[Authentication] Refresh Token Success',
 }
 
 export const loginUser = createAction(
@@ -32,4 +34,13 @@ export const logoutUser = createAction(
 
 export const logoutUserSuccess = createAction(
   AuthenticationActions.LOGOUT_USER_SUCCESS
+);
+
+export const refreshToken = createAction(
+  AuthenticationActions.REFRESH_TOKEN
+);
+
+export const refreshTokenSuccess = createAction(
+  AuthenticationActions.REFRESH_TOKEN_SUCCESS,
+  (user: AuthenticatedUser) => ({ payload: user })
 );

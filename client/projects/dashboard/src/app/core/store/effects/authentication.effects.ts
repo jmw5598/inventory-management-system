@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { map, mergeMap, catchError, tap } from 'rxjs/operators';
+import { map, mergeMap, catchError, tap, withLatestFrom } from 'rxjs/operators';
 
-import { AuthenticationActions, loginUserSuccess, loginUserError } from '../actions/authentication.actions';
+import { AuthenticationActions, loginUserSuccess, loginUserError, logoutUser, refreshTokenSuccess } from '../actions/authentication.actions';
 import { AuthenticationService } from '../../services/authentication.service';
+import { IAppState } from '../state/app.state';
 
 @Injectable()
 export class AuthenticationEffects {
   constructor(
     private _actions: Actions,
     private _authenticationService: AuthenticationService,
-    private _router: Router
+    private _router: Router,
+    private _store: Store<IAppState>,
   ) { }
 
   loginUser$ = createEffect(() => this._actions.pipe(
@@ -40,4 +43,20 @@ export class AuthenticationEffects {
       this._router.navigate(['/auth', 'login']);
     })
   ), { dispatch: false });
+
+  refreshToken$ = createEffect(() => this._actions.pipe(
+    ofType(AuthenticationActions.REFRESH_TOKEN),
+    withLatestFrom(this._store),
+    mergeMap(([action, state]) => {
+      console.log("inside refresh token effect");
+      const accessToken: string = state.authentication.authenticatedUser.accessToken;
+      const refreshToken: string = state.authentication.authenticatedUser.refreshToken;
+      return this._authenticationService.refreshToken(accessToken, refreshToken)
+        .pipe(
+          map(user => refreshTokenSuccess(user)),
+          catchError(error => of(logoutUser()))
+        )
+    })
+  ));
 }
+
