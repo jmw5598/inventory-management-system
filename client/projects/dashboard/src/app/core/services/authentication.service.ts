@@ -19,4 +19,11 @@ export class AuthenticationService {
   public authenticateUser(credentials: UserCredentials): Observable<AuthenticatedUser> {
     return this._http.post<AuthenticatedUser>(`${this._baseUrl}/login`, credentials);
   }
+  
+  public refreshToken(accessToken: string, refreshToken: string): Observable<AuthenticatedUser> {
+    return this._http.post<AuthenticatedUser>(`${this._baseUrl}/token`, {
+      accessToken: accessToken,
+      refreshToken: refreshToken
+    });
+  }
 }
