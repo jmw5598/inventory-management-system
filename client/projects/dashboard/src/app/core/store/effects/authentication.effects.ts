@@ -30,16 +30,13 @@ export class AuthenticationEffects {
   
   loginUserSuccess$ = createEffect(() => this._actions.pipe(
     ofType(AuthenticationActions.LOGIN_USER_SUCCESS),
-    tap(({ payload }) => {
-      localStorage.setItem('authenticatedUser', JSON.stringify(payload));
-      this._router.navigate(['/dashboard', 'home']);
-    })
+    tap(({ payload }) => this._router.navigate(['/dashboard', 'home']))
   ), { dispatch: false });
 
   logoutUser$ = createEffect(() => this._actions.pipe(
     ofType(AuthenticationActions.LOGOUT_USER),
     tap(() => {
-      localStorage.removeItem('authenticatedUser');
+      this._authenticationService.logoutUser();
       this._router.navigate(['/auth', 'login']);
     })
   ), { dispatch: false });
