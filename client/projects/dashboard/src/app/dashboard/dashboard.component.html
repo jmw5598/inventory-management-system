@@ -2,35 +2,39 @@
   <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
     <div class="logo"></div>
     <ul nz-menu nzTheme="dark" nzMode="inline">
-      <li nz-menu-item>
+      <li nz-menu-item [nzMatchRouter]="true" [routerLink]="['home']">
         <i nz-icon nzType="pie-chart"></i>
         <span>Dashboard</span>
       </li>
-      <li nz-submenu nzTitle="Stockrooms" nzIcon="reconciliation">
+      <li nz-submenu nzTitle="Stockrooms" nzIcon="reconciliation" [nzOpen]="true">
         <ul>
-          <li nz-menu-item>Basement</li>
-          <li nz-menu-item>Sidestock</li>
-          <li nz-menu-item>Offsite 1</li>
+          <li nz-menu-item [nzMatchRouterExact]="true">Create</li> 
+          <li nz-menu-item>Manage</li>
+          <ng-container *ngFor="let stockroom of (stockroomState$ | async)" >
+            <li nz-menu-item [nzMatchRouterExact]="true"  (click)="goToStockroom(stockroom)">{{ stockroom.name }}</li>
+          </ng-container>
         </ul>
       </li>
-      <li nz-submenu nzTitle="Listings" nzIcon="group">
+      <li nz-submenu nzTitle="Listings" nzIcon="group" [nzOpen]="true">
         <ul>
           <li nz-menu-item>Ebay</li>
           <li nz-menu-item>Amazon</li>
         </ul>
       </li>
-      <li nz-submenu nzTitle="Settings" nzIcon="tool">
-        <ul>
-          <li nz-menu-item>Account Details</li>
-          <li nz-menu-item>Logout</li>
-        </ul>
-      </li>
-      
     </ul>
   </nz-sider>
   <nz-layout>
     <nz-header>
       <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="isCollapsed = !isCollapsed"></i>
+      <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu" nzPlacement="bottomRight">
+        <nz-avatar nzText="U"></nz-avatar>
+      </a>
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu style="margin-top: 1rem;">
+          <li nz-menu-item [routerLink]="['/dashboard', 'account']">Account Details</li>
+          <li nz-menu-item [routerLink]="['/auth', 'logout']">Logout</li>
+        </ul>
+      </nz-dropdown-menu>
     </nz-header>
     <nz-content>
       <nz-breadcrumb>
@@ -41,6 +45,6 @@
         <router-outlet></router-outlet>
       </div>
     </nz-content>
-    <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
+    <nz-footer>Inventory Project ©2020 By Jason White</nz-footer>
   </nz-layout>
 </nz-layout>
