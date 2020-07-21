@@ -2,7 +2,6 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity'; 
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Injectable()
 export class UsersService {
@@ -18,5 +17,8 @@ export class UsersService {
       take: 1
     }))[0];
   }
-}
 
+  public async findById(id: number): Promise<User | undefined> {
+    return this.usersRepository.findOne(id);
+  }
+}
