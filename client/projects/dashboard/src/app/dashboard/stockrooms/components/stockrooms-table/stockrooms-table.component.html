@@ -1,0 +1,34 @@
+<nz-table #editRowTable nzBordered [nzData]="summaries" nzTableLayout="fixed">
+  <thead>
+    <tr>
+      <th nzWidth="10%">Name</th>
+      <th nzWidth="50%">Description</th>
+      <th>Value</th>
+      <th>Items</th>
+      <th>Listed</th>
+      <th>Unlisted</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of editRowTable.data">
+      <td>{{ data.stockroom.name }}</td>
+      <td>{{ data.stockroom.description }}</td>
+      <td>{{ data.purchaseValue | currency }}</td>
+      <td>{{ data.itemCount }}</td>
+      <td>{{ data.listedCount || 0 }}</td>
+      <td>{{ (data.itemCount - (data.listedCount || 0)) }}</td>
+      <td class="table-row-actions">
+        <a [routerLink]="['../', data.stockroom.id, 'details']">
+          <i nz-icon nzType="folder-view"></i>
+        </a>
+        <a nz-typography nzType="warning" [routerLink]="['../', data.stockroom.id, 'edit']">
+          <i nz-icon nzType="edit" nzTheme="outline"></i>
+        </a>
+        <a nz-typography nzType="danger" nz-popconfirm nzPopconfirmTitle="Are you sure you want to delete this stockroom?" [nzOkText]="'Yes'" [nzCancelText]="'Cancel'" (nzOnConfirm)="deleteStockroom(data.stockroom)">
+          <i nz-icon nzType="delete" nzTheme="outline"></i>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

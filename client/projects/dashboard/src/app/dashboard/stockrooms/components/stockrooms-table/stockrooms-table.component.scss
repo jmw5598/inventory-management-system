@@ -1,0 +1,10 @@
+.table-row-actions {
+  display: flex;
+  flex-direction: row;
+
+  a {
+    &:not(:last-child) {
+      margin-right: 6px;
+    }
+  }
+}

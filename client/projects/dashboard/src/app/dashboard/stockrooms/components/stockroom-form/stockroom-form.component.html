@@ -1,0 +1,32 @@
+<form nz-form [formGroup]="form" (ngSubmit)="submitForm(form.value)">
+  <div nz-row>
+
+    <!-- Left column - stockroom details -->
+    <div nz-col nzSpan="8">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5" nzRequired>Name</nz-form-label>
+        <nz-form-control [nzSpan]="16" nzValidatingTip="Validating...">
+          <input nz-input formControlName="name" placeholder="The stockroom name" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5" nzRequired>Description</nz-form-label>
+        <nz-form-control [nzSpan]="16">
+          <input nz-input formControlName="description" placeholder="The stockroom description" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control [nzOffset]="5" [nzSpan]="16">
+          <button nz-button nzType="primary" [disabled]="form.invalid">Create</button>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <!-- Right column - stockroom location labels -->
+    <div nz-col nzSpan="8">
+      Locations
+      <!-- TODO STILL -->
+    </div>
+  </div>
+</form>
+  
