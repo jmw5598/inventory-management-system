@@ -4,5 +4,5 @@ export class StockroomSummary {
   public stockroom: Stockroom;
   public itemCount: number;
   public listedCount: number;
-  public puchaseValue: number;
+  public purchaseValue: number;
 }
