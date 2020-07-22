@@ -5,7 +5,9 @@ import { of, EMPTY } from 'rxjs';
 import { map, mergeMap, catchError, tap } from 'rxjs/operators'; 
 
 import { handleHttpError } from '../actions/http-error.actions';
-import { StockroomActions, getStockroomsSuccess, createStockroomSuccess, deleteStockroomSuccess, updateStockroomSuccess } from '../actions/stockroom.actions';
+import { StockroomActions, getStockroomSummariesSuccess, getStockroomsSuccess, 
+  createStockroomSuccess, deleteStockroomSuccess, updateStockroomSuccess 
+} from '../actions/stockroom.actions';
 import { StockroomsService } from '../../services/stockrooms.service';
 import { Stockroom } from '../../models/stockroom.model';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
@@ -69,6 +71,16 @@ export class StockroomEffects {
           );
           return EMPTY;
         })
+      )
+    )
+  ));
+
+  getStockroomSummaries$ = createEffect(() => this._actions.pipe(
+    ofType(StockroomActions.GET_STOCKROOM_SUMMARIES),
+    mergeMap(() => this._stockroomsService.getStockroomSummaries()
+      .pipe(
+        map(summaries => getStockroomSummariesSuccess(summaries)),
+        catchError(error => of(handleHttpError(error)))
       )
     )
   ));

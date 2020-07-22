@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { createStockroomSuccess, deleteStockroomSuccess, getStockroomsSuccess, setSelectedStockroom, updateStockroomSuccess } from '../actions/stockroom.actions'; 
+import { createStockroomSuccess, deleteStockroomSuccess, getStockroomsSuccess, setSelectedStockroom, updateStockroomSuccess, getStockroomSummariesSuccess } from '../actions/stockroom.actions'; 
 import { initialStockroomState } from '../state/stockroom.state';
 import { Stockroom } from '../../models/stockroom.model';
 
@@ -9,6 +9,12 @@ const _stockroomReducer = createReducer(
     return {
       ...state,
       stockrooms: payload
+    }
+  }),
+  on(getStockroomSummariesSuccess, (state, { payload }) => {
+    return {
+      ...state,
+      stockroomSummaries: payload
     }
   }),
   on(createStockroomSuccess, (state, { payload }) => {
