@@ -1,0 +1,12 @@
+<nz-page-header nzBackIcon>
+  <nz-page-header-title>Edit {{ (selectedStockroom$ | async).name }}</nz-page-header-title>
+  <nz-page-header-subtitle></nz-page-header-subtitle>
+</nz-page-header>
+<nz-layout>
+  <nz-card>
+    <inv-stockroom-form
+        [formValue]="(selectedStockroom$ | async)"
+        (onSaveStockroom)="onUpdateStockroom($event)">
+    </inv-stockroom-form>
+  </nz-card>
+</nz-layout>
