@@ -11,14 +11,21 @@
 }
 
 .logo {
-  height: 32px;
+  height: 64px;
   background: rgba(255, 255, 255, 0.2);
-  margin: 16px;
+  padding: 16px;
+  border-right: 1px solid #F0F0F0;
+  border-bottom: 1px solid #F0F0F0;
+}
+
+.layout-main-content {
+  background: #FCFCFC;
 }
 
 nz-header {
   background: #fff;
   padding: 0;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 nz-content {
@@ -26,7 +33,8 @@ nz-content {
 }
 
 nz-breadcrumb {
-  margin: 16px 0;
+  padding: 16px 0;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .inner-content {
@@ -37,6 +45,7 @@ nz-breadcrumb {
 
 nz-footer {
   text-align: center;
+  background: #FFF;
 }
 
 nz-layout {

@@ -9,22 +9,27 @@ const routes: Routes = [
     path: '',
     component: DashboardComponent,
     canActivate: [StockroomsGuard],
+    data: { breadcrumb: 'Dashbaord' },
     children: [
       {
         path: 'account',
-        loadChildren: () => import('./account/account.module').then(m => m.AccountModule)
+        loadChildren: () => import('./account/account.module').then(m => m.AccountModule),
+        data: { breadcrumb: 'Account' }
       },
       {
         path: 'home',
-        loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+        loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
+        data: { breadcrumb: 'Home' }
       },
       {
         path: 'items',
-        loadChildren: () => import('./items/items.module').then(m => m.ItemsModule)
+        loadChildren: () => import('./items/items.module').then(m => m.ItemsModule),
+        data: { breadcrumb: 'Items' }
       },
       {
         path: 'stockrooms',
-        loadChildren: () => import('./stockrooms/stockrooms.module').then(m => m.StockroomsModule)
+        loadChildren: () => import('./stockrooms/stockrooms.module').then(m => m.StockroomsModule),
+        data: { breadcrumb: 'Stockrooms' }
       },
       {
         path: '**',

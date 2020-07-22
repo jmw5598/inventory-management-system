@@ -1,29 +1,30 @@
 <nz-layout>
-  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+  <nz-sider nzCollapsible nzTheme="light" [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
     <div class="logo"></div>
-    <ul nz-menu nzTheme="dark" nzMode="inline">
+    <ul nz-menu nzTheme="light" nzMode="inline">
       <li nz-menu-item [nzMatchRouter]="true" [routerLink]="['home']">
         <i nz-icon nzType="pie-chart"></i>
         <span>Dashboard</span>
       </li>
       <li nz-submenu nzTitle="Stockrooms" nzIcon="reconciliation" [nzOpen]="true">
         <ul>
-          <li nz-menu-item [nzMatchRouterExact]="true">Create</li> 
-          <li nz-menu-item>Manage</li>
+          <li nz-menu-item [nzMatchRouter]="true" [routerLink]="['stockrooms', 'create']">Create</li> 
+          <li nz-menu-item [nzMatchRouter]="true" [routerLink]="['stockrooms', 'manage']">Manage</li>
           <ng-container *ngFor="let stockroom of (stockroomState$ | async)" >
-            <li nz-menu-item [nzMatchRouterExact]="true"  (click)="goToStockroom(stockroom)">{{ stockroom.name }}</li>
+            <li nz-menu-item [nzMatchRouter]="true" [routerLink]="['stockrooms', stockroom.id, 'details']">{{ stockroom.name }}</li>
           </ng-container>
         </ul>
       </li>
-      <li nz-submenu nzTitle="Listings" nzIcon="group" [nzOpen]="true">
+      <li nz-submenu nzTitle="Items" nzIcon="group" [nzOpen]="true">
         <ul>
-          <li nz-menu-item>Ebay</li>
-          <li nz-menu-item>Amazon</li>
+          <li nz-menu-item>Listed</li>
+          <li nz-menu-item>Unlisted</li>
+          <li nz-menu-item>Sold</li>
         </ul>
       </li>
     </ul>
   </nz-sider>
-  <nz-layout>
+  <nz-layout class="layout-main-content">
     <nz-header>
       <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="isCollapsed = !isCollapsed"></i>
       <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu" nzPlacement="bottomRight">
@@ -37,13 +38,11 @@
       </nz-dropdown-menu>
     </nz-header>
     <nz-content>
-      <nz-breadcrumb>
-        <nz-breadcrumb-item>User</nz-breadcrumb-item>
-        <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
+      <nz-breadcrumb [nzAutoGenerate]="true" [nzRouteLabel]="'breadcrumb'">
+        <!-- <nz-breadcrumb-item>User</nz-breadcrumb-item>
+        <nz-breadcrumb-item>Bill</nz-breadcrumb-item> -->
       </nz-breadcrumb>
-      <div class="inner-content">
-        <router-outlet></router-outlet>
-      </div>
+      <router-outlet></router-outlet>
     </nz-content>
     <nz-footer>Inventory Project ©2020 By Jason White</nz-footer>
   </nz-layout>

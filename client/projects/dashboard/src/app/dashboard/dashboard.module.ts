@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
-import { NgZorroModule } from '../nz-modules.module';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,7 @@ import { NgZorroModule } from '../nz-modules.module';
     FormsModule,
     ReactiveFormsModule,
     DashboardRoutingModule,
-    NgZorroModule,
+    SharedModule,
   ]
 })
 export class DashboardModule { }
