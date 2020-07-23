@@ -27,11 +27,6 @@ export class AuthenticationEffects {
       )
     )
   ));
-  
-  loginUserSuccess$ = createEffect(() => this._actions.pipe(
-    ofType(AuthenticationActions.LOGIN_USER_SUCCESS),
-    tap(({ payload }) => this._router.navigate(['/dashboard', 'home']))
-  ), { dispatch: false });
 
   logoutUser$ = createEffect(() => this._actions.pipe(
     ofType(AuthenticationActions.LOGOUT_USER),

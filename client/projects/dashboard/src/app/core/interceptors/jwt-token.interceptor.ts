@@ -10,6 +10,7 @@ import { AuthenticatedStatus } from '../enums/authenticated-status.enum';
 import { IAuthenticationState } from '../store/state/authentication.state';
 import { selectAuthenticationState, selectAuthenticatedUser } from '../store/selectors/authentication.selector';
 import { refreshToken } from '../store/actions/authentication.actions';
+import { response } from 'express';
 
 @Injectable()
 export class JwtTokenInterceptor implements HttpInterceptor, OnDestroy {
@@ -30,7 +31,7 @@ export class JwtTokenInterceptor implements HttpInterceptor, OnDestroy {
     }
     
     return next.handle(request).pipe(catchError(error => {
-      if (error instanceof HttpErrorResponse && error.status === 401) {
+      if (error instanceof HttpErrorResponse && error.status === 401 && !request.url.includes('auth/login')) {
         return this._handle401Error(request, next);
       } else {
         return throwError(error);
