@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, IsNull, Not } from 'typeorm';
 
+import { Location } from './entities/location.entity';
 import { Stockroom } from './entities/stockroom.entity';
 import { StockroomSummary } from './dtos/stockroom-summary.dto';
 import { StockroomMapper } from './mappers/stockroom.mapper';
@@ -12,7 +13,9 @@ import { UpdateStockroomDto } from './dtos/update-stockroom.dto';
 export class StockroomsService {
   constructor(
     @InjectRepository(Stockroom)
-    private readonly _stockroomRepository: Repository<Stockroom>
+    private readonly _stockroomRepository: Repository<Stockroom>,
+    @InjectRepository(Location)
+    private readonly _locationRepository: Repository<Location>
   ) {}
 
   public async getAllStockrooms(accountId: number): Promise<Stockroom[]> {
@@ -33,12 +36,29 @@ export class StockroomsService {
   }
 
   public async createNewStockroom(accountId: number, createStockroomDto: CreateStockroomDto): Promise<Stockroom> {
-    const stockroom: Stockroom = this._stockroomRepository.create({
+
+    let stockroom: Stockroom = this._stockroomRepository.create({
       name: createStockroomDto.name,
       description: createStockroomDto.description,
-      account: { id: accountId }
+      account: { id: accountId },
     });
-    return this._stockroomRepository.save(stockroom);
+    stockroom = await this._stockroomRepository.save(stockroom);
+
+    let locations: Location[] = [];
+
+    if (createStockroomDto.locations.length > 0) {
+      locations = createStockroomDto.locations.map(location => {
+        return this._locationRepository.create({
+          description: location.description,
+          stockroom: stockroom
+        })
+      })
+    }
+
+    locations = await this._locationRepository.save(locations);
+    stockroom.locations = locations;
+    
+    return stockroom;
   }
 
   public async getStockroomById(accountId: number, stockroomId: number): Promise<Stockroom> {
@@ -57,15 +77,23 @@ export class StockroomsService {
 
   public async deleteStockroom(accountId: number, stockroomId: number): Promise<Stockroom> {
     const stockroom: Stockroom = await this._findStockroomByIdWithAccountId(stockroomId, accountId);
-    if (!stockroomId) throw new NotFoundException(`Stockroom not found`);
+    if (!stockroomId) {
+      throw new NotFoundException(`Stockroom not found`);
+    }
     stockroom.deletedAt = new Date();
-    return this._stockroomRepository.save(stockroom);
+    this._stockroomRepository.save(stockroom);
+
+    const locations: Location[] = await this._locationRepository.find({ where: { stockroom: { id: stockroom.id }}})
+    locations.forEach(e => e.deletedAt = new Date());
+    this._locationRepository.save(locations);
+    
+    return stockroom;
   }
 
   private async _findStockroomByIdWithAccountId(stockroomId: number, accountId: number): Promise<Stockroom> {
     return this._stockroomRepository.findOne({
       id: stockroomId, account: { id: accountId }
-    });
+    }, { relations: ['locations'] });
   }
 
   // @@@ TODO Filter out sold items from item count
