@@ -48,7 +48,7 @@ export class StockroomsController {
       @Body() updateStockroomDto: UpdateStockroomDto,
       @Request() req): Promise<any> {
     const accountId: number = req.user.accountId;
-    this._stockroomsService.getStockroomById(accountId, id);
+    return this._stockroomsService.updateStockroom(accountId, id, updateStockroomDto);
   }
   
   @Delete(':id')
@@ -57,7 +57,10 @@ export class StockroomsController {
     return this._stockroomsService.deleteStockroom(accountId, id);
   }
 
-  @Get(':id/items')
+  // @@@ this will get all the stock-tiems items in this stockrooms
+  // @@@ 3000/items gets product items
+  // @@@ will have to page and filter??
+  @Get(':id/stock-items')
   public async getStockroomItems(
       @Param('id') id: number): Promise<any> {
     return [];
