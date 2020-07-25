@@ -8,6 +8,8 @@ import { StockroomSummary } from './dtos/stockroom-summary.dto';
 import { StockroomMapper } from './mappers/stockroom.mapper';
 import { CreateStockroomDto } from './dtos/create-stockroom.dto';
 import { UpdateStockroomDto } from './dtos/update-stockroom.dto';
+import { UpdateLocationDto } from './dtos/update-location.dto';
+import { CreateLocationDto } from './dtos/create-location.dto';
 
 @Injectable()
 export class StockroomsService {
@@ -37,28 +39,9 @@ export class StockroomsService {
   }
 
   public async createNewStockroom(accountId: number, createStockroomDto: CreateStockroomDto): Promise<Stockroom> {
-
-    let stockroom: Stockroom = this._stockroomRepository.create({
-      name: createStockroomDto.name,
-      description: createStockroomDto.description,
-      account: { id: accountId },
-    });
-    stockroom = await this._stockroomRepository.save(stockroom);
-
-    let locations: Location[] = [];
-
-    if (createStockroomDto.locations.length > 0) {
-      locations = createStockroomDto.locations.map(location => {
-        return this._locationRepository.create({
-          description: location.description,
-          stockroom: stockroom
-        })
-      })
-    }
-
-    locations = await this._locationRepository.save(locations);
+    const stockroom: Stockroom = await this._createNewStockroom(accountId, createStockroomDto);
+    const locations: Location[] = await this._createNewStockroomLocations(stockroom.id, createStockroomDto.locations);
     stockroom.locations = locations;
-    
     return stockroom;
   }
 
@@ -69,6 +52,57 @@ export class StockroomsService {
   }
 
   public async updateStockroom(accountId: number, stockroomId: number, updateStockroomDto: UpdateStockroomDto): Promise<Stockroom> {
+    const updatedStockroom: Stockroom = await this._updateStockroom(accountId, stockroomId, updateStockroomDto); 
+    const deletedLocationsResult = await this._removeLocationsNotInLocationsDto(updatedStockroom.locations, updateStockroomDto.locations);
+    const updatedLocation: Location[] = await this._insertOrUpdateStockroomLocations(updatedStockroom.id, updateStockroomDto.locations); 
+    return this._findStockroomByIdWithAccountId(stockroomId, accountId);
+  }
+
+  public async deleteStockroom(accountId: number, stockroomId: number): Promise<Stockroom> {
+    const softDeletedStockroom: Stockroom = await this._softDeleteStockroom(accountId, stockroomId);
+    const softDeletedLocations: Location[] = await this._softDeleteStockroomLocations(stockroomId);
+    softDeletedStockroom.locations = softDeletedLocations;
+    return softDeletedStockroom;
+  }
+
+  private async _softDeleteStockroom(accountId: number, stockroomId: number): Promise<Stockroom> {
+    const stockroom: Stockroom = await this._findStockroomByIdWithAccountId(stockroomId, accountId);
+    if (!stockroomId) {
+      throw new NotFoundException(`Stockroom not found`);
+    }
+    stockroom.deletedAt = new Date();
+    return this._stockroomRepository.save(stockroom);
+  }
+
+  private async _softDeleteStockroomLocations(stockroomId: number): Promise<Location[]> {
+    const locations: Location[] = await this._locationRepository.find({ where: { stockroom: { id: stockroomId }}})
+    locations.forEach(e => e.deletedAt = new Date());
+    return this._locationRepository.save(locations);
+  }
+
+  private async _createNewStockroom(accountId: number, createStockroomDto: CreateStockroomDto): Promise<Stockroom> {
+    let stockroom: Stockroom = this._stockroomRepository.create({
+      name: createStockroomDto.name,
+      description: createStockroomDto.description,
+      account: { id: accountId },
+    });
+    return this._stockroomRepository.save(stockroom);
+  }
+
+  private async _createNewStockroomLocations(stockroomId: number, createLocationDto: CreateLocationDto[]): Promise<Location[]> {
+    let locations: Location[] = [];
+    if (createLocationDto.length > 0) {
+      locations = createLocationDto.map(location => {
+        return this._locationRepository.create({
+          description: location.description,
+          stockroomId: stockroomId
+        })
+      })
+    }
+    return this._locationRepository.save(locations);
+  }
+
+  private async _updateStockroom(accountId: number, stockroomId: number, updateStockroomDto: UpdateStockroomDto): Promise<Stockroom> {
     const stockroom: Stockroom = await this._findStockroomByIdWithAccountId(stockroomId, accountId);
     if (!stockroom) throw new NotFoundException(`Unable to find a stockroom to update.`)
     stockroom.name = updateStockroomDto.name;
@@ -76,19 +110,27 @@ export class StockroomsService {
     return this._stockroomRepository.save(stockroom);
   }
 
-  public async deleteStockroom(accountId: number, stockroomId: number): Promise<Stockroom> {
-    const stockroom: Stockroom = await this._findStockroomByIdWithAccountId(stockroomId, accountId);
-    if (!stockroomId) {
-      throw new NotFoundException(`Stockroom not found`);
+  private async _removeLocationsNotInLocationsDto(locations:  Location[], updateLocationDtos: UpdateLocationDto[]): Promise<any> {
+    updateLocationDtos = updateLocationDtos ? updateLocationDtos : [];
+    const locationsToDelete = locations.filter(e => {
+      return updateLocationDtos.findIndex(l => l.id === e.id) === -1
+    }).map(e => e.id) || [];
+    if (locationsToDelete.length > 0) {
+      return this._locationRepository.delete(locationsToDelete);
     }
-    stockroom.deletedAt = new Date();
-    this._stockroomRepository.save(stockroom);
+    return Promise.resolve([]);
+  }
 
-    const locations: Location[] = await this._locationRepository.find({ where: { stockroom: { id: stockroom.id }}})
-    locations.forEach(e => e.deletedAt = new Date());
-    this._locationRepository.save(locations);
-    
-    return stockroom;
+  private async _insertOrUpdateStockroomLocations(stockroomId: number, updateLocationsDto: UpdateLocationDto[]): Promise<Location[]> {
+    updateLocationsDto = updateLocationsDto ? updateLocationsDto : [];
+    const locationsToSave = updateLocationsDto.map(e => {
+      return this._locationRepository.create({
+        id: (e.id || null),
+        description: e.description,
+        stockroomId: stockroomId
+      }) 
+    });
+    return this._locationRepository.save(locationsToSave);
   }
 
   private async _findStockroomByIdWithAccountId(stockroomId: number, accountId: number): Promise<Stockroom> {
