@@ -19,7 +19,6 @@ export class Stockroom extends BaseEntity {
   @OneToMany(type => Item, item => item.stockroom)
   public stockItems: Item[];
 
-  // @@@ TODO Create locations of all locations associated with this tockroom?
   @OneToMany(type => Location, location => location.stockroom)
   public locations: Location[];
 
