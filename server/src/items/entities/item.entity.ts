@@ -1,10 +1,13 @@
-import { Column, Entity, ManyToOne, JoinColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 import { BaseEntity } from '../../database/entities/base.entity';
-import { Stockroom } from '../../stockrooms/entities/stockroom.entity';
-import { ItemCondition } from '../../item-conditions/entities/item-condition.entity';
+import { Category } from '../../categories/entities/category.entity';
+import { StockItemDetails } from '../../stockrooms/entities/stock-item-details.entity'
 
 @Entity()
 export class Item extends BaseEntity {
+  @Column({ nullable: false })
+  public name: string;
+
   @Column({ nullable: false })
   public description: string;
 
@@ -17,24 +20,10 @@ export class Item extends BaseEntity {
   @Column({ nullable: true })
   public model: string;
 
-  @Column({ nullable: false })
-  public purchaseDate: Date;
+  @ManyToOne(type => Category)
+  @JoinColumn({ name: 'category_id' })
+  public category: Category;
 
-  @ManyToOne(type => ItemCondition)
-  @JoinColumn({ name: 'item_condition_id'})
-  public itemCondition: ItemCondition;
-
-  @ManyToOne(type => Stockroom)
-  @JoinColumn({ name: 'stockroom_id' })
-  public stockroom: Stockroom;
-
-  // @@@ TODO Categories list (tags)
-  
-  // @@@ Need to create ItemLocation entity (StockItemLocation??)
-  // @@@ entity should have AccountID as foreign key.
-  // Location _id
-
-  
-  // quantity (will need to move all listing details to separate table
-  //     if we allow quantity to know how many are listed etc and how man not)
+  @OneToMany(type => StockItemDetails, item => item.stockroom)
+  public stockItems: StockItemDetails[];
 }
