@@ -20,7 +20,8 @@ export class StockroomsService {
 
   public async getAllStockrooms(accountId: number): Promise<Stockroom[]> {
     return this._stockroomRepository.find({
-      where: { account: { id: accountId }, deletedAt: IsNull() }
+      where: { account: { id: accountId }, deletedAt: IsNull() },
+      order: { name: "ASC" }
     });
   }
 
@@ -104,6 +105,7 @@ export class StockroomsService {
       .leftJoin('s.stockItems', 'item')
       .where('s.account_id = :accountId AND s.deleted_at IS NULL', { accountId: accountId })
       .groupBy('s.id, account.id')
+      .orderBy('s.name', 'ASC')
       .getRawMany()
   }
 }
