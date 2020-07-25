@@ -6,7 +6,7 @@ import { map, mergeMap, catchError, tap } from 'rxjs/operators';
 
 import { handleHttpError } from '../actions/http-error.actions';
 import { StockroomActions, getStockroomSummariesSuccess, getStockroomsSuccess, 
-  createStockroomSuccess, deleteStockroomSuccess, updateStockroomSuccess 
+  createStockroomSuccess, deleteStockroomSuccess, updateStockroomSuccess, setSelectedStockroom 
 } from '../actions/stockroom.actions';
 import { StockroomsService } from '../../services/stockrooms.service';
 import { Stockroom } from '../../models/stockroom.model';
@@ -56,7 +56,6 @@ export class StockroomEffects {
       this._openNewNotificationSuccess(
         'We successfully deleted your stockrom!'
       );
-      this._router.navigate(['/dashboard', 'home']);
     })
   ), { dispatch: false });
 
@@ -83,6 +82,15 @@ export class StockroomEffects {
         catchError(error => of(handleHttpError(error)))
       )
     )
+  ));
+
+  getStockroomById$ = createEffect(() => this._actions.pipe(
+    ofType(StockroomActions.GET_STOCKROOM_BY_ID),
+    mergeMap(({ id}) => this._stockroomsService.findOne(id)
+      .pipe(
+        map((stockroom: Stockroom) => setSelectedStockroom(stockroom)),
+        catchError(error => of(handleHttpError(error)))
+      ))
   ));
 
   updateStockroom$ = createEffect(() => this._actions.pipe(

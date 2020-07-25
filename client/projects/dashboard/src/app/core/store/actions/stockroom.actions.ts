@@ -12,7 +12,7 @@ export enum StockroomActions {
   GET_STOCKROOMS_SUCCESS = '[Stockroom] Get Stockrooms Success',
   GET_STOCKROOM_SUMMARIES = '[Stockroom] Get Stockroom Summaries',
   GET_STOCKROOM_SUMMARIES_SUCCESS = '[Stockroom] Get Stockroom Summaries Success',
-  GET_STOCKROOM_DETAILS = '[Stockroom] Get Stockroom Details',
+  GET_STOCKROOM_BY_ID = '[Stockroom] Get Stockroom By Id',
   SET_SELECTED_STOCKROOM = '[Stockroom] Set Selected Stockroom',
   UPDATE_STOCKROOM = '[Stockroom] Update Stockroom',
   UPDATE_STOCKROOM_SUCCESS = '[Stockroom] Update Stockroom Success',
@@ -42,6 +42,11 @@ export const getStockrooms = createAction(
   StockroomActions.GET_STOCKROOMS
 );
 
+export const getStockroomsSuccess = createAction(
+  StockroomActions.GET_STOCKROOMS_SUCCESS,
+  (stockrooms: Stockroom[]) => ({ payload: stockrooms })
+);
+
 export const getStockroomSummaries = createAction(
   StockroomActions.GET_STOCKROOM_SUMMARIES
 )
@@ -51,9 +56,9 @@ export const getStockroomSummariesSuccess = createAction(
   (summaries: StockroomSummary[]) => ({ payload: summaries })
 )
 
-export const getStockroomsSuccess = createAction(
-  StockroomActions.GET_STOCKROOMS_SUCCESS,
-  (stockrooms: Stockroom[]) => ({ payload: stockrooms })
+export const getStockroomById = createAction(
+  StockroomActions.GET_STOCKROOM_BY_ID,
+  props<{ id: number }>()
 );
 
 export const setSelectedStockroom = createAction(

@@ -37,6 +37,8 @@ const _stockroomReducer = createReducer(
   }),
   on(deleteStockroomSuccess, (state, { payload }) => {
     return {
+      ...state,
+      stockroomSummaries: state.stockroomSummaries.filter(s => s.stockroom.id !== payload.id),
       stockrooms: state.stockrooms.filter(s => s.id !== payload.id),
       selectedStockroom: state.selectedStockroom,
     };
