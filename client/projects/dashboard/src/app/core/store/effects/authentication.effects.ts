@@ -1,21 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, mergeMap, catchError, tap, withLatestFrom } from 'rxjs/operators';
 
 import { AuthenticationActions, loginUserSuccess, loginUserError, logoutUser, refreshTokenSuccess } from '../actions/authentication.actions';
 import { AuthenticationService } from '../../services/authentication.service';
-import { IAppState } from '../state/app.state';
+import { AuthenticatedUser } from '../../models/authenticated-user.model';
 
 @Injectable()
 export class AuthenticationEffects {
   constructor(
     private _actions: Actions,
     private _authenticationService: AuthenticationService,
-    private _router: Router,
-    private _store: Store<IAppState>,
+    private _router: Router
   ) { }
 
   loginUser$ = createEffect(() => this._actions.pipe(
@@ -38,10 +36,10 @@ export class AuthenticationEffects {
 
   refreshToken$ = createEffect(() => this._actions.pipe(
     ofType(AuthenticationActions.REFRESH_TOKEN),
-    withLatestFrom(this._store),
-    mergeMap(([action, state]) => {
-      const accessToken: string = state.authentication.authenticatedUser.accessToken;
-      const refreshToken: string = state.authentication.authenticatedUser.refreshToken;
+    mergeMap(() => {
+      const authenticatedUser: AuthenticatedUser = this._authenticationService.getStoredAuthenticatedUser();
+      const accessToken: string = authenticatedUser.accessToken;
+      const refreshToken: string = authenticatedUser.refreshToken;
       return this._authenticationService.refreshToken(accessToken, refreshToken)
         .pipe(
           map(user => refreshTokenSuccess(user)),
