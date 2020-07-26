@@ -4,13 +4,13 @@ export abstract class BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ name: 'created_at', nullable: false })
+  @Column({ name: 'created_at', nullable: false, type: 'timestamp with time zone' })
   public createdAt: Date;
 
-  @Column({ name: 'updated_at', nullable: false })
+  @Column({ name: 'updated_at', nullable: false, type: 'timestamp with time zone' })
   public updatedAt: Date;
 
-  @Column({ name: 'deleted_at', nullable: true })
+  @Column({ name: 'deleted_at', nullable: true, type: 'timestamp with time zone' })
   public deletedAt: Date;
 
   @BeforeInsert()

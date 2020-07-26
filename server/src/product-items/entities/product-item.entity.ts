@@ -1,10 +1,10 @@
 import { Column, Entity, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 import { BaseEntity } from '../../database/entities/base.entity';
 import { Category } from '../../categories/entities/category.entity';
-import { StockItemDetails } from '../../stockrooms/entities/stock-item-details.entity'
+import { StockItem } from '../../stockrooms/entities/stock-item.entity'
 
-@Entity()
-export class Item extends BaseEntity {
+@Entity({ name: 'product_item' })
+export class ProductItem extends BaseEntity {
   @Column({ nullable: false })
   public name: string;
 
@@ -24,6 +24,6 @@ export class Item extends BaseEntity {
   @JoinColumn({ name: 'category_id' })
   public category: Category;
 
-  @OneToMany(type => StockItemDetails, item => item.stockroom)
-  public stockItems: StockItemDetails[];
+  @OneToMany(type => StockItem, item => item.stockroom)
+  public stockItems: StockItem[];
 }

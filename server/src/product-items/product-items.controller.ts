@@ -1,6 +1,6 @@
 import { Controller, UseGuards } from '@nestjs/common';
 import { JwtAuthenticationGuard } from '../authentication/guards/jwt-authentication.guard';
 
-@Controller('items')
+@Controller('product-items')
 @UseGuards(JwtAuthenticationGuard)
-export class ItemsController {}
+export class ProductItemsController {}

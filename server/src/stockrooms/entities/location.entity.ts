@@ -1,7 +1,7 @@
 import { Column, Entity, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
 import { BaseEntity } from '../../database/entities/base.entity';
 import { Stockroom } from './stockroom.entity';
-import { StockItemDetails } from './stock-item-details.entity';
+import { StockItem } from './stock-item.entity';
 
 @Entity()
 export class Location extends BaseEntity {
@@ -15,6 +15,6 @@ export class Location extends BaseEntity {
   @JoinColumn({ name: 'stockroom_id' })
   public stockroom: Stockroom;
 
-  @OneToMany(type => StockItemDetails, item => item.location)
-  public stockItems: StockItemDetails[];
+  @OneToMany(type => StockItem, item => item.location)
+  public stockItems: StockItem[];
 }

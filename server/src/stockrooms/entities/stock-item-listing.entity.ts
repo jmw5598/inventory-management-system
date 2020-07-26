@@ -3,8 +3,8 @@ import { BaseEntity } from '../../database/entities/base.entity';
 import { Platform } from '../../platforms/entities/platform.entity';
 
 @Entity({ name: 'stock_item_listing' })
-export class StockItemListingDetails extends BaseEntity {
-  @Column({ nullable: false, name: 'listed_date' })
+export class StockItemListing extends BaseEntity {
+  @Column({ nullable: false, name: 'listed_date', type: 'timestamp with time zone' })
   public listedDate: Date;
 
   @Column({ nullable: false, name: 'listed_price', type: 'numeric' })
@@ -13,7 +13,7 @@ export class StockItemListingDetails extends BaseEntity {
   @Column({ name: 'listed_quantity' }) 
   public listedQuantity: number;
 
-  @Column({ nullable: true, name: 'sold_date' })
+  @Column({ nullable: true, name: 'sold_date', type: 'timestamp with time zone' })
   public soldDate: Date;
 
   @Column({ name: 'sold_price', type: 'numeric' })

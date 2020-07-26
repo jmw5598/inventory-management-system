@@ -10,7 +10,7 @@ import { PlatformsModule } from './platforms/platforms.module';
 import { ProfilesModule } from './profiles/profiles.module';
 import { StockroomsModule } from './stockrooms/stockrooms.module';
 import { UsersModule } from './users/users.module';
-import { ItemsModule } from './items/items.module';
+import { ProductItemsModule } from './product-items/product-items.module';
 import { InvoicesModule } from './invoices/invoices.module';
 import { ListedItemsModule } from './listed-items/listed-items.module';
 import { PlansModule } from './plans/plans.module';
@@ -27,7 +27,7 @@ import { PlansModule } from './plans/plans.module';
     StockroomsModule,
     TypeOrmModule.forRoot(),
     UsersModule,
-    ItemsModule,
+    ProductItemsModule,
     InvoicesModule,
     ListedItemsModule,
     PlansModule
