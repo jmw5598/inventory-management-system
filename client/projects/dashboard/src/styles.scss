@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;400;600;700&display=swap');
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css");
 
-$background: #F6F6F8;
+$background: #FFFFFF;
 $font-color: #FFFF;
 
 * {
@@ -21,11 +21,15 @@ html {
 }
 
 body {
-  background: $background;
+  background: $background !important;
 }
 
 a {
   color: $font-color;
   font-weight: 400;
   text-decoration: none;
+}
+
+nz-layout {
+  background: #FFF;
 }
