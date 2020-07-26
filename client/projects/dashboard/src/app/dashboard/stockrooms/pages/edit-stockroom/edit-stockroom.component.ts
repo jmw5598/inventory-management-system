@@ -22,7 +22,6 @@ export class EditStockroomComponent implements OnInit {
   }
 
   public onUpdateStockroom(stockroom: Stockroom): void {
-    console.log("updating stockroom, ", stockroom);
-    // this._store.dispatch(updateStockroom({id: stockroom.id, stockroom: stockroom }));
+    this._store.dispatch(updateStockroom({id: stockroom.id, stockroom: stockroom }));
   }
 }

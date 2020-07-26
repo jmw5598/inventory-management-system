@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
+import { IAppState } from '../../../../core/store/state/app.state';
+import { selectSelectedStockroom } from '../../../../core/store/selectors/stockroom.selector';
+import { Stockroom } from '../../../../core/models/stockroom.model';
 
 @Component({
   selector: 'inv-stockroom-details',
@@ -6,8 +12,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./stockroom-details.component.scss']
 })
 export class StockroomDetailsComponent implements OnInit {
-  constructor() { }
+  public selectedStockroom$: Observable<Stockroom>;
+
+  constructor(private _store: Store<IAppState>) { }
 
   ngOnInit(): void {
+    this.selectedStockroom$ = this._store.select(selectSelectedStockroom);
   }
 }

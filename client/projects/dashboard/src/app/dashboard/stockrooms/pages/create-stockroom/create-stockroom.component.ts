@@ -22,7 +22,6 @@ export class CreateStockroomComponent implements OnInit {
   }
 
   public onCreateStockroom(stockroom: Stockroom): void {
-    console.log("creating stockroom, ", stockroom);
-    // this._store.dispatch(createStockroom(stockroom));
+    this._store.dispatch(createStockroom(stockroom));
   }
 }

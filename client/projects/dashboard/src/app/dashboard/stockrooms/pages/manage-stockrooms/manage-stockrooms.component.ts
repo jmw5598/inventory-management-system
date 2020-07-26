@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { IAppState } from '../../../../core/store/state/app.state';
 import { selectStockroomSummaries } from '../../../../core/store/selectors/stockroom.selector';
 import { StockroomSummary } from '../../../../core/models/stockroom-summary.model';
-import { deleteStockroom } from 'projects/dashboard/src/app/core/store/actions/stockroom.actions';
+import { deleteStockroom, getStockroomSummaries } from 'projects/dashboard/src/app/core/store/actions/stockroom.actions';
 
 class StockroomSummaryTotals {
   public stockroomCount: number = 0;
@@ -36,6 +36,10 @@ export class ManageStockroomsComponent implements OnInit {
 
   public onDeleteStockroom(stockroomId: number): void {
     this._store.dispatch(deleteStockroom({ id: stockroomId }));
+  }
+
+  public onReloadStockroomSummaries(): void {
+    this._store.dispatch(getStockroomSummaries());
   }
 
   private _setStockroomSummaryTotals(summaries: StockroomSummary[]): void {

@@ -2,16 +2,9 @@
   <nz-page-header nzBackIcon>
     <nz-page-header-title>Manage</nz-page-header-title>
     <nz-page-header-subtitle></nz-page-header-subtitle>
-    <nz-page-header-tags>
-      <!-- <nz-tag nzColor="blue">Runing</nz-tag> -->
-    </nz-page-header-tags>
-    <nz-page-header-extra>
-      <!-- <button nz-button>Operation</button> -->
-      <!-- <button nz-button>Operation</button> -->
-      <a [routerLink]="['../create']" nz-button nzType="primary">Create New</a>
-    </nz-page-header-extra>
     <nz-page-header-content>
       <nz-row nzType="flex">
+        <!-- @@@ TODO Change valule color to primary???-->
         <nz-statistic nzTitle="Stockrooms" [nzValue]="stockroomSummaryTotals.stockroomCount"></nz-statistic>
         <nz-statistic nzTitle="Items" [nzValue]="stockroomSummaryTotals.itemCount" style="margin: 0 32px"></nz-statistic>
         <nz-statistic nzTitle="Listed" [nzValue]="stockroomSummaryTotals.listedCount" style="margin: 0 32px"></nz-statistic>
@@ -20,9 +13,19 @@
       </nz-row>
     </nz-page-header-content>
   </nz-page-header>
-  <br />
-  <inv-stockrooms-table 
-      [summaries]="(stockroomSummaries$ | async)"
-      (onDeleteStockroom)="onDeleteStockroom($event)">
-  </inv-stockrooms-table>
+  <div class="stockroom-summaries">
+    <div class="stockroom-summaries-filter">
+      <a class="btn-new-stockroom" [routerLink]="['../create']" nz-button nzType="primary">
+        <i nz-icon nzType="plus" nzTheme="outline"></i>
+        Create Stockroom
+      </a>
+      <a class="btn-reload" nz-button (click)="onReloadStockroomSummaries()">
+        <i nz-icon nzType="reload" nzTheme="outline"></i>
+      </a>
+    </div>
+    <inv-stockrooms-table 
+        [summaries]="(stockroomSummaries$ | async)"
+        (onDeleteStockroom)="onDeleteStockroom($event)">
+    </inv-stockrooms-table>
+  </div>
 </div>

@@ -3,9 +3,12 @@
   <nz-page-header-subtitle></nz-page-header-subtitle>
 </nz-page-header>
 <nz-layout>
-  <nz-card>
-    <inv-stockroom-form
-        (onSaveStockroom)="onCreateStockroom($event)">
-    </inv-stockroom-form>
-  </nz-card>
+  <nz-row>
+    <nz-card nz-col [nzSpan]="8" nzXs="24" nzSm="24" nzMd="16" nzLg="12" nzXl="8">
+      <inv-stockroom-form
+          (onSaveStockroom)="onCreateStockroom($event)">
+      </inv-stockroom-form>
+    </nz-card>
+  </nz-row>
+  
 </nz-layout>
