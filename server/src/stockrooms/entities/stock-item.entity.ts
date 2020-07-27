@@ -30,8 +30,8 @@ export class StockItem extends BaseEntity {
   public location: Location;
 
   @ManyToOne(type => ProductItem)
-  @JoinColumn({ name: 'item_id' })
-  public item: ProductItem;
+  @JoinColumn({ name: 'product_item_id' })
+  public productItem: ProductItem;
 
   @OneToOne(type => StockItemListing)
   @JoinColumn({ name: 'stock_item_listing_id' })

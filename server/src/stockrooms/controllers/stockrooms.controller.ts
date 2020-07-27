@@ -1,13 +1,15 @@
-import { Controller, Get, Post, Put, Param, Request, UseGuards, Body, Delete } from '@nestjs/common';
-import { JwtAuthenticationGuard } from '../authentication/guards/jwt-authentication.guard';
-import { CreateStockroomDto } from './dtos/create-stockroom.dto';
-import { UpdateStockroomDto } from './dtos/update-stockroom.dto';
-import { StockroomsService } from './stockrooms.service';
+import { Controller, Get, Post, Put, Param, Request, UseGuards, Body, Delete, Query } from '@nestjs/common';
+import { JwtAuthenticationGuard } from '../../authentication/guards/jwt-authentication.guard';
+import { CreateStockroomDto } from '../dtos/create-stockroom.dto';
+import { UpdateStockroomDto } from '../dtos/update-stockroom.dto';
+import { StockroomsService } from '../services/stockrooms.service';
 
 @Controller('stockrooms')
 @UseGuards(JwtAuthenticationGuard)
 export class StockroomsController {
-  constructor(private readonly _stockroomsService: StockroomsService) {}
+  constructor(
+    private readonly _stockroomsService: StockroomsService,
+  ) {}
   
   @Get()
   public async getStockrooms(@Request() req): Promise<any> {
@@ -55,14 +57,5 @@ export class StockroomsController {
   public async deleteStockroom(@Request() req, @Param('id') id: number): Promise<any> {
     const accountId: number = req.user.accountId; 
     return this._stockroomsService.deleteStockroom(accountId, id);
-  }
-
-  // @@@ this will get all the stock-tiems items in this stockrooms
-  // @@@ 3000/items gets product items
-  // @@@ will have to page and filter??
-  @Get(':id/stock-items')
-  public async getStockroomItems(
-      @Param('id') id: number): Promise<any> {
-    return [];
   }
 }

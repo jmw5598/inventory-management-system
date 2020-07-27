@@ -1,15 +1,16 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, IsNull, Not } from 'typeorm';
 
-import { Location } from './entities/location.entity';
-import { Stockroom } from './entities/stockroom.entity';
-import { StockroomSummary } from './dtos/stockroom-summary.dto';
-import { StockroomMapper } from './mappers/stockroom.mapper';
-import { CreateStockroomDto } from './dtos/create-stockroom.dto';
-import { UpdateStockroomDto } from './dtos/update-stockroom.dto';
-import { UpdateLocationDto } from './dtos/update-location.dto';
-import { CreateLocationDto } from './dtos/create-location.dto';
+import { Location } from '../entities/location.entity';
+import { Stockroom } from '../entities/stockroom.entity';
+import { StockroomSummary } from '../dtos/stockroom-summary.dto';
+import { StockroomMapper } from '../mappers/stockroom.mapper';
+import { StockroomNotFoundException } from '../exceptions/stockroom-not-found.exception';
+import { CreateStockroomDto } from '../dtos/create-stockroom.dto';
+import { UpdateStockroomDto } from '../dtos/update-stockroom.dto';
+import { UpdateLocationDto } from '../dtos/update-location.dto';
+import { CreateLocationDto } from '../dtos/create-location.dto';
 
 @Injectable()
 export class StockroomsService {
@@ -17,7 +18,7 @@ export class StockroomsService {
     @InjectRepository(Stockroom)
     private readonly _stockroomRepository: Repository<Stockroom>,
     @InjectRepository(Location)
-    private readonly _locationRepository: Repository<Location>
+    private readonly _locationRepository: Repository<Location>,
   ) {}
 
   public async getAllStockrooms(accountId: number): Promise<Stockroom[]> {
@@ -47,7 +48,7 @@ export class StockroomsService {
 
   public async getStockroomById(accountId: number, stockroomId: number): Promise<Stockroom> {
     const stockroom: Stockroom = await this._findStockroomByIdWithAccountId(stockroomId, accountId);
-    if (!stockroom) throw new NotFoundException(`Stockroom not found.`);
+    if (!stockroom) throw new StockroomNotFoundException();
     return stockroom;
   }
 
@@ -68,7 +69,7 @@ export class StockroomsService {
   private async _softDeleteStockroom(accountId: number, stockroomId: number): Promise<Stockroom> {
     const stockroom: Stockroom = await this._findStockroomByIdWithAccountId(stockroomId, accountId);
     if (!stockroomId) {
-      throw new NotFoundException(`Stockroom not found`);
+      throw new StockroomNotFoundException(); 
     }
     stockroom.deletedAt = new Date();
     return this._stockroomRepository.save(stockroom);
@@ -91,7 +92,7 @@ export class StockroomsService {
 
   private async _createNewStockroomLocations(stockroomId: number, createLocationDto: CreateLocationDto[]): Promise<Location[]> {
     let locations: Location[] = [];
-    if (createLocationDto.length > 0) {
+    if (createLocationDto && createLocationDto.length > 0) {
       locations = createLocationDto.map(location => {
         return this._locationRepository.create({
           description: location.description,
@@ -104,7 +105,7 @@ export class StockroomsService {
 
   private async _updateStockroom(accountId: number, stockroomId: number, updateStockroomDto: UpdateStockroomDto): Promise<Stockroom> {
     const stockroom: Stockroom = await this._findStockroomByIdWithAccountId(stockroomId, accountId);
-    if (!stockroom) throw new NotFoundException(`Unable to find a stockroom to update.`)
+    if (!stockroom) throw new StockroomNotFoundException(); 
     stockroom.name = updateStockroomDto.name;
     stockroom.description = updateStockroomDto.description;
     return this._stockroomRepository.save(stockroom);
