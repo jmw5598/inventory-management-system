@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
+import { Stockroom } from '@inv/core';
 import { IAppState } from '../../../../core/store/state/app.state';
 import { selectSelectedStockroom } from '../../../../core/store/selectors/stockroom.selector';
-import { Stockroom } from '../../../../core/models/stockroom.model';
 
 @Component({
   selector: 'inv-stockroom-details',

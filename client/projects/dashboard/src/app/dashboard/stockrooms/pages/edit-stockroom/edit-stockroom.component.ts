@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
+import { Stockroom } from '@inv/core';
 import { IAppState } from '../../../../core/store/state/app.state';
 import { selectSelectedStockroom } from '../../../../core/store/selectors/stockroom.selector';
-import { Stockroom } from '../../../../core/models/stockroom.model';
 import { updateStockroom } from '../../../../core/store/actions/stockroom.actions';
 
 @Component({

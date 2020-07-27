@@ -1,8 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
-
-import { Location } from '../../../../core/models/location.model';
-import { Stockroom } from '../../../../core/models/stockroom.model';
+import { Location, Stockroom } from '@inv/core';
 
 @Component({
   selector: 'inv-stockroom-form',

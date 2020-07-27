@@ -4,10 +4,10 @@ import { Observable, of } from 'rxjs';
 import { tap, filter, take, switchMap, catchError } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
+import { StockroomSummary } from '@inv/core';
 import { IAppState } from '../store/state/app.state';
 import { getStockroomSummaries } from '../store/actions/stockroom.actions';
 import { selectStockroomSummaries } from '../store/selectors/stockroom.selector';
-import { StockroomSummary } from '../models/stockroom-summary.model';
 
 @Injectable({
   providedIn: 'root'

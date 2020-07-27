@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-import { HttpErrorActions, handleHttpError } from '../actions/http-error.actions';
-import { PlatformsService } from '../../services/platforms.service';
+import { PlatformsService } from '@inv/core';
+import { handleHttpError } from '../actions/http-error.actions';
 import { PlatformActions, getPlatformsSuccess } from '../actions/platform.actions';
 
 import { of } from 'rxjs';

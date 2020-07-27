@@ -5,8 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { take, map } from 'rxjs/operators';
 
-import { AuthenticationService } from '../services/authentication.service';
-import { AuthenticatedStatus } from '../enums/authenticated-status.enum';
+import { AuthenticationService, AuthenticatedStatus } from '@inv/core';
 import { IAppState } from '../store/state/app.state';
 import { IAuthenticationState } from '../store/state/authentication.state';
 import { selectAuthenticationState } from '../store/selectors/authentication.selector';

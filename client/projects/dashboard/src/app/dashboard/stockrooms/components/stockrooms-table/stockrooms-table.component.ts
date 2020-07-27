@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { StockroomSummary } from '../../../../core/models/stockroom-summary.model';
-import { Stockroom } from '../../../../core/models/stockroom.model';
+import { Stockroom, StockroomSummary } from '@inv/core';
 
 @Component({
   selector: 'inv-stockrooms-table',

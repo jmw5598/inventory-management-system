@@ -1,9 +1,8 @@
 import { Store } from '@ngrx/store';
 import { take, map } from 'rxjs/operators';
-import { AuthenticationService } from '../services/authentication.service';
+import { AuthenticationService, AuthenticatedUser } from '@inv/core';
 import { IAppState } from '../store/state/app.state';
 import { refreshToken, loginUserSuccess, logoutUser } from '../store/actions/authentication.actions';
-import { AuthenticatedUser } from '../models/authenticated-user.model';
 import { selectAuthenticatedUser } from '../store/selectors/authentication.selector';
 
 export function authenticatedUserInitializer(

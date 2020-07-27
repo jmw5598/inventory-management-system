@@ -1,22 +1,25 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
+import { InvCoreConfig, INV_CORE_CONFIG } from '../inv-core.config';
 import { AuthenticatedUser } from '../models/authenticated-user.model'; 
 import { UserCredentials } from '../models/user-credentials.model';
-import { environment } from '../../../environments/environment';
 
-@Injectable({
-  providedIn: 'root'
-})
+
+@Injectable()
 export class AuthenticationService {
   private readonly AUTH_USER_KEY: string = "AUTHUSER";
   private readonly REMEMBER_ME_KEY: string = "REMEMBERME";
   private _baseUrl: string;
 
-  constructor(private _http: HttpClient) {
-    this._baseUrl = environment.auth.base;
+  constructor(
+    @Inject(INV_CORE_CONFIG) 
+    private _config: InvCoreConfig,
+    private _http: HttpClient
+  ) {
+    this._baseUrl = this._config.auth.baseUrl;
   }
 
   public authenticateUser(credentials: UserCredentials): Observable<AuthenticatedUser> {

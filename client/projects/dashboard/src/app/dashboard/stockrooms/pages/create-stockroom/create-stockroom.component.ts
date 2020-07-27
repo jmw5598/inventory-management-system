@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
+import { Stockroom } from '@inv/core';
 import { IAppState } from '../../../../core/store/state/app.state';
 import { createStockroom } from '../../../../core/store/actions/stockroom.actions'; 
 import { selectSelectedStockroom } from '../../../../core/store/selectors/stockroom.selector';
-import { Stockroom } from '../../../../core/models/stockroom.model';
 
 @Component({
   selector: 'inv-create-stockroom',

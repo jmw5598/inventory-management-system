@@ -1,5 +1,5 @@
 import { createAction } from '@ngrx/store';
-import { Plan } from '../../models/plan.model';
+import { Plan } from '@inv/core';
 
 export enum PlanActions {
   GET_PLANS = '[Plan] Get Plans',

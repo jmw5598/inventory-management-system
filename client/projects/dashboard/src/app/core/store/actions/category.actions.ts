@@ -1,5 +1,5 @@
 import { createAction } from '@ngrx/store';
-import { Category } from '../../models/category.model';
+import { Category } from '@inv/core';
 
 export enum CategoryActions {
   GET_CATEGORIES = '[Category] Get Categories',

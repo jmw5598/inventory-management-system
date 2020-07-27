@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
+import { CategoriesService } from '@inv/core';
 import { HttpErrorActions, handleHttpError } from '../actions/http-error.actions';
-import { CategoriesService } from '../../services/categories.service';
 import { CategoryActions, getCategoriesSuccess } from '../actions/category.actions';
 
 import { of } from 'rxjs';

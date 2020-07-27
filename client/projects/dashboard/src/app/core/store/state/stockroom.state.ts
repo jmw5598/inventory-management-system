@@ -1,5 +1,4 @@
-import { Stockroom } from '../../models/stockroom.model';
-import { StockroomSummary } from '../../models/stockroom-summary.model';
+import { Stockroom, StockroomSummary } from '@inv/core';
 
 export interface IStockroomState {
   stockrooms: Stockroom[];

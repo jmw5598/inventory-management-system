@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { AuthenticatedStatus } from '../../enums/authenticated-status.enum';
+import { AuthenticatedStatus } from '@inv/core';
 import { loginUserSuccess, loginUserError, logoutUser, refreshTokenSuccess } from '../actions/authentication.actions';
 import { initialAuthenticationState } from '../state/authentication.state';
 

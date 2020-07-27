@@ -1,4 +1,4 @@
-import { ItemCondition } from '../../models/item-condition.model';
+import { ItemCondition } from '@inv/core';
 
 export interface IItemConditionState {
   itemConditions: ItemCondition[]

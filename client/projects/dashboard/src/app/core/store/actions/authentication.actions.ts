@@ -1,6 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { AuthenticatedUser } from '../../models/authenticated-user.model';
-import { UserCredentials } from '../../models/user-credentials.model';
+import { AuthenticatedUser, UserCredentials } from '@inv/core';
 import { HttpErrorResponse } from '@angular/common/http';
 
 export enum AuthenticationActions {

@@ -1,5 +1,5 @@
 import { createAction } from '@ngrx/store';
-import { ItemCondition } from '../../models/item-condition.model';
+import { ItemCondition } from '@inv/core';
 
 export enum ItemConditionActions {
   GET_ITEM_CONDITIONS = '[Item Condition] Get Item Conditions',

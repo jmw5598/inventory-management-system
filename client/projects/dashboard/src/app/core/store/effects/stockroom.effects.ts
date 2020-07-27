@@ -4,12 +4,12 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of, EMPTY } from 'rxjs';
 import { map, mergeMap, catchError, tap } from 'rxjs/operators'; 
 
+import { StockroomsService, Stockroom } from '@inv/core';
+
 import { handleHttpError } from '../actions/http-error.actions';
 import { StockroomActions, getStockroomSummariesSuccess, getStockroomsSuccess, 
   createStockroomSuccess, deleteStockroomSuccess, updateStockroomSuccess, setSelectedStockroom 
 } from '../actions/stockroom.actions';
-import { StockroomsService } from '../../services/stockrooms.service';
-import { Stockroom } from '../../models/stockroom.model';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Injectable()

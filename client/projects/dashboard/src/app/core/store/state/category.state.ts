@@ -1,4 +1,4 @@
-import { Category } from '../../models/category.model';
+import { Category } from '@inv/core';
 
 export interface ICategoryState {
   categories: Category[]

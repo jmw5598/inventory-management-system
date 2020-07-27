@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
+import { Stockroom } from '@inv/core';
 import { createStockroomSuccess, deleteStockroomSuccess, getStockroomsSuccess, setSelectedStockroom, updateStockroomSuccess, getStockroomSummariesSuccess } from '../actions/stockroom.actions'; 
 import { initialStockroomState } from '../state/stockroom.state';
-import { Stockroom } from '../../models/stockroom.model';
 
 const _stockroomReducer = createReducer(
   initialStockroomState,

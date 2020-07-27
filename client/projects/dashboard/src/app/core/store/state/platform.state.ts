@@ -1,4 +1,4 @@
-import { Platform } from '../../models/platform.model';
+import { Platform } from '@inv/core';
 
 export interface IPlatformState {
   platforms: Platform[]

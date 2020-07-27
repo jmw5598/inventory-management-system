@@ -4,9 +4,9 @@ import { Observable, of } from 'rxjs';
 import { tap, filter, take, switchMap, catchError } from 'rxjs/operators'
 import { Store } from '@ngrx/store';
 
+import { Stockroom } from '@inv/core';
 import { IAppState } from '../store/state/app.state';
 import { getStockrooms } from '../store/actions/stockroom.actions';
-import { Stockroom } from '../models/stockroom.model'; 
 import { selectCurrentStockrooms } from '../store/selectors/stockroom.selector';
 
 @Injectable({

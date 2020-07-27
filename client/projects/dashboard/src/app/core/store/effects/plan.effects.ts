@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-import { HttpErrorActions, handleHttpError } from '../actions/http-error.actions';
-import { PlansService } from '../../services/plans.service'; 
+import { PlansService } from '@inv/core';
+import { handleHttpError } from '../actions/http-error.actions';
 import { PlanActions, getPlansSuccess } from '../actions/plan.actions';
 
 import { of } from 'rxjs';

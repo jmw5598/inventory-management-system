@@ -11,7 +11,6 @@ import { authenticationReducer } from './store/reducers/authentication.reducer';
 import { HttpErrorEffects } from './store/effects/http-error.effects';
 import { CategoryEffects } from './store/effects/category.effects';
 import { categoryReducer } from './store/reducers/category.reducer';
-import { IAppState } from './store/state/app.state';
 import { PlanEffects } from './store/effects/plan.effects';
 import { planReducer } from './store/reducers/plan.reducer';
 import { PlatformEffects } from './store/effects/platform.effects';
@@ -20,7 +19,7 @@ import { ItemConditionEffects } from './store/effects/item-condition.effects';
 import { itemConditionReducer } from './store/reducers/item-condition.reducer';
 import { StockroomEffects } from './store/effects/stockroom.effects';
 import { stockroomReducer } from './store/reducers/stockroom.reducer';
-import { logoutUser } from './store/actions/authentication.actions';
+import { AuthenticationService } from '@inv/core';
 
 const jwtTokenInterceptor = {
   provide: HTTP_INTERCEPTORS,
@@ -32,7 +31,7 @@ const authenticationAppInitializer = {
   provide: APP_INITIALIZER, 
   useFactory: authenticatedUserInitializer, 
   multi: true,
-  deps: [Store]
+  deps: [Store, AuthenticationService]
 };
 
 @NgModule({

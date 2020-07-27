@@ -1,4 +1,4 @@
-import { Plan } from '../../models/plan.model'; 
+import { Plan } from '@inv/core'; 
 
 export interface IPlanState {
   plans: Plan[]

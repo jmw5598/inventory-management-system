@@ -5,8 +5,7 @@ import { of } from 'rxjs';
 import { map, mergeMap, catchError, tap, withLatestFrom } from 'rxjs/operators';
 
 import { AuthenticationActions, loginUserSuccess, loginUserError, logoutUser, refreshTokenSuccess } from '../actions/authentication.actions';
-import { AuthenticationService } from '../../services/authentication.service';
-import { AuthenticatedUser } from '../../models/authenticated-user.model';
+import { AuthenticationService, AuthenticatedUser } from '@inv/core';
 
 @Injectable()
 export class AuthenticationEffects {

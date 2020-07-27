@@ -1,5 +1,5 @@
 import { createAction } from '@ngrx/store';
-import { Platform } from '../../models/platform.model';
+import { Platform } from '@inv/core';
 
 export enum PlatformActions {
   GET_PLATFORMS = '[Platform] Get Platforms',

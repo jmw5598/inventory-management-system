@@ -1,7 +1,5 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
-import { Stockroom } from '../../models/stockroom.model';
-import { StockroomSummary } from '../../models/stockroom-summary.model';
+import { Stockroom, StockroomSummary } from '@inv/core';
 
 export enum StockroomActions {
   CREATE_STOCKROOM = '[Stockroom] Create Stockroom',

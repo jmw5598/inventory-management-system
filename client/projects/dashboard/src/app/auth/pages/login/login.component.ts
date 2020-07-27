@@ -6,11 +6,9 @@ import { Subscription } from 'rxjs';
 
 import { IAppState } from '../../../core/store/state/app.state';
 import { IAuthenticationState } from '../../../core/store/state/authentication.state';
-import { UserCredentials } from '../../../core/models/user-credentials.model';
 import { loginUser } from '../../../core/store/actions/authentication.actions';
 import { selectAuthenticationState } from '../../../core/store/selectors/authentication.selector';
-import { AuthenticationService } from '../../../core/services/authentication.service';
-import { AuthenticatedStatus } from '../../../core/enums/authenticated-status.enum';
+import { AuthenticationService, AuthenticatedStatus, UserCredentials } from '@inv/core';
 
 @Component({
   selector: 'inv-login',

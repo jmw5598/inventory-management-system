@@ -3,9 +3,9 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
+import { StockroomSummary } from '@inv/core';
 import { IAppState } from '../../../../core/store/state/app.state';
 import { selectStockroomSummaries } from '../../../../core/store/selectors/stockroom.selector';
-import { StockroomSummary } from '../../../../core/models/stockroom-summary.model';
 import { deleteStockroom, getStockroomSummaries } from 'projects/dashboard/src/app/core/store/actions/stockroom.actions';
 
 class StockroomSummaryTotals {

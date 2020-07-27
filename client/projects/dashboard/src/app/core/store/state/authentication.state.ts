@@ -1,5 +1,4 @@
-import { AuthenticatedUser } from '../../models/authenticated-user.model';
-import { AuthenticatedStatus } from '../../enums/authenticated-status.enum';
+import { AuthenticatedUser, AuthenticatedStatus } from '@inv/core';
 
 export interface IAuthenticationState {
   authenticatedUser: AuthenticatedUser;

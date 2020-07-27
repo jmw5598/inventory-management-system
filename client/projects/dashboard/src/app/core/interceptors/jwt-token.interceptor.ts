@@ -4,13 +4,11 @@ import { Observable, Subscription, BehaviorSubject, throwError } from 'rxjs';
 import { catchError, switchMap, filter, take, skip } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
-import { AuthenticatedUser } from '../models/authenticated-user.model';
+import { AuthenticatedStatus, AuthenticatedUser } from '@inv/core';
 import { IAppState } from '../store/state/app.state';
-import { AuthenticatedStatus } from '../enums/authenticated-status.enum';
 import { IAuthenticationState } from '../store/state/authentication.state';
 import { selectAuthenticationState, selectAuthenticatedUser } from '../store/selectors/authentication.selector';
 import { refreshToken } from '../store/actions/authentication.actions';
-import { response } from 'express';
 
 @Injectable()
 export class JwtTokenInterceptor implements HttpInterceptor, OnDestroy {
