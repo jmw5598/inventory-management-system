@@ -7,18 +7,18 @@ import { Account } from 'src/accounts/entities/account.entity';
 @Entity({ name: 'product_item' })
 export class ProductItem extends BaseEntity {
   @Column({ nullable: false })
-  public name: string;
+  public title: string;
 
   @Column({ nullable: false })
   public description: string;
 
-  @Column({ nullable: false })
+  @Column({ nullable: true })
   public sku: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: false })
   public brand: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: false })
   public model: string;
 
   @ManyToOne(type => Category)
