@@ -15,6 +15,8 @@ import { PlanEffects } from './store/effects/plan.effects';
 import { planReducer } from './store/reducers/plan.reducer';
 import { PlatformEffects } from './store/effects/platform.effects';
 import { platformReducer } from './store/reducers/platform.reducer';
+import { ProductItemEffects } from './store/effects/product-item.effects';
+import { productItemReducer } from './store/reducers/product-item.reducer';
 import { ItemConditionEffects } from './store/effects/item-condition.effects';
 import { itemConditionReducer } from './store/reducers/item-condition.reducer';
 import { StockroomEffects } from './store/effects/stockroom.effects';
@@ -45,6 +47,7 @@ const authenticationAppInitializer = {
       itemConditions: itemConditionReducer,
       categories: categoryReducer,
       plans: planReducer,
+      productItems: productItemReducer,
     }),
     EffectsModule.forRoot([
       AuthenticationEffects,
@@ -54,6 +57,7 @@ const authenticationAppInitializer = {
       ItemConditionEffects,
       CategoryEffects,
       PlanEffects,
+      ProductItemEffects,
     ]),
     HttpClientModule,
   ],
