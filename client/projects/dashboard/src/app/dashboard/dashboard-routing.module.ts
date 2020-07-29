@@ -27,6 +27,11 @@ const routes: Routes = [
         data: { breadcrumb: 'Items' }
       },
       {
+        path: 'product-items',
+        loadChildren: () => import('./product-items/product-items.module').then(m => m.ProductItemsModule),
+        data: { breadcrumb: 'Product Items' }
+      },
+      {
         path: 'stockrooms',
         loadChildren: () => import('./stockrooms/stockrooms.module').then(m => m.StockroomsModule),
         data: { breadcrumb: 'Stockrooms' }

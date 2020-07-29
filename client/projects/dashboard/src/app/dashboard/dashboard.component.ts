@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ComponentFactoryResolver } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 

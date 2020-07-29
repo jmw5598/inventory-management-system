@@ -6,16 +6,23 @@
         <i nz-icon nzType="pie-chart"></i>
         <span>Dashboard</span>
       </li>
-      <li nz-submenu nzTitle="Stockrooms" nzIcon="reconciliation" [nzOpen]="true">
+      <li nz-submenu nzTitle="Product Items" nzIcon="barcode" [nzOpen]="false">
+        <ul>
+          <li nz-menu-item [nzMatchRouter]="true" [routerLink]="['product-items', 'create']">Create</li> 
+          <li nz-menu-item [nzMatchRouter]="true" [routerLink]="['product-items', 'manage']">Manage</li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Stockrooms" nzIcon="reconciliation" [nzOpen]="false">
         <ul>
           <li nz-menu-item [nzMatchRouter]="true" [routerLink]="['stockrooms', 'create']">Create</li> 
           <li nz-menu-item [nzMatchRouter]="true" [routerLink]="['stockrooms', 'manage']">Manage</li>
+          <li nz-menu-item [nzMatchRouter]="true" [routerLink]="['stockrooms', 'search']">Manage</li>
           <ng-container *ngFor="let stockroom of (stockroomState$ | async)" >
             <li nz-menu-item [nzMatchRouter]="true" [routerLink]="['stockrooms', stockroom.id, 'details']">{{ stockroom.name }}</li>
           </ng-container>
         </ul>
       </li>
-      <li nz-submenu nzTitle="Items" nzIcon="group" [nzOpen]="true">
+      <li nz-submenu nzTitle="Stock Items" nzIcon="group" [nzOpen]="false">
         <ul>
           <li nz-menu-item>Listed</li>
           <li nz-menu-item>Unlisted</li>
