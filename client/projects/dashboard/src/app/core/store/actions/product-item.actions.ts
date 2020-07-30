@@ -10,6 +10,11 @@ export enum ProductItemActions {
   SEARCH_PRODUCT_ITEMS_SUCCESS = '[Product Item] Search Product Items Success'
 };
 
+export interface ProductItemSearch {
+  searchTerm: string;
+  pageable: IPageable;
+}
+
 export const createProductItem = createAction(
   ProductItemActions.CREATE_PRODUCT_ITEM,
   props<Stockroom>()
@@ -32,7 +37,7 @@ export const getProductItemsByPageSuccess = createAction(
 
 export const searchProductItems = createAction(
   ProductItemActions.SEARCH_PRODUCT_ITEMS,
-  props<{ searchTerm: string }>()
+  props<ProductItemSearch>()
 );
 
 export const searchProductItemsSuccess = createAction(

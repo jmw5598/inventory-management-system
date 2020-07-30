@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { ProductItemsService } from '@inv/core';
 import { handleHttpError } from '../actions/http-error.actions';
-import { ProductItemActions, createProductItemSuccess, getProductItemsByPageSuccess } from '../actions/product-item.actions';
+import { ProductItemActions, createProductItemSuccess, getProductItemsByPageSuccess, ProductItemSearch, searchProductItemsSuccess } from '../actions/product-item.actions';
 
 import { of } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
@@ -36,8 +36,13 @@ export class ProductItemEffects {
     )
   ));
 
-  // @@@ TODO THIS SHOULD RETURN A PAGE
-  // searchProductItems$ = createEffect(() => this._actions.pipe(
-  //   // @@@ TODO
-  // ));
+  searchProductItems$ = createEffect(() => this._actions.pipe(
+    ofType(ProductItemActions.SEARCH_PRODUCT_ITEMS),
+    mergeMap((search: ProductItemSearch) => this._productItemsService.searchProductItems(search.searchTerm, search.pageable)
+      .pipe(
+        map(page => searchProductItemsSuccess(page)),
+        catchError(error => of(handleHttpError(error)))
+      )
+    )
+  ));
 }
