@@ -16,7 +16,7 @@
         <ul>
           <li nz-menu-item [nzMatchRouter]="true" [routerLink]="['stockrooms', 'create']">Create</li> 
           <li nz-menu-item [nzMatchRouter]="true" [routerLink]="['stockrooms', 'manage']">Manage</li>
-          <li nz-menu-item [nzMatchRouter]="true" [routerLink]="['stockrooms', 'search']">Manage</li>
+          <li nz-menu-item [nzMatchRouter]="true" [routerLink]="['stockrooms', 'search']">Search</li>
           <ng-container *ngFor="let stockroom of (stockroomState$ | async)" >
             <li nz-menu-item [nzMatchRouter]="true" [routerLink]="['stockrooms', stockroom.id, 'details']">{{ stockroom.name }}</li>
           </ng-container>
