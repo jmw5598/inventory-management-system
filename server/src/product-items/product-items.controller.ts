@@ -29,6 +29,19 @@ export class ProductItemsController {
     return this._productItemsService.findAllByPage(accountId, pageable);  
   }
 
+  @Get('search')
+  public async serachProductItems(
+      @Request() req,
+      @Query('page') page: number = 1,
+      @Query('size') size: number = 10,
+      @Query('sortCol') sortCol: string = 'title',
+      @Query('sortDir') sortDir: SortDirection = SortDirection.ASCENDING,
+      @Query('searchTerm') searchTerm: string = ''): Promise<Page<ProductItem>> {
+    const pageable: IPageable = PageRequest.from(page, size, sortCol, sortDir); 
+    const accountId: number = req.user.accountId;
+    return this._productItemsService.searchProductItems(accountId, searchTerm, pageable);  
+  }
+
   @Post()
   public async createNewProductItem(
       @Request() req, 
