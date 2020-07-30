@@ -1,0 +1,29 @@
+<nz-table 
+    nzBordered 
+    nzServerRender="true"
+    [nzFrontPagination]="false"
+    [nzLoading]="false"
+    [nzData]="page?.elements"
+    [nzTotal]="page?.totalElements"
+    [nzPageSize]="page?.current.size"
+    [nzPageIndex]="page?.current.page"
+    (nzPageIndexChange)="pageChange($event)">
+  <thead>
+    <tr>
+      <th nzWidth="30%">Title</th>
+      <th>Description</th>
+      <th></th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of page?.elements" class="editable-row">
+      <td>{{ product?.title }}</td>
+      <td>{{ product?.description }}</td>
+      <td></td>
+      <td>
+        <a nz-popconfirm nzPopconfirmTitle="Sure to delete?">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

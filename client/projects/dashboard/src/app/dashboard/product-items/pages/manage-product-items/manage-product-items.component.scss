@@ -1,0 +1,16 @@
+.product-items {
+  border: 1px solid #F0F0F0;
+  .product-items-filter {
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+
+    a {
+      margin-right: 0.5rem;
+    }
+
+    .search-items {
+      margin-left: auto;
+    }
+  }
+}
