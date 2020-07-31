@@ -82,7 +82,8 @@ export class ProductItemsService {
       { title: ilike, account: { id: accountId } },
       { description: ilike, account: { id: accountId } },
       { brand: ilike, account: { id: accountId } },
-      { model: ilike, account: { id: accountId } }
+      { model: ilike, account: { id: accountId } },
+      { sku: ilike, account: { id: accountId } }
     ];
   }
 

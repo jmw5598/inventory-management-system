@@ -24,7 +24,10 @@ export class ProductItemsTableComponent implements OnInit {
   } 
   
   public pageChange(pageNumber: number) {
-    console.log(pageNumber);
     this.onPageChange.emit(pageNumber);
+  }
+
+  public deleteProductItem(product: ProductItem): void {
+    console.log("deleting product item: ", product);
   }
 }

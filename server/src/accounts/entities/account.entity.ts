@@ -3,6 +3,7 @@ import { BaseEntity } from '../../database/entities/base.entity';
 import { Plan } from '../../plans/entities/plan.entity';
 import { User } from '../../users/entities/user.entity';
 import { Invoice } from '../../invoices/entities/invoice.entity';
+import { ProductItem } from '../../product-items/entities/product-item.entity'
 import { StripeCustomer } from './stripe-customers.entity';
 import { Stockroom } from '../../stockrooms/entities/stockroom.entity';
 
@@ -35,4 +36,7 @@ export class Account extends BaseEntity {
 
   @OneToMany(type => Stockroom, stockroom => stockroom.account)
   public stockrooms: Stockroom[];
+
+  @OneToMany(type => ProductItem, item => item.account)
+  public productItems: ProductItem[];
 }

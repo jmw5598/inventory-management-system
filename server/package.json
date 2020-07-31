@@ -25,6 +25,7 @@
     "migration:revert": "ts-node node_modules/.bin/typeorm migration:revert"
   },
   "dependencies": {
+    "@nestjs-modules/mailer": "^1.5.1",
     "@nestjs/common": "^7.0.0",
     "@nestjs/config": "^0.4.2",
     "@nestjs/core": "^7.0.0",
@@ -36,6 +37,7 @@
     "bcrypt": "^4.0.1",
     "class-transformer": "^0.2.3",
     "class-validator": "^0.12.2",
+    "nodemailer": "^6.4.10",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
@@ -43,7 +45,8 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.5.4",
-    "typeorm": "^0.2.24"
+    "typeorm": "^0.2.24",
+    "uuid": "^8.2.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.0.0",

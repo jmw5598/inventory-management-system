@@ -15,7 +15,7 @@ import { RefreshToken } from './entities/refresh-token.entity';
 const passportModuleOptions: IAuthModuleOptions = { defaultStrategy: 'jwt' };
 const jwtModuleOptions: JwtModuleOptions = {
   secret: jwtConstants.secret,
-  signOptions: { expiresIn: '60s' }
+  signOptions: { expiresIn: '1h' }
 }
 
 @Module({

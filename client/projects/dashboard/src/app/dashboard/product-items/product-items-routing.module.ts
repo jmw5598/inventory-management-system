@@ -3,12 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { CreateProductItemComponent } from './pages/create-product-item/create-product-item.component';
 import { ManageProductItemsComponent } from './pages/manage-product-items/manage-product-items.component';
-import { UpdateProductItemComponent } from './pages/update-product-item/update-product-item.component';
+import { EditProductItemComponent } from './pages/edit-product-item/edit-product-item.component';
+import { CategoriesGuard } from '../../core/guards/categories.guard';
 
 const routes: Routes = [
   {
     path: 'create',
     component: CreateProductItemComponent,
+    canActivate: [CategoriesGuard],
     data: { breadcrumb: 'Create' }
   },
   {
@@ -21,15 +23,16 @@ const routes: Routes = [
     data: { breadcrumb: '' },
     children: [
       {
-        path: '',
-        component: UpdateProductItemComponent,
-        data: { breadcrumb: 'Details' }
+        path: 'edit',
+        component: EditProductItemComponent,
+        canActivate: [CategoriesGuard],
+        data: { breadcrumb: 'Edit' }
       },
       {
-        path: 'edit',
-        component: UpdateProductItemComponent,
-        data: { breadcrumb: 'Edit' }
-      }
+        path: '***',
+        redirectTo: 'edit',
+        pathMatch: 'full'
+      },
     ]
   },
   {

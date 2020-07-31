@@ -5,10 +5,10 @@
 export const environment = {
   production: false,
   auth: {
-    base: 'http://localhost:3000/auth'
+    baseUrl: 'http://localhost:3000/auth'
   },
   api: {
-    base: 'http://localhost:3000'
+    baseUrl: 'http://localhost:3000'
   }
 };
 
