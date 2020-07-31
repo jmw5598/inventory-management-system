@@ -12,7 +12,7 @@ export class ProductItem extends BaseEntity {
   @Column({ nullable: false })
   public description: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: false })
   public sku: string;
 
   @Column({ nullable: false })
