@@ -42,7 +42,7 @@ export class AuthenticationService {
   }
 
   private async _generateAuthenticatedUser(user: User): Promise<AuthenticatedUser> {
-    const expiresIn: string = '60s';
+    const expiresIn: string = '1h';
     return {
       accessToken: await this._getAccessToken(user, expiresIn),
       refreshToken: await this._getRefreshToken(user),
