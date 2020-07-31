@@ -1,19 +1,23 @@
 import { Injectable } from '@angular/core';
+import { Router }  from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-import { ProductItemsService } from '@inv/core';
+import { ProductItemsService, ProductItem } from '@inv/core';
 import { handleHttpError } from '../actions/http-error.actions';
-import { ProductItemActions, createProductItemSuccess, getProductItemsByPageSuccess, ProductItemSearch, searchProductItemsSuccess } from '../actions/product-item.actions';
+import { ProductItemActions, createProductItemSuccess, getProductItemsByPageSuccess, ProductItemSearch, searchProductItemsSuccess, setSelectedProductItem } from '../actions/product-item.actions';
 
 import { of } from 'rxjs';
-import { map, mergeMap, catchError } from 'rxjs/operators';
+import { map, mergeMap, catchError, tap } from 'rxjs/operators';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 
 @Injectable()
 export class ProductItemEffects {
   constructor(
     private _actions: Actions,
-    private _productItemsService: ProductItemsService
+    private _notificationService: NzNotificationService,
+    private _productItemsService: ProductItemsService,
+    private _router: Router
   ) {}
 
   createProductItem$ = createEffect(() => this._actions.pipe(
@@ -26,6 +30,13 @@ export class ProductItemEffects {
     )
   ));
 
+  createProductItemSuccess$ = createEffect(() => this._actions.pipe(
+    ofType(ProductItemActions.CREATE_PRODUCT_ITEM_SUCCESS),
+    tap(({ payload }) => {
+      this._openNewNotificationSuccess('We successfully created your product item');
+    })
+  ), { dispatch: false });
+
   getProductItemsByPage$ = createEffect(() => this._actions.pipe(
     ofType(ProductItemActions.GET_PRODUCT_ITEMS_BY_PAGE),
     mergeMap(pageable => this._productItemsService.getProductItemsByPage(pageable)
@@ -34,6 +45,15 @@ export class ProductItemEffects {
         catchError(error => of(handleHttpError(error)))
       )
     )
+  ));
+
+  getProductItemById$ = createEffect(() => this._actions.pipe(
+    ofType(ProductItemActions.GET_PRODUCT_ITEM_BY_ID),
+    mergeMap((({ id }) => this._productItemsService.findOne(id)
+      .pipe(
+        map((product: ProductItem) => setSelectedProductItem(product)),
+        catchError(error => of(handleHttpError(error)))
+      )))
   ));
 
   searchProductItems$ = createEffect(() => this._actions.pipe(
@@ -45,4 +65,10 @@ export class ProductItemEffects {
       )
     )
   ));
+
+  private _openNewNotificationSuccess(message: string): void {
+    this._notificationService.blank(
+        'Success', message, { nzPlacement: 'topRight', nzDuration: 3000 }
+      );
+  }
 }

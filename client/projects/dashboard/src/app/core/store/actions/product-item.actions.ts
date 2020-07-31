@@ -1,11 +1,13 @@
 import { createAction, props } from '@ngrx/store';
-import { ProductItem, Stockroom, Page, IPageable } from '@inv/core';
+import { ProductItem, Page, IPageable } from '@inv/core';
 
 export enum ProductItemActions {
   CREATE_PRODUCT_ITEM = '[Product Item] Create Product Item',
   CREATE_PRODUCT_ITEM_SUCCESS = '[Product Item] Create Product Item Success',
   GET_PRODUCT_ITEMS_BY_PAGE = '[Product Item] Get Product Items By Page',
   GET_PRODUCT_ITEMS_BY_PAGE_SUCCESS = '[Product Item] Get Product Items By Page Success',
+  GET_PRODUCT_ITEM_BY_ID = '[Product Item] Get Product Item By Id',
+  SET_SELECTED_PRODUCT_ITEM = '[Product Item] Set Selected Product Item',
   SEARCH_PRODUCT_ITEMS = '[Product Item] Search Product Items',
   SEARCH_PRODUCT_ITEMS_SUCCESS = '[Product Item] Search Product Items Success'
 };
@@ -17,7 +19,7 @@ export interface ProductItemSearch {
 
 export const createProductItem = createAction(
   ProductItemActions.CREATE_PRODUCT_ITEM,
-  props<Stockroom>()
+  props<ProductItem>()
 );
 
 export const createProductItemSuccess = createAction(
@@ -34,6 +36,16 @@ export const getProductItemsByPageSuccess = createAction(
   ProductItemActions.GET_PRODUCT_ITEMS_BY_PAGE_SUCCESS,
   (products: Page<ProductItem>) => ({ payload: products })
 )
+
+export const getProductItemById = createAction(
+  ProductItemActions.GET_PRODUCT_ITEM_BY_ID,
+  props<{ id: number }>()
+);
+
+export const setSelectedProductItem = createAction(
+  ProductItemActions.SET_SELECTED_PRODUCT_ITEM,
+  (product: ProductItem) => ({ payload: product })
+);
 
 export const searchProductItems = createAction(
   ProductItemActions.SEARCH_PRODUCT_ITEMS,

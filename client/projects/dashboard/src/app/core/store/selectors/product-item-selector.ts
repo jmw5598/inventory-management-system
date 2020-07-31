@@ -12,3 +12,8 @@ export const selectProductItemPageResult = createSelector(
   selectProductItemState,
   (state: IProductItemState) => state.pageResult
 );
+
+export const selectSelectedProductItem = createSelector(
+  selectProductItemState,
+  (state: IProductItemState) => state.selectedProductItem
+);
