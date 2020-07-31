@@ -1,11 +1,16 @@
-<nz-page-header nzBackIcon>
-  <nz-page-header-title>Create a Product Item</nz-page-header-title>
-  <nz-page-header-subtitle></nz-page-header-subtitle>
-</nz-page-header>
-<nz-layout>
-  <nz-row>
-    <nz-card nz-col [nzSpan]="8" nzXs="24" nzSm="24" nzMd="16" nzLg="12" nzXl="8">
-      form here
-    </nz-card>
-  </nz-row>
-</nz-layout>
+<div>
+  <nz-page-header nzBackIcon>
+    <nz-page-header-title>Create a Product Item</nz-page-header-title>
+    <nz-page-header-subtitle></nz-page-header-subtitle>
+  </nz-page-header>
+  <nz-layout>
+    <nz-row>
+      <nz-card nz-col [nzSpan]="8" nzXs="24" nzSm="24" nzMd="16" nzLg="12" nzXl="8">
+        <inv-product-item-form
+            [categories]="(categories$ | async)"
+            (onSaveProductItem)="onSaveProductItem($event)">
+        </inv-product-item-form>
+      </nz-card>
+    </nz-row>
+  </nz-layout>
+</div>
