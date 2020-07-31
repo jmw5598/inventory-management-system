@@ -1,0 +1,51 @@
+<form nz-form [formGroup]="form" (ngSubmit)="submitForm(form.value)" novalidate>
+  <div nz-row>
+    <div nz-col nzSpan="24">
+      <nz-form-item>
+        <input type="hidden" formControlName="id" />
+        <nz-form-label [nzSpan]="5" nzRequired>Title</nz-form-label>
+        <nz-form-control [nzSpan]="19" nzErrorTip="Product title is required">
+          <input nz-input formControlName="title" placeholder="The product title" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5" nzRequired>Description</nz-form-label>
+        <nz-form-control [nzSpan]="19" nzErrorTip="Description is required">
+          <input nz-input formControlName="description" placeholder="The product description" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5">Sku</nz-form-label>
+        <nz-form-control [nzSpan]="19">
+          <input nz-input formControlName="sku" placeholder="The product sku" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5">Brand</nz-form-label>
+        <nz-form-control [nzSpan]="19">
+          <input nz-input formControlName="brand" placeholder="The product brand" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5">Model</nz-form-label>
+        <nz-form-control [nzSpan]="19">
+          <input nz-input formControlName="model" placeholder="The product model" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5" nzRequired>Category</nz-form-label>
+        <nz-form-control [nzSpan]="19" nzErrorTip="Category is required">
+          <nz-select formControlName="category">
+            <nz-option selected="selected" [nzValue]="null" [nzDisabled]="true" nzLabel="The product category"></nz-option>
+            <nz-option *ngFor="let category of categories" [nzValue]="category" [nzLabel]="category.description"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control [nzOffset]="5" [nzSpan]="19">
+          <button nz-button nzType="primary">Save</button>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+</form>
