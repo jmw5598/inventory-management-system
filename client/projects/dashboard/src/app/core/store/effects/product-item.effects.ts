@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { ProductItemsService, ProductItem } from '@inv/core';
 import { handleHttpError } from '../actions/http-error.actions';
-import { ProductItemActions, createProductItemSuccess, deleteProductItemSuccess, getProductItemsByPageSuccess, ProductItemSearch, searchProductItemsSuccess, setSelectedProductItem } from '../actions/product-item.actions';
+import { ProductItemActions, createProductItemSuccess, deleteProductItemSuccess, getProductItemsByPageSuccess, ProductItemSearch, searchProductItemsSuccess, setSelectedProductItem, updateProductItemSuccess } from '../actions/product-item.actions';
 
 import { of } from 'rxjs';
 import { map, mergeMap, catchError, tap } from 'rxjs/operators';
@@ -82,6 +82,23 @@ export class ProductItemEffects {
       )
     )
   ));
+
+  updateProductItem$ = createEffect(() => this._actions.pipe(
+    ofType(ProductItemActions.UPDATE_PRODUCT_ITEM),
+    mergeMap(({ id, product }) => this._productItemsService.update(id, product)
+      .pipe(
+        map(product => updateProductItemSuccess(product)),
+        catchError(error => of(handleHttpError(error)))
+      )
+    )
+  ));
+
+  updateProductItemSuccess$ = createEffect(() => this._actions.pipe(
+    ofType(ProductItemActions.UPDATE_PRODUCT_TIEM_SUCCESS),
+    tap(product => {
+      this._openNewNotificationSuccess('We successfully updated your product item');
+    })
+  ), { dispatch: false });
 
   private _openNewNotificationSuccess(message: string): void {
     this._notificationService.blank(

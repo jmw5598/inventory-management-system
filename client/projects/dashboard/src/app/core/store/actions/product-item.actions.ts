@@ -11,7 +11,9 @@ export enum ProductItemActions {
   GET_PRODUCT_ITEM_BY_ID = '[Product Item] Get Product Item By Id',
   SET_SELECTED_PRODUCT_ITEM = '[Product Item] Set Selected Product Item',
   SEARCH_PRODUCT_ITEMS = '[Product Item] Search Product Items',
-  SEARCH_PRODUCT_ITEMS_SUCCESS = '[Product Item] Search Product Items Success'
+  SEARCH_PRODUCT_ITEMS_SUCCESS = '[Product Item] Search Product Items Success',
+  UPDATE_PRODUCT_ITEM = '[Product Item] Update Product Item',
+  UPDATE_PRODUCT_TIEM_SUCCESS = '[Product Item] Update Product Item Success'
 };
 
 export interface ProductItemSearch {
@@ -67,4 +69,14 @@ export const searchProductItems = createAction(
 export const searchProductItemsSuccess = createAction(
   ProductItemActions.SEARCH_PRODUCT_ITEMS_SUCCESS,
   (products: Page<ProductItem>) => ({ payload: products })
+);
+
+export const updateProductItem = createAction(
+  ProductItemActions.UPDATE_PRODUCT_ITEM,
+  props<{ id: number, product: ProductItem}>()
+);
+
+export const updateProductItemSuccess = createAction(
+  ProductItemActions.UPDATE_PRODUCT_TIEM_SUCCESS,
+  (product: ProductItem) => ({ payload: product})
 );
