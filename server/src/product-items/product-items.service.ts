@@ -53,7 +53,12 @@ export class ProductItemsService {
 
   public async createNewProductItem(accountId: number, createProductItemDto: CreateProductItemDto): Promise<ProductItem> {
     const productItem: ProductItem = this._productItemRepository.create({
-      ...createProductItemDto,
+      title: createProductItemDto.title,
+      description: createProductItemDto.description,
+      sku: createProductItemDto.sku || null,
+      brand: createProductItemDto.brand || null,
+      model: createProductItemDto.model || null,
+      category: createProductItemDto.category,
       accountId: accountId
     });
     return this._productItemRepository.save(productItem);
@@ -82,7 +87,8 @@ export class ProductItemsService {
       { title: ilike, account: { id: accountId } },
       { description: ilike, account: { id: accountId } },
       { brand: ilike, account: { id: accountId } },
-      { model: ilike, account: { id: accountId } }
+      { model: ilike, account: { id: accountId } },
+      { sku: ilike, account: { id: accountId } }
     ];
   }
 
@@ -101,6 +107,6 @@ export class ProductItemsService {
     return this._productItemRepository.findOne({
       id: productItemId,
       account: { id: accountId }
-    });
+    }, { relations: ['category'] });
   }
 }
