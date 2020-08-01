@@ -38,9 +38,7 @@ export * from './lib/models/user-credentials.model';
 export * from './lib/models/user-credentials.model';
 export * from './lib/models/paging/page.model';
 export * from './lib/models/paging/pageable.interface';
+export * from './lib/models/paging/page-request.model';
 export * from './lib/models/paging/sort-direction.enum';
 export * from './lib/models/paging/sort.model';
 export * from './lib/models/paging/sortable.interface';
-
-
-
