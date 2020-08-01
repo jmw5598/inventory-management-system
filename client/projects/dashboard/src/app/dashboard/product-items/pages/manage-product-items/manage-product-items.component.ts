@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Subscription, Observable, Subject, of } from 'rxjs';
-import { tap, takeUntil, debounceTime, distinctUntilChanged, mergeMap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { tap, takeUntil, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 import { ProductItem, Page, IPageable, PageRequest } from '@inv/core';
 import { IAppState } from '../../../../core/store/state/app.state';
-import { selectProductItemSearchResult, selectProductItemPageResult } from '../../../../core/store/selectors/product-item-selector';
-import { searchProductItems, getProductItemsByPage } from '../../../../core/store/actions/product-item.actions';
+import { selectProductItemSearchResult } from '../../../../core/store/selectors/product-item-selector';
+import { searchProductItems, deleteProductItem } from '../../../../core/store/actions/product-item.actions';
 
 
 @Component({
@@ -31,10 +31,6 @@ export class ManageProductItemsComponent implements OnInit {
     this._store.select(selectProductItemSearchResult)
       .pipe(takeUntil(this._subscriptionSubject))
       .subscribe(page => this.currentPage = page);
-
-    this._store.select(selectProductItemPageResult)
-      .pipe(takeUntil(this._subscriptionSubject))
-      .subscribe(page => this.currentPage = page);
     
     this._searchTextChangeSubject
       .pipe(
@@ -44,7 +40,12 @@ export class ManageProductItemsComponent implements OnInit {
         tap(search => this.onFilterProductItems())
       ).subscribe();
 
-      this.onFilterProductItems();
+    this.onFilterProductItems();
+  }
+
+  public onResetProductItemSearch(): void {
+    this.searchTerm = "";
+    this.onFilterProductItems();
   }
 
   public onPageChange(pageNumber: number): void {
@@ -58,6 +59,10 @@ export class ManageProductItemsComponent implements OnInit {
       searchTerm: this.searchTerm,
       pageable: page
     }));
+  }
+
+  public onDeleteProductItem(product: ProductItem): void {
+    this._store.dispatch(deleteProductItem({ id: product.id }));
   }
 
   public onSearchProductItemsKeyup($event): void {

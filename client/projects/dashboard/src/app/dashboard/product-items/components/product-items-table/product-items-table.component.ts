@@ -15,8 +15,12 @@ export class ProductItemsTableComponent implements OnInit {
   @Output()
   public onPageChange: EventEmitter<number>;
 
+  @Output()
+  public onDeleteProductItem: EventEmitter<ProductItem>;
+
   constructor() {
     this.onPageChange = new EventEmitter<number>();
+    this.onDeleteProductItem = new EventEmitter<ProductItem>();
   }
 
   ngOnInit(): void {
@@ -28,6 +32,6 @@ export class ProductItemsTableComponent implements OnInit {
   }
 
   public deleteProductItem(product: ProductItem): void {
-    console.log("deleting product item: ", product);
+    this.onDeleteProductItem.emit(product);
   }
 }

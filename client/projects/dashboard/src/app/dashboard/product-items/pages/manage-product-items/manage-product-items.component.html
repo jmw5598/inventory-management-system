@@ -5,20 +5,6 @@
   </nz-page-header>
   <div class="product-items">
     <div class="product-items-filter">
-      <div>
-      <a class="btn-new-product-item" [routerLink]="['../create']" nz-button nzType="primary">
-        <i nz-icon nzType="plus" nzTheme="outline"></i>
-        Create Product Item 
-      </a>
-      </div>
-      <div>
-      <a class="btn-reload" nz-button (click)="onFilterProductItems()">
-        <i nz-icon nzType="reload" nzTheme="outline"></i>
-      </a>
-      </div>
-      <!-- <a class="btn-filter" nz-button (click)="onFilterProductItems()">
-        <i nz-icon nzType="filter" nzTheme="outline"></i>
-      </a> -->
       <div class="search-items">
         <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
           <input type="text" nz-input placeholder="Search product items" [(ngModel)]="searchTerm" (keyup)="onSearchProductItemsKeyup($event)" />
@@ -27,9 +13,21 @@
           <button nz-button nzSearch (click)="onFilterProductItems()"><i nz-icon nzType="search"></i></button>
         </ng-template>
       </div>
+      <div>
+        <a class="btn-reload" nz-button (click)="onResetProductItemSearch()">
+          <i nz-icon nzType="reload" nzTheme="outline"></i>
+        </a>
+      </div>
+      <div>
+        <a class="btn-new-product-item" [routerLink]="['../create']" nz-button nzType="primary">
+          <i nz-icon nzType="plus" nzTheme="outline"></i>
+          Create Product Item 
+        </a>
+      </div>
     </div>
     <inv-product-items-table 
         [page]="currentPage"
+        (onDeleteProductItem)="onDeleteProductItem($event)"
         (onPageChange)="onPageChange($event)">
     </inv-product-items-table>
   </div>
