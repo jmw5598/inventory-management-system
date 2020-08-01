@@ -1,6 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
-import { searchProductItemsSuccess, getProductItemsByPageSuccess, setSelectedProductItem } from '../actions/product-item.actions';
+import { searchProductItemsSuccess, getProductItemsByPageSuccess, setSelectedProductItem, deleteProductItemSuccess } from '../actions/product-item.actions';
 import { initialProductItemState } from '../state/product-item.state';
+import { Page, ProductItem } from '@inv/core';
 
 const _productItemReducer = createReducer(
   initialProductItemState,
@@ -8,6 +9,15 @@ const _productItemReducer = createReducer(
     return {
       ...state,
       pageResult: payload
+    }
+  }),
+  on(deleteProductItemSuccess, (state, { payload }) => {
+    const searchResult: Page<ProductItem> = { ...state.searchResult };
+    const elements: ProductItem[] = searchResult.elements.filter(e => e.id !== payload.id);
+    searchResult.elements = elements;
+    return {
+      ...state,
+      searchResult: searchResult
     }
   }),
   on(setSelectedProductItem, (state, { payload }) => {

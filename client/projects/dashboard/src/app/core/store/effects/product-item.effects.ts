@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { ProductItemsService, ProductItem } from '@inv/core';
 import { handleHttpError } from '../actions/http-error.actions';
-import { ProductItemActions, createProductItemSuccess, getProductItemsByPageSuccess, ProductItemSearch, searchProductItemsSuccess, setSelectedProductItem } from '../actions/product-item.actions';
+import { ProductItemActions, createProductItemSuccess, deleteProductItemSuccess, getProductItemsByPageSuccess, ProductItemSearch, searchProductItemsSuccess, setSelectedProductItem } from '../actions/product-item.actions';
 
 import { of } from 'rxjs';
 import { map, mergeMap, catchError, tap } from 'rxjs/operators';
@@ -35,6 +35,23 @@ export class ProductItemEffects {
     tap(({ payload }) => {
       this._openNewNotificationSuccess('We successfully created your product item');
     })
+  ), { dispatch: false });
+
+  deleteProductItem$ = createEffect(() => this._actions.pipe(
+    ofType(ProductItemActions.DELETE_PRODUCT_ITEM),
+    mergeMap(({ id }) => this._productItemsService.delete(id)
+      .pipe(
+        map(product => deleteProductItemSuccess(product)),
+        catchError(error => of(handleHttpError(error)))
+      )
+    )
+  ));
+
+  deleteProductItemSuccess$ = createEffect(() => this._actions.pipe(
+    ofType(ProductItemActions.DELETE_PRODUCT_TIEM_SUCCESS),
+    tap(({ payload }) => {
+      this._openNewNotificationSuccess('We successfully deleted your product item');
+    }) 
   ), { dispatch: false });
 
   getProductItemsByPage$ = createEffect(() => this._actions.pipe(

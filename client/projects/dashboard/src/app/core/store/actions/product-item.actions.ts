@@ -4,6 +4,8 @@ import { ProductItem, Page, IPageable } from '@inv/core';
 export enum ProductItemActions {
   CREATE_PRODUCT_ITEM = '[Product Item] Create Product Item',
   CREATE_PRODUCT_ITEM_SUCCESS = '[Product Item] Create Product Item Success',
+  DELETE_PRODUCT_ITEM = '[Product Item] Delete Product Item',
+  DELETE_PRODUCT_TIEM_SUCCESS = '[Product Item] Delete Product Item Success',
   GET_PRODUCT_ITEMS_BY_PAGE = '[Product Item] Get Product Items By Page',
   GET_PRODUCT_ITEMS_BY_PAGE_SUCCESS = '[Product Item] Get Product Items By Page Success',
   GET_PRODUCT_ITEM_BY_ID = '[Product Item] Get Product Item By Id',
@@ -30,6 +32,16 @@ export const createProductItemSuccess = createAction(
 export const getProductItemsByPage = createAction(
   ProductItemActions.GET_PRODUCT_ITEMS_BY_PAGE,
   props<IPageable>()
+);
+
+export const deleteProductItem = createAction(
+  ProductItemActions.DELETE_PRODUCT_ITEM,
+  props<{ id: number }>()
+);
+
+export const deleteProductItemSuccess = createAction(
+  ProductItemActions.DELETE_PRODUCT_TIEM_SUCCESS,
+  (product: ProductItem) => ({ payload: product })
 );
 
 export const getProductItemsByPageSuccess = createAction(
