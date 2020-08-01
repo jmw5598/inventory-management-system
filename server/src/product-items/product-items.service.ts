@@ -77,7 +77,8 @@ export class ProductItemsService {
   public async deleteProductItem(accountId: number, productItemId: number): Promise<ProductItem> {
     const productItem:  ProductItem = await this._findProductItemByIdWithAccountId(accountId, productItemId);
     if (!productItem) throw new ProductItemNotFoundException();
-    this._productItemRepository.delete(productItemId);
+    productItem.deletedAt = new Date();
+    this._productItemRepository.save(productItem);
     return productItem;
   }
 
@@ -104,6 +105,7 @@ export class ProductItemsService {
   }
 
   private _findProductItemByIdWithAccountId(accountId: number, productItemId: number): Promise<ProductItem> {
+    console.log("finding product item with id: ", productItemId);
     return this._productItemRepository.findOne({
       id: productItemId,
       account: { id: accountId }

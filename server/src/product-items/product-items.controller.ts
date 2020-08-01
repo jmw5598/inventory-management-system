@@ -1,4 +1,4 @@
-import { Controller, Body, UseGuards, Get, Post, Request, Query, Put, Param } from '@nestjs/common';
+import { Controller, Body, UseGuards, Get, Post, Request, Query, Put, Param, Delete } from '@nestjs/common';
 import { JwtAuthenticationGuard } from '../authentication/guards/jwt-authentication.guard';
 import { ProductItemsService } from './product-items.service';
 import { ProductItem } from './entities/product-item.entity';
@@ -61,9 +61,17 @@ export class ProductItemsController {
   @Put(':id')
   public async updateProductItem(
       @Request() req, 
-      @Param() productItemId: number, 
-      updateProductItemDto: UpdateProductItemDto): Promise<any> {
+      @Param('id') id: number, 
+      updateProductItemDto: UpdateProductItemDto): Promise<ProductItem> {
     const accountId: number = req.user.accountId;
-    return this._productItemsService.updateProductItem(accountId, productItemId, updateProductItemDto);
+    return this._productItemsService.updateProductItem(accountId, id, updateProductItemDto);
+  }
+
+  @Delete(':id')
+  public async deleteProductItem(
+      @Request() req,
+      @Param('id') id: number): Promise<ProductItem> {
+    const accountId: number = req.user.accountId;
+    return this._productItemsService.deleteProductItem(accountId, id);
   }
 }
