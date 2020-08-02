@@ -26,13 +26,13 @@ export class PageRequest implements IPageable {
   }
 
   public next(totalElements:number): IPageable {
-    const totalPages: number = Math.ceil(totalElements / this.getPageSize());
+    const totalPages: number = Math.ceil(totalElements / this.getPageSize()) || 1;
     const nextPage: number = +this.getPageNumber() === totalPages ? 1 : +this.getPageNumber() + 1;
     return new PageRequest(nextPage, this.getPageSize(), this.getSort());
   }
 
   public previous(totalElements: number): IPageable {
-    const totalPages: number = Math.ceil(totalElements / this.getPageSize());
+    const totalPages: number = Math.ceil(totalElements / this.getPageSize()) || 1;
     const previousPage: number = +this.getPageNumber() === 1 ? totalPages : +this.getPageNumber() - 1;
     return new PageRequest(previousPage, this.getPageSize(), this.getSort());
   }
