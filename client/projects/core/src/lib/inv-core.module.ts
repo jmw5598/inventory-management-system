@@ -11,6 +11,7 @@ import { PlansService } from './services/plans.service';
 import { PlatformsService } from './services/platforms.service';
 import { ProductItemsService } from './services/product-items.service';
 import { ProfilesService } from './services/profiles.service';
+import { StockItemsService } from './services/stock-items.service';
 import { StockroomsService } from './services/stockrooms.service';
 
 const providers: any[] = [
@@ -24,6 +25,7 @@ const providers: any[] = [
   PlatformsService,
   ProductItemsService,
   ProfilesService,
+  StockItemsService,
   StockroomsService,
 ];
 

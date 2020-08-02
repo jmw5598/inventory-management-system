@@ -14,6 +14,7 @@ export * from './lib/services/plans.service';
 export * from './lib/services/platforms.service';
 export * from './lib/services/product-items.service';
 export * from './lib/services/profiles.service';
+export * from './lib/services/stock-items.service';
 export * from './lib/services/stockrooms.service';
 
 // Model/Enum Exports
@@ -32,6 +33,7 @@ export * from './lib/models/plan.model';
 export * from './lib/models/platform.model';
 export * from './lib/models/product-item.model';
 export * from './lib/models/profile.model';
+export * from './lib/models/stock-item.model';
 export * from './lib/models/stockroom-summary.model';
 export * from './lib/models/stockroom.model';
 export * from './lib/models/user-credentials.model';
