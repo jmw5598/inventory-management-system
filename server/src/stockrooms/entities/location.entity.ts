@@ -1,7 +1,7 @@
 import { Column, Entity, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
 import { BaseEntity } from '../../database/entities/base.entity';
 import { Stockroom } from './stockroom.entity';
-import { StockItem } from './stock-item.entity';
+import { StockItem } from '../../stock-items/entities/stock-item.entity';
 
 @Entity()
 export class Location extends BaseEntity {

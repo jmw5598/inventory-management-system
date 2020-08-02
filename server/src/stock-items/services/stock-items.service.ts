@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Stockroom } from '../entities/stockroom.entity';
 import { StockItem } from '../entities/stock-item.entity';
 import { Repository } from 'typeorm';
 
@@ -10,8 +9,6 @@ import { Page } from '../../common/models/page.model';
 @Injectable()
 export class StockItemsService {
   constructor(
-    @InjectRepository(Stockroom)
-    public readonly _stockroomRepository: Repository<Stockroom>,
     @InjectRepository(StockItem)
     public readonly _stockItemRepository: Repository<StockItem>
   ) {}

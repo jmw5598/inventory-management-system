@@ -1,7 +1,7 @@
 import { Column, Entity, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 import { BaseEntity } from '../../database/entities/base.entity';
 import { Category } from '../../categories/entities/category.entity';
-import { StockItem } from '../../stockrooms/entities/stock-item.entity'
+import { StockItem } from '../../stock-items/entities/stock-item.entity'
 import { Account } from 'src/accounts/entities/account.entity';
 
 @Entity({ name: 'product_item' })

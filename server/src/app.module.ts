@@ -14,6 +14,7 @@ import { ProductItemsModule } from './product-items/product-items.module';
 import { InvoicesModule } from './invoices/invoices.module';
 import { ListedItemsModule } from './listed-items/listed-items.module';
 import { PlansModule } from './plans/plans.module';
+import { StockItemsModule } from './stock-items/stock-items.module';
 
 @Module({
   imports: [
@@ -30,7 +31,8 @@ import { PlansModule } from './plans/plans.module';
     ProductItemsModule,
     InvoicesModule,
     ListedItemsModule,
-    PlansModule
+    PlansModule,
+    StockItemsModule
   ],
   controllers: [],
   providers: [],
