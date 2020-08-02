@@ -15,7 +15,17 @@ export class StockItemsService extends AbstractCrudService<StockItem, number> {
     protected _config: InvCoreConfig,
     protected _http: HttpClient
   ) {
-    super(_http, `${_config.api.baseUrl}/stock-items}`);
+    super(_http, `${_config.api.baseUrl}/stock-items`);
+  }
+
+  public getStockItemsByPage(page?: IPageable): Observable<Page<StockItem>> {
+    const params: {[key: string]: any} = !page ? {} : {
+      page: page.page,
+      size: page.size,
+      sortCol: page.sort.column,
+      sortDir: page.sort.direction,
+    };
+    return this._http.get<Page<StockItem>>(`${this._base}`, { params: params });
   }
 
   public searchStockItems(searchTerm: string, page?: IPageable): Observable<Page<StockItem>> {
@@ -26,6 +36,6 @@ export class StockItemsService extends AbstractCrudService<StockItem, number> {
       sortDir: page.sort.direction,
       // @@@ TODO filter and serach term ehre....
     };
-    return this._http.get<Page<StockItem>>(`${this._base}`, { params: params });
+    return this._http.get<Page<StockItem>>(`${this._base}/search`, { params: params });
   }
 }
