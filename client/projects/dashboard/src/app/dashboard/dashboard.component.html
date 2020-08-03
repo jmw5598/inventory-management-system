@@ -22,6 +22,12 @@
           </ng-container>
         </ul>
       </li>
+      <li nz-submenu nzTitle="Stock Items" nzIcon="tags" [nzOpen]="false">
+        <ul>
+          <li nz-menu-item [nzMatchRouter]="true" [routerLink]="['stock-items', 'create']">Create</li> 
+          <li nz-menu-item [nzMatchRouter]="true" [routerLink]="['stock-items', 'manage']">Manage</li>
+        </ul>
+      </li>
       <li nz-submenu nzTitle="Listings" nzIcon="group" [nzOpen]="false">
         <ul>
           <li nz-menu-item>Active</li>
