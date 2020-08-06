@@ -9,11 +9,13 @@ import { IAuthenticationState } from '../../../core/store/state/authentication.s
 import { loginUser } from '../../../core/store/actions/authentication.actions';
 import { selectAuthenticationState } from '../../../core/store/selectors/authentication.selector';
 import { AuthenticationService, AuthenticatedStatus, UserCredentials } from '@inv/core';
+import { fadeAnimation } from '../../../shared/animations/fade-in-out.animation';
 
 @Component({
   selector: 'inv-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  animations: [fadeAnimation]
 })
 export class LoginComponent implements OnInit, OnDestroy {
   private _authenticationStateSubscription: Subscription;
