@@ -1,3 +1,57 @@
+.login-layout {
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+
+  .left-col,
+  .right-col {
+    flex: 1 1 0px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+
+  }
+
+  .left-col {
+    .login-marketing {
+      max-width: 556px;
+      padding: 3rem;
+      margin: auto;
+
+      h1 {
+        font-size: 3.5rem;
+        font-weight: bold;
+        line-height: 4rem;
+      }
+    }
+  }
+
+  .right-col {
+    background: #756EEA !important;
+    position: relative;
+
+    h1.logo {
+      font-family: 'Righteous';
+      color: #FFF;
+      font-size: 4rem;
+    }
+
+    nz-card {
+      max-width: 350px;
+      padding: 24px;
+      margin: auto;
+
+      form {
+        nz-alert {
+          margin-bottom: 24px;
+        }
+      }
+    }
+  }
+}
+
 .login-form {
   max-width: 300px;
 }
@@ -14,24 +68,31 @@
   width: 100%;
 }
 
-nz-layout {
-  background: #FCFCFC;
-  position: relative;
-  height: 100vh;
-  width: 100vw;
+@media only screen and (max-width : 992px) {
+  .login-layout {
+    flex-direction: column;
 
-  nz-content {
-    nz-card {
-      width: 350px;
-      padding: 24px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -70%);
+    .left-col,
+    .right-col {
+      width: 100%;
+    }
 
-      form {
-        nz-alert {
-          margin-bottom: 24px;
+    .right-col {
+      nz-card {
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width : 768px) {
+  .login-layout {
+    .left-col {
+      .login-marketing {
+        h1 {
+          font-size: 2.5rem;
+          line-height: 3rem;
         }
       }
     }
