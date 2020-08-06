@@ -1,0 +1,43 @@
+@import '../../../../assets/scss/variables';
+
+@mixin generate-spinner-by-size($size, $borderWidth) {
+  border-width: $borderWidth;
+  width: $size;
+  height: $size;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.spinner {
+  display: inline-block;
+  
+  .spinner-inner {
+    border-radius: 50%;
+    border-style: solid;
+
+    border-color: $spinner-track-color;
+    border-top-color: $spinner-color;
+    
+    animation: spin 0.75s linear infinite;
+  
+    &.spinner-size-sm {
+      @include generate-spinner-by-size(72px, 9px);
+    }
+
+    &.spinner-size-md {
+      @include generate-spinner-by-size(96px, 12px);
+    }
+
+    &.spinner-size-lg {
+      @include generate-spinner-by-size(128px, 16px);
+    }
+  }
+
+  .spinner-text {
+    margin-top: 1rem;
+    text-align: center;
+  }
+}
