@@ -43,13 +43,14 @@ export class ManageStockroomsComponent implements OnInit {
   }
 
   private _setStockroomSummaryTotals(summaries: StockroomSummary[]): void {
-    console.log("getting stockroom totals for", summaries);
-    this.stockroomSummaryTotals = summaries.reduce((total, summary) => {
-      total.stockroomCount += 1;
-      total.itemCount += summary.itemCount || 0;
-      total.listedCount += summary.listedCount || 0;
-      total.purchaseValue += summary.purchaseValue || 0;
-      return total;
-    }, new StockroomSummaryTotals());
+    setTimeout(() => {
+      this.stockroomSummaryTotals = summaries.reduce((total, summary) => {
+        total.stockroomCount += 1;
+        total.itemCount += summary.itemCount || 0;
+        total.listedCount += summary.listedCount || 0;
+        total.purchaseValue += summary.purchaseValue || 0;
+        return total;
+      }, new StockroomSummaryTotals());
+    });
   }
 }
