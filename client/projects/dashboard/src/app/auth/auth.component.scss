@@ -1,0 +1,42 @@
+.auth-layout {
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+
+  .left-col,
+  .right-col {
+    flex: 1 1 0px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+
+  }
+
+  .left-col {
+    .auth-marketing {
+      max-width: 556px;
+      padding: 3rem;
+      margin: auto;
+    }
+  }
+
+  .right-col {
+    background: #756EEA;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+@media only screen and (max-width : 992px) {
+  .auth-layout {
+    flex-direction: column;
+
+    .left-col,
+    .right-col {
+      width: 100%;
+    }
+  }
+}
