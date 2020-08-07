@@ -8,10 +8,7 @@ export class Location extends BaseEntity {
   @Column({ nullable: false })
   public description: string;
 
-  @Column({ type: 'integer', nullable: false, name: 'stockroom_id' })
-  public stockroomId: number;
-
-  @ManyToOne(type => Stockroom)
+  @ManyToOne(type => Stockroom, { nullable: false })
   @JoinColumn({ name: 'stockroom_id' })
   public stockroom: Stockroom;
 

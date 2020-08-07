@@ -12,7 +12,7 @@ export class Stockroom extends BaseEntity {
   @Column({ nullable: false })
   public description: string;
 
-  @ManyToOne(type => Account)
+  @ManyToOne(type => Account, { nullable: false })
   @JoinColumn({ name: 'account_id' })
   public account: Account;
 

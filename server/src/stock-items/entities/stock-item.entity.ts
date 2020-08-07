@@ -17,23 +17,23 @@ export class StockItem extends BaseEntity {
   @Column({ nullable: false, type: 'integer', default: 1 })
   public quantity: number;
 
-  @ManyToOne(type => ItemCondition)
+  @ManyToOne(type => ItemCondition, { nullable: false })
   @JoinColumn({ name: 'item_condition_id'})
   public itemCondition: ItemCondition;
 
-  @ManyToOne(type => Stockroom)
+  @ManyToOne(type => Stockroom, { nullable: false })
   @JoinColumn({ name: 'stockroom_id' })
   public stockroom: Stockroom;
 
-  @ManyToOne(type => Location)
+  @ManyToOne(type => Location, { nullable: false })
   @JoinColumn({ name: 'location_id' })
   public location: Location;
 
-  @ManyToOne(type => ProductItem)
+  @ManyToOne(type => ProductItem, { nullable: false })
   @JoinColumn({ name: 'product_item_id' })
   public productItem: ProductItem;
 
-  @OneToOne(type => StockItemListing)
+  @OneToOne(type => StockItemListing, { nullable: false })
   @JoinColumn({ name: 'stock_item_listing_id' })
   public listingDetails: StockItemListing;
 }

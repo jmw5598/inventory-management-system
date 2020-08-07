@@ -8,7 +8,7 @@ export class Invoice extends BaseEntity {
   @Column({ name: 'stripe_customer_id' })
   public stripeCustomerId: string;
 
-  @ManyToOne(type => Account)
+  @ManyToOne(type => Account, { nullable: false })
   @JoinColumn({ name: 'account_id' })
   public account: Account
 }

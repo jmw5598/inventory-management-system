@@ -28,7 +28,7 @@ export class StockItemListing extends BaseEntity {
   @Column({ name: 'external_id' })
   public externalId: string;
 
-  @ManyToOne(type => Platform)
+  @ManyToOne(type => Platform, { nullable: false })
   @JoinColumn({ name: 'platform_id' })
   public platform: Platform;
 }
