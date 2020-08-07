@@ -1,17 +1,18 @@
 import {MigrationInterface, QueryRunner} from "typeorm";
 
-export class AddedNullableFalseToForeignKeys1596820353376 implements MigrationInterface {
-    name = 'AddedNullableFalseToForeignKeys1596820353376'
+export class MadeFKNotNullableAndModifiedAccountConfirmationTokenToBeUUID1596841716837 implements MigrationInterface {
+    name = 'MadeFKNotNullableAndModifiedAccountConfirmationTokenToBeUUID1596841716837'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.query(`ALTER TABLE "app_user" DROP COLUMN "is_active"`, undefined);
+        await queryRunner.query(`ALTER TABLE "app_user" ADD "profile_id" integer NOT NULL`, undefined);
+        await queryRunner.query(`ALTER TABLE "app_user" ADD CONSTRAINT "UQ_e66ed379f8b17b06d03121ceff5" UNIQUE ("profile_id")`, undefined);
         await queryRunner.query(`ALTER TABLE "profile" DROP CONSTRAINT "FK_fb70f0dc1dda3ae5e1b7fb0c93e"`, undefined);
         await queryRunner.query(`ALTER TABLE "profile" ALTER COLUMN "address_id" SET NOT NULL`, undefined);
         await queryRunner.query(`ALTER TABLE "refresh_token" DROP CONSTRAINT "FK_6bbe63d2fe75e7f0ba1710351d4"`, undefined);
         await queryRunner.query(`ALTER TABLE "refresh_token" ALTER COLUMN "user_id" SET NOT NULL`, undefined);
         await queryRunner.query(`ALTER TABLE "app_user" DROP CONSTRAINT "FK_3f710dff1743c1005439f25a6ec"`, undefined);
-        await queryRunner.query(`ALTER TABLE "app_user" DROP CONSTRAINT "FK_e66ed379f8b17b06d03121ceff5"`, undefined);
         await queryRunner.query(`ALTER TABLE "app_user" ALTER COLUMN "account_id" SET NOT NULL`, undefined);
-        await queryRunner.query(`ALTER TABLE "app_user" ALTER COLUMN "profile_id" SET NOT NULL`, undefined);
         await queryRunner.query(`ALTER TABLE "invoice" DROP CONSTRAINT "FK_7743b783da4d0b74b7bfdfd4818"`, undefined);
         await queryRunner.query(`ALTER TABLE "invoice" ALTER COLUMN "account_id" SET NOT NULL`, undefined);
         await queryRunner.query(`ALTER TABLE "stockroom" DROP CONSTRAINT "FK_81d987603a64e5394877333daac"`, undefined);
@@ -28,6 +29,8 @@ export class AddedNullableFalseToForeignKeys1596820353376 implements MigrationIn
         await queryRunner.query(`ALTER TABLE "stock_item" ALTER COLUMN "location_id" SET NOT NULL`, undefined);
         await queryRunner.query(`ALTER TABLE "stock_item" ALTER COLUMN "product_item_id" SET NOT NULL`, undefined);
         await queryRunner.query(`ALTER TABLE "stock_item" ALTER COLUMN "stock_item_listing_id" SET NOT NULL`, undefined);
+        await queryRunner.query(`ALTER TABLE "account" DROP COLUMN "confirmation_token"`, undefined);
+        await queryRunner.query(`ALTER TABLE "account" ADD "confirmation_token" uuid NOT NULL DEFAULT uuid_generate_v4()`, undefined);
         await queryRunner.query(`ALTER TABLE "profile" ADD CONSTRAINT "FK_fb70f0dc1dda3ae5e1b7fb0c93e" FOREIGN KEY ("address_id") REFERENCES "address"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`, undefined);
         await queryRunner.query(`ALTER TABLE "refresh_token" ADD CONSTRAINT "FK_6bbe63d2fe75e7f0ba1710351d4" FOREIGN KEY ("user_id") REFERENCES "app_user"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`, undefined);
         await queryRunner.query(`ALTER TABLE "app_user" ADD CONSTRAINT "FK_3f710dff1743c1005439f25a6ec" FOREIGN KEY ("account_id") REFERENCES "account"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`, undefined);
@@ -55,6 +58,8 @@ export class AddedNullableFalseToForeignKeys1596820353376 implements MigrationIn
         await queryRunner.query(`ALTER TABLE "app_user" DROP CONSTRAINT "FK_3f710dff1743c1005439f25a6ec"`, undefined);
         await queryRunner.query(`ALTER TABLE "refresh_token" DROP CONSTRAINT "FK_6bbe63d2fe75e7f0ba1710351d4"`, undefined);
         await queryRunner.query(`ALTER TABLE "profile" DROP CONSTRAINT "FK_fb70f0dc1dda3ae5e1b7fb0c93e"`, undefined);
+        await queryRunner.query(`ALTER TABLE "account" DROP COLUMN "confirmation_token"`, undefined);
+        await queryRunner.query(`ALTER TABLE "account" ADD "confirmation_token" character varying NOT NULL`, undefined);
         await queryRunner.query(`ALTER TABLE "stock_item" ALTER COLUMN "stock_item_listing_id" DROP NOT NULL`, undefined);
         await queryRunner.query(`ALTER TABLE "stock_item" ALTER COLUMN "product_item_id" DROP NOT NULL`, undefined);
         await queryRunner.query(`ALTER TABLE "stock_item" ALTER COLUMN "location_id" DROP NOT NULL`, undefined);
@@ -71,14 +76,15 @@ export class AddedNullableFalseToForeignKeys1596820353376 implements MigrationIn
         await queryRunner.query(`ALTER TABLE "stockroom" ADD CONSTRAINT "FK_81d987603a64e5394877333daac" FOREIGN KEY ("account_id") REFERENCES "account"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`, undefined);
         await queryRunner.query(`ALTER TABLE "invoice" ALTER COLUMN "account_id" DROP NOT NULL`, undefined);
         await queryRunner.query(`ALTER TABLE "invoice" ADD CONSTRAINT "FK_7743b783da4d0b74b7bfdfd4818" FOREIGN KEY ("account_id") REFERENCES "account"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`, undefined);
-        await queryRunner.query(`ALTER TABLE "app_user" ALTER COLUMN "profile_id" DROP NOT NULL`, undefined);
         await queryRunner.query(`ALTER TABLE "app_user" ALTER COLUMN "account_id" DROP NOT NULL`, undefined);
-        await queryRunner.query(`ALTER TABLE "app_user" ADD CONSTRAINT "FK_e66ed379f8b17b06d03121ceff5" FOREIGN KEY ("profile_id") REFERENCES "profile"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`, undefined);
         await queryRunner.query(`ALTER TABLE "app_user" ADD CONSTRAINT "FK_3f710dff1743c1005439f25a6ec" FOREIGN KEY ("account_id") REFERENCES "account"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`, undefined);
         await queryRunner.query(`ALTER TABLE "refresh_token" ALTER COLUMN "user_id" DROP NOT NULL`, undefined);
         await queryRunner.query(`ALTER TABLE "refresh_token" ADD CONSTRAINT "FK_6bbe63d2fe75e7f0ba1710351d4" FOREIGN KEY ("user_id") REFERENCES "app_user"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`, undefined);
         await queryRunner.query(`ALTER TABLE "profile" ALTER COLUMN "address_id" DROP NOT NULL`, undefined);
         await queryRunner.query(`ALTER TABLE "profile" ADD CONSTRAINT "FK_fb70f0dc1dda3ae5e1b7fb0c93e" FOREIGN KEY ("address_id") REFERENCES "address"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`, undefined);
+        await queryRunner.query(`ALTER TABLE "app_user" DROP CONSTRAINT "UQ_e66ed379f8b17b06d03121ceff5"`, undefined);
+        await queryRunner.query(`ALTER TABLE "app_user" DROP COLUMN "profile_id"`, undefined);
+        await queryRunner.query(`ALTER TABLE "app_user" ADD "is_active" boolean NOT NULL DEFAULT true`, undefined);
     }
 
 }
