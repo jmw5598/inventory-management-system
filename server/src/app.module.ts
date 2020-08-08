@@ -7,7 +7,6 @@ import { AuthenticationModule } from './authentication/authentication.module'
 import { CategoriesModule } from './categories/categories.module';
 import { ItemConditionsModule } from './item-conditions/item-conditions.module';
 import { PlatformsModule } from './platforms/platforms.module';
-import { ProfilesModule } from './profiles/profiles.module';
 import { StockroomsModule } from './stockrooms/stockrooms.module';
 import { UsersModule } from './users/users.module';
 import { ProductItemsModule } from './product-items/product-items.module';
@@ -24,7 +23,6 @@ import { StockItemsModule } from './stock-items/stock-items.module';
     ConfigModule.forRoot({ isGlobal: true }),
     ItemConditionsModule,
     PlatformsModule,
-    ProfilesModule,
     StockroomsModule,
     TypeOrmModule.forRoot(),
     UsersModule,
