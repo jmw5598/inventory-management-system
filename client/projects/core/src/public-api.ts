@@ -44,3 +44,11 @@ export * from './lib/models/paging/page-request.model';
 export * from './lib/models/paging/sort-direction.enum';
 export * from './lib/models/paging/sort.model';
 export * from './lib/models/paging/sortable.interface';
+
+// Dtos
+export * from './lib/dtos/registration-account.dto';
+export * from './lib/dtos/registration-address.dto';
+export * from './lib/dtos/registration-profile.dto';
+export * from './lib/dtos/registration-result.dto';
+export * from './lib/dtos/registration-user.dto';
+export * from './lib/dtos/registration.dto';
