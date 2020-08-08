@@ -1,4 +1,4 @@
-import { Entity, Column, JoinColumn, OneToOne, OneToMany } from 'typeorm';
+import { Entity, Column, JoinColumn, OneToOne, OneToMany, ManyToOne, Generated } from 'typeorm';
 import { BaseEntity } from '../../database/entities/base.entity';
 import { Plan } from '../../plans/entities/plan.entity';
 import { User } from '../../users/entities/user.entity';
@@ -9,16 +9,15 @@ import { Stockroom } from '../../stockrooms/entities/stockroom.entity';
 
 @Entity()
 export class Account extends BaseEntity {
-  @Column({ nullable: false })
-  public email: string;
-
   @Column({ name: 'is_confirmed', default: false })
   public isConfirmed: boolean;
 
-  @Column({ name: 'confirmation_token', nullable: false, type: 'uuid', default: 'uuid_generate_v4()'})
+  @Column({ name: 'confirmation_token', nullable: false})
+  @Generated('uuid')
   public comfirmationToken: string;
 
-  @OneToOne(type => Plan)
+  @ManyToOne(type => Plan, plan => plan.accounts, { nullable: false })
+  @JoinColumn({ name: 'plan_id' })
   public plan: Plan;
 
   @OneToOne(type => User, user => user.account)
