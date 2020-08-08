@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsEmail } from 'class-validator';
+import { Plan } from '../../plans/entities/plan.entity';
 
 export class CreateAccountDto {
   @IsEmail()
@@ -9,4 +10,7 @@ export class CreateAccountDto {
 
   @IsNotEmpty()
   public password: string;
+
+  @IsNotEmpty()
+  public plan: Plan;
 }

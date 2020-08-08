@@ -1,6 +1,12 @@
+import { IsNotEmpty } from 'class-validator';
+
 export class CreateUserDto {
+  @IsNotEmpty()
   public username: string;
+
+  @IsNotEmpty()
   public password: string;
-  public isActive: boolean;
-  public roles: string[]
+
+  @IsNotEmpty()
+  public passwordConfirm: string;
 }
