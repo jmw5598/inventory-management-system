@@ -1,5 +1,6 @@
-import { Entity, Column } from 'typeorm';
+import { Entity, Column, OneToOne } from 'typeorm';
 import { BaseEntity } from '../../database/entities/base.entity';
+import { Profile } from './profile.entity';
 
 @Entity()
 export class Address extends BaseEntity {
@@ -17,4 +18,7 @@ export class Address extends BaseEntity {
 
   @Column({ nullable: false })
   public zip: string;
+
+  @OneToOne(type => Profile, profile => profile.address)
+  public profile: Profile;
 }

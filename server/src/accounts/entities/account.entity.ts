@@ -1,5 +1,6 @@
 import { Entity, Column, JoinColumn, OneToOne, OneToMany, ManyToOne, Generated } from 'typeorm';
 import { BaseEntity } from '../../database/entities/base.entity';
+import { Profile } from './profile.entity';
 import { Plan } from '../../plans/entities/plan.entity';
 import { User } from '../../users/entities/user.entity';
 import { Invoice } from '../../invoices/entities/invoice.entity';
@@ -26,8 +27,7 @@ export class Account extends BaseEntity {
   @OneToMany(type => Invoice, invoice => invoice.account)
   public invoices: Invoice[];
 
-  @OneToOne(type => StripeCustomer)
-  @JoinColumn({ name: 'stripe_customer_id' })
+  @OneToOne(type => StripeCustomer, cust => cust.account)
   public stripeCustomer: StripeCustomer;
 
   @OneToMany(type => Stockroom, stockroom => stockroom.account)
@@ -35,4 +35,7 @@ export class Account extends BaseEntity {
 
   @OneToMany(type => ProductItem, item => item.account)
   public productItems: ProductItem[];
+
+  @OneToOne(type => Profile, profile => profile.account)
+  public profile: Profile;
 }

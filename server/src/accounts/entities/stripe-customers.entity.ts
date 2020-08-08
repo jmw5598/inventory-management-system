@@ -1,4 +1,4 @@
-import { Entity, Column, OneToOne } from 'typeorm';
+import { Entity, Column, OneToOne, JoinColumn } from 'typeorm';
 import { BaseEntity } from '../../database/entities/base.entity';
 import { Account } from './account.entity'
 
@@ -8,5 +8,6 @@ export class StripeCustomer extends BaseEntity {
   public stripeCustomerId: string;
 
   @OneToOne(type => Account, account => account.stripeCustomer)
+  @JoinColumn({ name: 'account_id' })
   public account: Account;
 }

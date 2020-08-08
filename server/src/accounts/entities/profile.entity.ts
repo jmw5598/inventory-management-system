@@ -1,7 +1,7 @@
 import { Entity, Column, JoinColumn, OneToOne } from 'typeorm';
 import { BaseEntity } from '../../database/entities/base.entity';
 import { Address } from './address.entity';
-import { User } from '../../users/entities/user.entity';
+import { Account } from './account.entity';
 
 @Entity()
 export class Profile extends BaseEntity {
@@ -14,10 +14,11 @@ export class Profile extends BaseEntity {
   @Column({ nullable: false })
   public email: string;
 
-  @OneToOne(type => Address, { nullable: false })
+  @OneToOne(type => Address, address => address.profile, { nullable: false })
   @JoinColumn({ name: 'address_id' })
   public address: Address;
 
-  @OneToOne(type => User)
-  public user: User;
+  @OneToOne(type => Account, account => account.profile, { nullable: false })
+  @JoinColumn({ name: 'account_id' })
+  public account: Account;
 }
