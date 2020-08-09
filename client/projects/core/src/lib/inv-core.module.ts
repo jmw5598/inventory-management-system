@@ -2,6 +2,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { InvCoreConfig, INV_CORE_CONFIG } from './inv-core.config';
 
 import { AccountsService } from './services/accounts.service';
+import { AccountValidators } from './validators/account.validators';
 import { AuthenticationService } from './services/authentication.service';
 import { CategoriesService } from './services/categories.service';
 import { InvoicesService } from './services/invoices.service';
@@ -16,6 +17,7 @@ import { StockroomsService } from './services/stockrooms.service';
 
 const providers: any[] = [
   AccountsService,
+  AccountValidators,
   AuthenticationService,
   CategoriesService,
   InvoicesService,

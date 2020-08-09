@@ -53,3 +53,6 @@ export * from './lib/dtos/registration-profile.dto';
 export * from './lib/dtos/registration-result.dto';
 export * from './lib/dtos/registration-user.dto';
 export * from './lib/dtos/registration.dto';
+
+// Validators
+export * from './lib/validators/account.validators';

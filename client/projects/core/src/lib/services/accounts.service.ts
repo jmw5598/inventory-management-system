@@ -27,16 +27,14 @@ export class AccountsService extends AbstractCrudService<Account, number> {
   public validateEmail(email: string): Observable<ValidatorResult> {
     return this._http.head<ValidatorResult>(`${this._base}/validate/email`, { params: { email: email }})
       .pipe(
-        switchMap(() => of({ isValid: false } as ValidatorResult)),
-        catchError(() => of({ isValid: true } as ValidatorResult))
+        switchMap(() => of({ isValid: false } as ValidatorResult))
       );
   }
 
   public validateUsername(username: string): Observable<ValidatorResult> {
     return this._http.head<ValidatorResult>(`${this._base}/validate/username`, { params: { username: username }})
       .pipe(
-        switchMap(() => of({ isValid: false } as ValidatorResult)),
-        catchError(() => of({ isValid: true } as ValidatorResult))
+        switchMap(() => of({ isValid: false } as ValidatorResult))
       );
   }
 }
