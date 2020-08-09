@@ -47,6 +47,16 @@ export class AccountsService {
     } as RegistrationResult;
   }
 
+  public async doesEmailExist(email: string): Promise<boolean> {
+    return this._profileRepository.count({ where: { email: email.trim().toLowerCase() }})
+      .then(count => count > 0);
+  }
+
+  public async doesUsernameExist(username: string): Promise<boolean> {
+    return this._userRepository.count({ where: { username: username.trim().toLowerCase() }})
+      .then(count => count > 0);
+  }
+
   private async _createNewAddress(createAddressDto: CreateAddressDto): Promise<Address> {
     const address: Address = this._addressRepository.create({
       street: createAddressDto.street,
@@ -63,7 +73,7 @@ export class AccountsService {
     const profile: Profile = this._profileRepository.create({
       firstName: createProfileDto.firstName,
       lastName: createProfileDto.lastName,
-      email: createProfileDto.email,
+      email: createProfileDto.email.trim().toLowerCase(),
       address: address,
       account: { id: account.id }
     });
@@ -80,7 +90,7 @@ export class AccountsService {
   private async _createNewUser(createUserDto: CreateUserDto, account: Account): Promise<User> {
     const userRole: Role = await this._roleRepository.findOne({ name: RoleType.USER });
     const user: User = this._userRepository.create({
-      username: createUserDto.username,
+      username: createUserDto.username.trim().toLowerCase(),
       password: this._hashPassword(createUserDto.password),
       account: { id: account.id },
       roles: [userRole]
