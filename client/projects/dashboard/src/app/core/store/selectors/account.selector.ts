@@ -1,7 +1,7 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import { IAccountState } from '../state/account.state';
 
-export const selectAccountState = createFeatureSelector<IAccountState>("account");
+export const selectAccountState = createFeatureSelector<IAccountState>("accounts");
 
 export const selectAccountDetails = createSelector(
   selectAccountState,
@@ -16,4 +16,9 @@ export const selectAccountStatus = createSelector(
 export const selectAccountProfile = createSelector(
   selectAccountState,
   (state: IAccountState) => state.profile
+);
+
+export const selectRegistrationResult = createSelector(
+  selectAccountState,
+  (state: IAccountState) => state.registrationResult
 );

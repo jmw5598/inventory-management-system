@@ -6,6 +6,8 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { AuthenticationEffects } from './store/effects/authentication.effects';
 import { authenticatedUserInitializer } from './initializers/authenticated-user.initializer';
+import { AccountEffects } from './store/effects/account.effects';
+import { accountReducer } from './store/reducers/account.reducer';
 import { JwtTokenInterceptor } from './interceptors/jwt-token.interceptor';
 import { authenticationReducer } from './store/reducers/authentication.reducer';
 import { HttpErrorEffects } from './store/effects/http-error.effects';
@@ -43,6 +45,7 @@ const authenticationAppInitializer = {
   imports: [
     CommonModule,
     StoreModule.forRoot({
+      accounts: accountReducer,
       authentication: authenticationReducer,
       stockrooms: stockroomReducer,
       platforms: platformReducer,
@@ -53,6 +56,7 @@ const authenticationAppInitializer = {
       stockItems: stockItemReducer,
     }),
     EffectsModule.forRoot([
+      AccountEffects,
       AuthenticationEffects,
       PlatformEffects,
       HttpErrorEffects,

@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { getAccountDetailsSuccess, getAccountProfileSuccess } from '../actions/account.actions';
+import { getAccountDetailsSuccess, getAccountProfileSuccess, registerNewAccountResult } from '../actions/account.actions';
 import { initialAccountState } from '../state/account.state';
 
 const _accountReducer = createReducer(
@@ -9,6 +9,12 @@ const _accountReducer = createReducer(
   }),
   on(getAccountProfileSuccess, (state, { payload }) => {
     return {}
+  }),
+  on(registerNewAccountResult, (state, { payload }) => {
+    return {
+      ...state,
+      registrationResult: payload
+    }
   })
 );
 
