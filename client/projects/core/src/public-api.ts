@@ -44,6 +44,7 @@ export * from './lib/models/paging/page-request.model';
 export * from './lib/models/paging/sort-direction.enum';
 export * from './lib/models/paging/sort.model';
 export * from './lib/models/paging/sortable.interface';
+export * from './lib/models/validator-result.model';
 
 // Dtos
 export * from './lib/dtos/registration-account.dto';

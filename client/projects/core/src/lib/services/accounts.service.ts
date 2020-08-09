@@ -1,12 +1,13 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of} from 'rxjs';
+import { switchMap, catchError } from 'rxjs/operators';
 
 import { InvCoreConfig, INV_CORE_CONFIG } from '../inv-core.config';
 import { AbstractCrudService } from './abstract-crud.service'; 
 import { Account } from '../models/account.model';
-import { Registration } from '../dtos/registration.dto';
 import { RegistrationResult } from '../dtos/registration-result.dto';
+import { ValidatorResult } from '../models/validator-result.model';
 
 @Injectable()
 export class AccountsService extends AbstractCrudService<Account, number> {
@@ -21,5 +22,21 @@ export class AccountsService extends AbstractCrudService<Account, number> {
   public registerNewAccount(
       registration: RegistrationResult): Observable<RegistrationResult> {
     return this._http.post<RegistrationResult>(`${this._base}/register`, registration);
+  }
+
+  public validateEmail(email: string): Observable<ValidatorResult> {
+    return this._http.head<ValidatorResult>(`${this._base}/validate/email`, { params: { email: email }})
+      .pipe(
+        switchMap(() => of({ isValid: false } as ValidatorResult)),
+        catchError(() => of({ isValid: true } as ValidatorResult))
+      );
+  }
+
+  public validateUsername(username: string): Observable<ValidatorResult> {
+    return this._http.head<ValidatorResult>(`${this._base}/validate/username`, { params: { username: username }})
+      .pipe(
+        switchMap(() => of({ isValid: false } as ValidatorResult)),
+        catchError(() => of({ isValid: true } as ValidatorResult))
+      );
   }
 }
