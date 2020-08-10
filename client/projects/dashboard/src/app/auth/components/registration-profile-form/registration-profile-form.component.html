@@ -1,0 +1,59 @@
+<div [formGroup]="form.get('profile')">
+  <!-- First & Last Name Inputs -->
+  <nz-row [nzGutter]="['16', '0']">
+    <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12">
+      <nz-form-item>
+        <nz-form-label nzSpan="24" nzFor="">First Name</nz-form-label>
+        <nz-form-control nzSpan="24" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="firstNameErrorTpl">
+          <input formControlName="firstName" nz-input name="firstName" type="text" id="firstName">
+          <ng-template #firstNameErrorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">
+              Please input your first name!
+            </ng-container>
+            <ng-container *ngIf="control.hasError('pattern')">
+              First name must be 3 to 20 characters!
+            </ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12">
+      <nz-form-item nzRow>
+        <nz-form-label nzSpan="24" nzFor="lastName">Last Name</nz-form-label>
+        <nz-form-control nzSpan="24" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="lastNameErrorTpl">
+          <input formControlName="lastName" nz-input name="lastName" type="text" id="lastName">
+          <ng-template #lastNameErrorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">
+              Please input your last name!
+            </ng-container>
+            <ng-container *ngIf="control.hasError('pattern')">
+              Last name must be 3 to 20 characters!
+            </ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </nz-row>
+ 
+  <!-- Address Form -->
+  <inv-registration-address-form></inv-registration-address-form>
+
+  <!-- Email Input -->
+  <nz-form-item>
+    <nz-form-label nzSpan="24" nzFor="email">Email</nz-form-label>
+    <nz-form-control nzSpan="24" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="emailErrorTpl">
+      <input formControlName="email" nz-input name="email" type="text" id="email">
+      <ng-template #emailErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">
+          Please input your email!
+        </ng-container>
+        <ng-container *ngIf="control.hasError('email')">
+          Invalid email format!
+        </ng-container>
+        <ng-container *ngIf="control.hasError('emailExists')">
+          The email already exists!
+        </ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+</div>
