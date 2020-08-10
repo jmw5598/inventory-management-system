@@ -1,0 +1,39 @@
+@import '../../../../assets/scss/variables';
+
+nz-card {
+  width: 100%;
+  padding: 24px;
+}
+
+.steps-content {
+  margin-top: 2rem;
+}
+
+.steps-action {
+  padding-top: 0.5rem;
+}
+
+button {
+  margin-right: 8px;
+}
+
+nz-form-label {
+  padding: 0 !important;
+}
+
+nz-form-item {
+  margin-bottom: 1rem !important;
+}
+
+.registration-sign-on-link {
+  margin-bottom: 0;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.registration-title {
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 2rem;
+}

@@ -1,1 +1,59 @@
-<p>register works!</p>
+<nz-card nzBordered="false" [@fadeAnimation]>
+  <h1 class="registration-title">Create Your Account</h1>
+  <nz-steps [nzCurrent]="currentStep">
+    <nz-step [nzTitle]="RegistrationStep.USER | titlecase"></nz-step>
+    <nz-step [nzTitle]="RegistrationStep.PROFILE | titlecase"></nz-step>
+    <nz-step [nzTitle]="RegistrationStep.ACCOUNT | titlecase"></nz-step>
+    <nz-step [nzTitle]="RegistrationStep.FINISH | titlecase"></nz-step>
+  </nz-steps>
+  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" novalidate>
+    <div class="steps-content">
+      <ng-container [ngSwitch]="step">
+        <div *ngSwitchCase="RegistrationStep.USER">
+          <inv-registration-user-form></inv-registration-user-form>
+          <nz-form-item>
+            <div class="steps-action">
+              <button nz-button nzType="default" type="button" [disabled]="this.form.get('user').invalid" (click)="next()" *ngIf="currentStep < 2">
+                <span>Next</span>
+                <i nz-icon nzType="right" nzTheme="outline"></i>
+              </button>
+            </div>
+          </nz-form-item>
+        </div>
+        <div *ngSwitchCase="RegistrationStep.PROFILE">
+          <inv-registration-profile-form></inv-registration-profile-form>
+          <nz-form-item>
+            <div class="steps-action">
+              <button nz-button nzType="default" type="button" (click)="pre()" *ngIf="currentStep > 0 && currentStep < 3">
+                <i nz-icon nzType="left" nzTheme="outline"></i>
+                <span>Previous</span>
+              </button>
+              <button nz-button nzType="default" type="button" [disabled]="this.form.get('profile').invalid" (click)="next()" *ngIf="currentStep < 2">
+                <span>Next</span>
+                <i nz-icon nzType="right" nzTheme="outline"></i>
+              </button>
+            </div>
+          </nz-form-item>
+        </div>
+        <div *ngSwitchCase="RegistrationStep.ACCOUNT">
+          <inv-registration-account-form [plans]="plans"></inv-registration-account-form>
+          <nz-form-item>
+            <div class="steps-action">
+              <button nz-button nzType="default" type="button" (click)="pre()" *ngIf="currentStep > 0 && currentStep < 3">
+                <i nz-icon nzType="left" nzTheme="outline"></i>
+                <span>Previous</span>
+              </button>
+              <button nz-button nzType="primary" [disabled]="this.form.invalid" type="submit" *ngIf="currentStep === 2">
+                <span>Register</span>
+              </button>
+            </div>
+          </nz-form-item>
+        </div>
+        <div *ngSwitchCase="RegistrationStep.FINISH">
+          <inv-registration-result [result]="registrationResult"></inv-registration-result>
+        </div>
+      </ng-container>
+    </div>
+  </form>
+  <p class="registration-sign-on-link">Or <a [routerLink]="['/auth', 'login']">sign in!</a></p>
+</nz-card>
