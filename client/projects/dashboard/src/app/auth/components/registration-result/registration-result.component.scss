@@ -1,0 +1,34 @@
+@import '../../../../assets/scss/variables';
+
+.registration-result {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+  .registration-result-icon {
+    font-size: 128px;
+    line-height: 128px;
+    margin-bottom: 0;
+    text-align: center;
+
+    &.registration-result-success {
+      color: $success-color;
+    }
+
+    &.registration-result-error {
+      color: $danger-color; 
+    }
+  }
+
+  .registration-result-status {
+    font-weight: bold;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 0;
+  }
+
+  .registration-result-message {
+    font-size: 1.2rem;
+    text-align: center;
+    max-width: 350px;
+    margin: auto;
+  }
+}

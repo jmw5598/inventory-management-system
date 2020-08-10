@@ -1,0 +1,16 @@
+<div class="registration-result">
+  <h1 class="registration-result-icon"
+      [ngClass]="{ 
+        'registration-result-success' : isSuccess(),
+        'registration-result-error' : !isSuccess()
+      }">
+    <ng-container *ngIf="isSuccess(); else errorResult">
+      <i nz-icon nzType="check-circle" nzTheme="outline"></i>
+    </ng-container>
+    <ng-template #errorResult>
+      <i nz-icon nzType="exclamation-circle" nzTheme="outline"></i>
+    </ng-template>
+  </h1>
+  <h2 class="registration-result-status">{{ result?.status | titlecase }}</h2>
+  <p class="registration-result-message">{{ result?.message }}</p>
+</div>
