@@ -1,4 +1,5 @@
 <nz-card [nzBordered]="true" [@fadeAnimation]>
+  <h1 class="login-title">Sign In</h1>
   <form nz-form [formGroup]="form" class="login-form" (ngSubmit)="submitForm(form.value)">
     <nz-alert 
         *ngIf="authenticationState && authenticationState.errorMessage" 
