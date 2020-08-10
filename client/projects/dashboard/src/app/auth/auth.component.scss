@@ -1,12 +1,12 @@
 .auth-layout {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: row;
 
   .left-col,
   .right-col {
     flex: 1 1 0px;
-    height: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -27,6 +27,11 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    .auth-outlet {
+      margin: 2rem;
+      width: 75%;
+    }
   }
 }
 
@@ -37,6 +42,17 @@
     .left-col,
     .right-col {
       width: 100%;
+    }
+  }
+}
+
+@media only screen and (max-width : 480px) {
+  .auth-layout {
+    display: block;
+    .right-col {
+      .auth-outlet {
+        width: 90%;
+      }
     }
   }
 }
