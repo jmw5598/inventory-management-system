@@ -56,3 +56,4 @@ export * from './lib/dtos/registration.dto';
 
 // Validators
 export * from './lib/validators/account.validators';
+export * from './lib/validators/match.validators';
