@@ -1,7 +1,7 @@
 <div [formGroup]="form.get('account')">
   <nz-form-item>
     <nz-form-label nzSpan="24" nzFor="plan">Plan</nz-form-label>
-    <nz-form-control nzSpan="24" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="planErrorTpl">
+    <nz-form-control nzSpan="24" nzValidatingTip="Validating..." [nzErrorTip]="planErrorTpl">
       <nz-radio-group formControlName="plan" nzButtonStyle="solid" nzSize="large">
         <ng-container *ngIf="plans">
           <label 
