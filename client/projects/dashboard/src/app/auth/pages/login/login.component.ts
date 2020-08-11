@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { IAppState } from '../../../core/store/state/app.state';
 import { IAuthenticationState } from '../../../core/store/state/authentication.state';
@@ -21,12 +22,14 @@ export class LoginComponent implements OnInit, OnDestroy {
   private _authenticationStateSubscription: Subscription;
   public authenticationState: IAuthenticationState;
   public form: FormGroup;
+  public queryParamMessage$: Observable<string>;
 
   constructor(
     private _authenticationService: AuthenticationService,
     private _formBuilder: FormBuilder,
     private _store: Store<IAppState>,
-    private _router: Router
+    private _router: Router,
+    private _route: ActivatedRoute
   ) {
     this.form = this._formBuilder.group({
       username: ['', [Validators.required]],
@@ -42,7 +45,11 @@ export class LoginComponent implements OnInit, OnDestroy {
         if(state.authenticatedStatus === AuthenticatedStatus.AUTHENTICATED) {
           this._router.navigate(['dashboard', 'home']);
         }
-      }); 
+      });
+      
+    this.queryParamMessage$ = this._route.queryParams.pipe(
+      map(params => params['message'])
+    );
     
     const rememberMe: UserCredentials = this._authenticationService.getStoredRememberMe();
     if (rememberMe) this.form.patchValue(rememberMe);

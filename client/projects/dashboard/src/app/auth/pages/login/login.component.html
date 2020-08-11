@@ -1,10 +1,17 @@
 <nz-card [nzBordered]="true" [@fadeAnimation]>
   <h1 class="login-title">Sign In</h1>
   <form nz-form [formGroup]="form" class="login-form" (ngSubmit)="submitForm(form.value)">
+    <!-- TODO Refactor these two alerts into one alert somehow? -->
     <nz-alert 
         *ngIf="authenticationState && authenticationState.errorMessage" 
         nzType="error" 
         [nzMessage]="authenticationState.errorMessage" 
+        nzShowIcon>
+    </nz-alert>
+    <nz-alert 
+        *ngIf="(queryParamMessage$ | async)"
+        nzType="success" 
+        [nzMessage]="(queryParamMessage$ | async)" 
         nzShowIcon>
     </nz-alert>
     <nz-form-item>
@@ -28,7 +35,7 @@
         </label>
       </div>
       <div nz-col [nzSpan]="12">
-        <a class="login-form-forgot" [routerLink]="['../forgot-password']">Forgot password</a>
+        <a class="login-form-forgot" [routerLink]="['../password-request']">Forgot password</a>
       </div>
     </div>
     <button 
