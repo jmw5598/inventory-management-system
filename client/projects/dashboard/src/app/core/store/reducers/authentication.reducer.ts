@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { AuthenticatedStatus } from '@inv/core';
-import { loginUserSuccess, loginUserError, logoutUser, refreshTokenSuccess } from '../actions/authentication.actions';
+import { loginUserSuccess, loginUserError, logoutUser, refreshTokenSuccess, setAuthenticatedUser } from '../actions/authentication.actions';
 import { initialAuthenticationState } from '../state/authentication.state';
 
 const _authenticationReducer = createReducer(
@@ -37,6 +37,12 @@ const _authenticationReducer = createReducer(
       errorMessage: null
     }
   }),
+  on(setAuthenticatedUser, (state, { payload }) => {
+    return {
+      ...state,
+      authenticatedUser: payload
+    }
+  })
 );
 
 export function authenticationReducer(state, action) {
