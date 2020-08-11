@@ -15,7 +15,7 @@ dotenv.config();
       defaults: {
         from:'"no-reply" <noreply.invmnt@gmail.com>',
       },
-    })
+    })    
   ],
   exports: [
     EmailerService

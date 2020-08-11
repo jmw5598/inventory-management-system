@@ -9,13 +9,12 @@ export class EmailerService {
 
   public async sendConfirmationEmail(email: string, code: string): Promise<any> {
     const emailTemplate: string = await this.generateConfirmationEmailTemplate(code);
-
     this.mailerService
       .sendMail({
         to: email,
         subject: 'Confirm your email address for your new Invmnt account!',
         html: emailTemplate,
-      })
+      }).catch(error => console.log(error));
   }
 
   private async generateConfirmationEmailTemplate(code: string): Promise<string> {
