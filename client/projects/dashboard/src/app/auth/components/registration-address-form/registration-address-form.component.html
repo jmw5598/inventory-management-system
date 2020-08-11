@@ -3,7 +3,7 @@
   <nz-form-item>
     <nz-form-label nzSpan="24" nzFor="">Street</nz-form-label>
     <nz-form-control nzSpan="24" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="streetErrorTpl">
-      <input formControlName="street" nz-input name="street" type="text" id="street">
+      <input nzSize="large" formControlName="street" nz-input name="street" type="text" id="street">
       <ng-template #streetErrorTpl let-control>
         <ng-container *ngIf="control.hasError('required')">
           Please input your street!
@@ -16,7 +16,7 @@
   <nz-form-item>
     <nz-form-label nzSpan="24" nzFor="">Street 2</nz-form-label>
     <nz-form-control nzSpan="24">
-      <input formControlName="street2" nz-input name="street2" type="text" id="street2">
+      <input nzSize="large" formControlName="street2" nz-input name="street2" type="text" id="street2">
     </nz-form-control>
   </nz-form-item>
   
@@ -26,7 +26,7 @@
       <nz-form-item>
         <nz-form-label nzSpan="24" nzFor="city">City</nz-form-label>
         <nz-form-control nzSpan="24" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="cityErrorTpl">
-          <input formControlName="city" nz-input name="city" type="text" id="city">
+          <input nzSize="large" formControlName="city" nz-input name="city" type="text" id="city">
           <ng-template #cityErrorTpl let-control>
             <ng-container *ngIf="control.hasError('required')">
               Please input your city!
@@ -39,7 +39,7 @@
       <nz-form-item>
         <nz-form-label nzSpan="24" nzFor="state">State</nz-form-label>
         <nz-form-control nzSpan="24" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="stateErrorTpl">
-          <nz-select formControlName="state" name="state" id="state">
+          <nz-select nzSize="large" formControlName="state" name="state" id="state">
             <nz-option
                 *ngFor="let state of states"
                 [nzValue]="state.abbr"
@@ -58,7 +58,7 @@
       <nz-form-item>
         <nz-form-label nzSpan="24" nzFor="zip">Zip</nz-form-label>
         <nz-form-control nzSpan="24" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="zipErrorTpl">
-          <input formControlName="zip" nz-input name="zip" type="text" id="zip">
+          <input nzSize="large" formControlName="zip" nz-input name="zip" type="text" id="zip">
           <ng-template #zipErrorTpl let-control>
             <ng-container *ngIf="control.hasError('required')">
               Please input your zip/postal code!

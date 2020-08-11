@@ -3,7 +3,7 @@
   <nz-form-item>
     <nz-form-label nzSpan="24" nzFor="">Username</nz-form-label>
     <nz-form-control nzSpan="24" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
-      <input formControlName="username" nz-input name="username" type="text" id="username" autocomplete="off">
+      <input nzSize="large" formControlName="username" nz-input name="username" type="text" id="username" autocomplete="off">
       <ng-template #userErrorTpl let-control>
         <ng-container *ngIf="control.hasError('required')">
           Please input your username!
@@ -22,7 +22,7 @@
   <nz-form-item>
     <nz-form-label nzSpan="24" nzFor="password">Password</nz-form-label>
     <nz-form-control nzSpan="24" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="passwordErrorTpl">
-      <input formControlName="password" nz-input name="password" type="password" id="password">
+      <input nzSize="large" formControlName="password" nz-input name="password" type="password" id="password">
       <ng-template #passwordErrorTpl let-control>
         <ng-container *ngIf="control.hasError('required')">
           Please input your password!
@@ -38,7 +38,7 @@
   <nz-form-item>
     <nz-form-label nzSpan="24" nzFor="passwordConfirm">Confirm Password</nz-form-label>
     <nz-form-control nzSpan="24" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="passwordConfirmErrorTpl">
-      <input formControlName="passwordConfirm" nz-input name="passwordConfirm" type="password" id="passwordConfirm">
+      <input nzSize="large" formControlName="passwordConfirm" nz-input name="passwordConfirm" type="password" id="passwordConfirm">
       <ng-template #passwordConfirmErrorTpl let-control>
         <ng-container *ngIf="control.hasError('required')">
           Please confirm your password!

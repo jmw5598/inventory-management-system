@@ -5,7 +5,7 @@
       <nz-form-item>
         <nz-form-label nzSpan="24" nzFor="">First Name</nz-form-label>
         <nz-form-control nzSpan="24" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="firstNameErrorTpl">
-          <input formControlName="firstName" nz-input name="firstName" type="text" id="firstName">
+          <input nzSize="large" formControlName="firstName" nz-input name="firstName" type="text" id="firstName">
           <ng-template #firstNameErrorTpl let-control>
             <ng-container *ngIf="control.hasError('required')">
               Please input your first name!
@@ -21,7 +21,7 @@
       <nz-form-item nzRow>
         <nz-form-label nzSpan="24" nzFor="lastName">Last Name</nz-form-label>
         <nz-form-control nzSpan="24" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="lastNameErrorTpl">
-          <input formControlName="lastName" nz-input name="lastName" type="text" id="lastName">
+          <input nzSize="large" formControlName="lastName" nz-input name="lastName" type="text" id="lastName">
           <ng-template #lastNameErrorTpl let-control>
             <ng-container *ngIf="control.hasError('required')">
               Please input your last name!
@@ -42,7 +42,7 @@
   <nz-form-item>
     <nz-form-label nzSpan="24" nzFor="email">Email</nz-form-label>
     <nz-form-control nzSpan="24" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="emailErrorTpl">
-      <input formControlName="email" nz-input name="email" type="text" id="email">
+      <input nzSize="large" formControlName="email" nz-input name="email" type="text" id="email">
       <ng-template #emailErrorTpl let-control>
         <ng-container *ngIf="control.hasError('required')">
           Please input your email!
