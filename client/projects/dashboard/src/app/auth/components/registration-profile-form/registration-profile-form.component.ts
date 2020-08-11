@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ControlContainer } from '@angular/forms';
-import { AccountValidators, checkFormGroupValidity } from '@inv/core';
+import { AccountValidators } from '@inv/core';
 
 @Component({
   selector: 'inv-registration-profile-form',
