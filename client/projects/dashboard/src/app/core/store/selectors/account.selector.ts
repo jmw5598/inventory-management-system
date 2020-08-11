@@ -22,3 +22,13 @@ export const selectRegistrationResult = createSelector(
   selectAccountState,
   (state: IAccountState) => state.registrationResult
 );
+
+export const selectPasswordRequestResult = createSelector(
+  selectAccountState,
+  (state: IAccountState) => state.passwordRequestResetResult
+);
+
+export const selectPasswordResetResult = createSelector(
+  selectAccountState,
+  (state: IAccountState) => state.passwordResetResult
+);

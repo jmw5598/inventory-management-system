@@ -1,6 +1,13 @@
 import { createReducer, on } from '@ngrx/store';
-import { getAccountDetailsSuccess, getAccountProfileSuccess, registerNewAccountResult } from '../actions/account.actions';
 import { initialAccountState } from '../state/account.state';
+
+import { 
+  getAccountDetailsSuccess, 
+  getAccountProfileSuccess, 
+  registerNewAccountResult, 
+  passwordRequestResetResult, 
+  passwordResetResult 
+} from '../actions/account.actions';
 
 const _accountReducer = createReducer(
   initialAccountState,
@@ -14,6 +21,18 @@ const _accountReducer = createReducer(
     return {
       ...state,
       registrationResult: payload
+    }
+  }),
+  on(passwordRequestResetResult, (state, { payload }) => {
+    return {
+      ...state,
+      passwordRequestResetResult: payload
+    }
+  }),
+  on(passwordResetResult, (state, { payload }) => {
+    return {
+      ...state,
+      passwordResetResult: payload
     }
   })
 );
