@@ -1,15 +1,19 @@
 import { Controller, UseGuards, Get, Post, Request, Query, Redirect, Body, Head, Response, HttpCode, NotFoundException } from '@nestjs/common';
 import { AccountsService } from './services/accounts.service';
-import { AuthenticationService } from '../authentication/authentication.service';
-import { EmailerService } from '../common/services/emailer/emailer.service';
 import { RegistrationDto } from './dtos/registration.dto';
 import { RegistrationResult } from './dtos/registration-result.dto';
+import { PasswordResetDto } from './dtos/password-reset.dto';
+import { PasswordRequestResetDto } from './dtos/password-request-reset.dto';
+import { ResponseMessage } from '../common/models/response-message.model';
+import { ResponseStatus } from '../common/enums/response-status.enum';
+import { ConfigService } from '@nestjs/config';
 
 @Controller('accounts')
 export class AccountsController {
   constructor(
-    private readonly _accountsService: AccountsService
-   ) {}
+    private readonly _accountsService: AccountsService,
+    private readonly _configService: ConfigService
+  ) {}
 
   @Post('register')
   public async registerAccount(@Body() registrationDto: RegistrationDto): Promise<RegistrationResult> {
@@ -19,12 +23,25 @@ export class AccountsController {
 
   @Get('verify')
   @Redirect('https://inv.io', 301)
-  public async verifyAccount(
-      @Query('code') code: string,
-      @Query('redirect') redirect: string): Promise<any> {
+  public async verifyAccount(@Query('code') code: string): Promise<any> {
+    const response: ResponseMessage = await this._accountsService.confirmAccount(code);
+    const redirect: string = this._configService.get('MAIL_CONFIRMATION_REDIRECT_URL');
     return {
-      url: 'https://google.com'// get redirct url from config service
+      url: `${redirect}?message=${encodeURI(response.message)}`
     };
+  }
+
+  @Post('password-request')
+  public async passwordResetRequest(
+      @Body() passwordRequestDto: PasswordRequestResetDto): Promise<ResponseMessage> {
+    // @@@ TODO
+    return {} as ResponseMessage
+  }
+
+  @Post('password-reset')
+  public async passwordReset(@Body() passwordResetDto: PasswordResetDto): Promise<ResponseMessage> {
+    // @@@ TODO
+    return {} as ResponseMessage
   }
 
   @Head('validate/email')
