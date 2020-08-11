@@ -1,0 +1,14 @@
+// Colors (these are also declared in theme.less for the ng zorro theme)
+$primary-color: #756EEA;
+$success-color: #74BC16;
+$info-color: #1EB7FF;
+$warning-color: #FFE100;
+$danger-color: #FF7451;
+
+// Background
+$background-transparent: transparent;
+$background-primary: $primary-color;
+
+// Spinner
+$spinner-track-color: #f0ebff;
+$spinner-color: $primary-color;
