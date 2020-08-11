@@ -3,7 +3,6 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { AccountActions, registerNewAccountResult } from '../actions/account.actions';
 import { AccountsService } from '@inv/core';
-
 import { of } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 
@@ -21,7 +20,7 @@ export class AccountEffects {
         map(result => registerNewAccountResult(result)),
         catchError(error => of(registerNewAccountResult({
           status: 'ERROR',
-          message: error.message
+          message: error.error.message
         })))
       )
     )

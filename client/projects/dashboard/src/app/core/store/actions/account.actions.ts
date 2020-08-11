@@ -7,7 +7,7 @@ export enum AccountActions {
   GET_ACCOUNT_PROFILE = '[Account] Get Account Profile',
   GET_ACCOUNT_PROFILE_SUCCESS = '[Account] Get Account Profile Success',
   REGISTER_NEW_ACCOUNT = '[Acount] Register New Account',
-  REGISTER_NEW_ACCOUNT_RESULT= '[Account] Register New Account Result'
+  REGISTER_NEW_ACCOUNT_RESULT= '[Account] Register New Account Result',
 };
 
 export const getAccountDetails = createAction(
