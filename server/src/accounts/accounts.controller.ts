@@ -1,4 +1,4 @@
-import { Controller, UseGuards, Get, Post, Request, Query, Redirect, Body, Head, Response, HttpCode, NotFoundException } from '@nestjs/common';
+import { Controller, UseGuards, Get, Post, Request, Query, Redirect, Body, Head, Response, HttpCode, NotFoundException, UnprocessableEntityException } from '@nestjs/common';
 import { AccountsService } from './services/accounts.service';
 import { RegistrationDto } from './dtos/registration.dto';
 import { RegistrationResult } from './dtos/registration-result.dto';
@@ -34,14 +34,15 @@ export class AccountsController {
   @Post('password-request')
   public async passwordResetRequest(
       @Body() passwordRequestDto: PasswordRequestResetDto): Promise<ResponseMessage> {
-    // @@@ TODO
-    return {} as ResponseMessage
+    return this._accountsService.passwordRequestReset(passwordRequestDto.email);
   }
 
   @Post('password-reset')
   public async passwordReset(@Body() passwordResetDto: PasswordResetDto): Promise<ResponseMessage> {
-    // @@@ TODO
-    return {} as ResponseMessage
+    if (passwordResetDto.password !== passwordResetDto.passwordConfirm)
+      throw new UnprocessableEntityException(`Password and confirmation password must match`);
+    return this._accountsService
+      .passwordResetFromResetToken(passwordResetDto.password, passwordResetDto.code)
   }
 
   @Head('validate/email')

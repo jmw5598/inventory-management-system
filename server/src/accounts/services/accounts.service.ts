@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import { v4 as uuidv4 } from 'uuid';
 
 import { Account } from '../entities/account.entity';
 import { Address } from '../entities/address.entity';
@@ -53,8 +54,44 @@ export class AccountsService {
     this._accountRepository.save(account);
     return {
       status: ResponseStatus.SUCCESS,
-      message: `You successfully confirmed your email!`
+      message: `Email successfully confirmed!`
     } as ResponseMessage;
+  }
+
+  public async passwordResetFromResetToken(password: string, resetToken: string): Promise<ResponseMessage> {
+    const user: User = await this._userRepository.findOne({ where: { resetToken: resetToken } });
+    
+    if (!user) {
+      return { status: ResponseStatus.ERROR, message: `Invalid reset token.` };
+    }
+
+    user.password = this._hashPassword(password);
+    user.resetToken = uuidv4(); // change token so it cant be reused
+    this._userRepository.save(user);
+    
+    return {
+      status: ResponseStatus.SUCCESS,
+      message: `Your password was successfully changed!`
+    } as ResponseMessage
+  }
+
+  public async passwordRequestReset(email: string): Promise<ResponseMessage> {
+    const profile: Profile = await this._profileRepository.findOne({ 
+      relations: ['account'],
+      where: { email: email } 
+    });
+
+    if (profile) {
+      const user: User = await this._userRepository.findOne({ account: { id: profile.account.id } });
+      user.resetToken = uuidv4();
+      this._userRepository.save(user);
+      this._emailerService.sendPasswordResetEmail(email, user.resetToken);
+    }
+
+    return {
+      status: ResponseStatus.SUCCESS,
+      message: `You should receive an email with a reset link shortly!`
+    } as ResponseMessage
   }
 
   public async doesEmailExist(email: string): Promise<boolean> {
