@@ -53,7 +53,6 @@ export class PasswordResetComponent implements OnInit {
   }
 
   public onSubmit(resetValues: PasswordReset): void {
-    console.log(resetValues);
     this._store.dispatch(passwordReset(resetValues));
   }
 }
