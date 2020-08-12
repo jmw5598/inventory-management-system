@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, Raw } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -59,14 +59,19 @@ export class AccountsService {
   }
 
   public async passwordResetFromResetToken(password: string, resetToken: string): Promise<ResponseMessage> {
-    const user: User = await this._userRepository.findOne({ where: { resetToken: resetToken } });
+    const user: User = await this._userRepository.findOne({ 
+      where: { 
+        resetToken: resetToken,
+            resetTokenExpiration: Raw(alias =>`${alias} > NOW()`)
+      } 
+    });
     
     if (!user) {
-      return { status: ResponseStatus.ERROR, message: `Invalid reset token.` };
+      return { status: ResponseStatus.ERROR, message: `Invalid or expired reset code.` };
     }
 
     user.password = this._hashPassword(password);
-    user.resetToken = uuidv4(); // change token so it cant be reused
+    user.resetToken = uuidv4();
     this._userRepository.save(user);
     
     return {
@@ -84,6 +89,7 @@ export class AccountsService {
     if (profile) {
       const user: User = await this._userRepository.findOne({ account: { id: profile.account.id } });
       user.resetToken = uuidv4();
+      user.resetTokenExpiration = this._generateResetTokenExpiration();
       this._userRepository.save(user);
       this._emailerService.sendPasswordResetEmail(email, user.resetToken);
     }
@@ -136,13 +142,22 @@ export class AccountsService {
 
   private async _createNewUser(createUserDto: CreateUserDto, account: Account): Promise<User> {
     const userRole: Role = await this._roleRepository.findOne({ name: RoleType.USER });
+    const resetTokenExpiration: Date = this._generateResetTokenExpiration();
     const user: User = this._userRepository.create({
       username: createUserDto.username.trim().toLowerCase(),
       password: this._hashPassword(createUserDto.password),
       account: { id: account.id },
+      resetToken: uuidv4(),
+      resetTokenExpiration: resetTokenExpiration,
       roles: [userRole]
     });  
     return this._userRepository.save(user);
+  }
+
+  private _generateResetTokenExpiration(): Date {
+    const now: Date = new Date();
+    now.setMinutes(now.getMinutes() + 10);
+    return now;
   }
 
   private _hashPassword(password: string): string {
