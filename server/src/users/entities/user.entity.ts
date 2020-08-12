@@ -19,6 +19,9 @@ export class User extends BaseEntity {
   @Generated('uuid')
   public resetToken: string;
 
+  @Column({ name: 'reset_token_expiration', nullable: false, type: 'timestamp with time zone' })
+  public resetTokenExpiration: Date;
+
   @ManyToMany(type => Role, role => role.users)
   @JoinTable({ name: 'user_role'})
   public roles: Role[];
