@@ -4,6 +4,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StoreModule, Store } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
+import { resetStateOnLogout } from './store/reducers/global-meta.reducer';
 import { AuthenticationEffects } from './store/effects/authentication.effects';
 import { authenticatedUserInitializer } from './initializers/authenticated-user.initializer';
 import { AccountEffects } from './store/effects/account.effects';
@@ -54,7 +55,7 @@ const authenticationAppInitializer = {
       plans: planReducer,
       productItems: productItemReducer,
       stockItems: stockItemReducer,
-    }),
+    }, { metaReducers: [resetStateOnLogout] }),
     EffectsModule.forRoot([
       AccountEffects,
       AuthenticationEffects,
