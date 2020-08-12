@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthComponent } from './auth.component';
-import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { LoginComponent } from './pages/login/login.component';
 import { LogoutComponent } from './pages/logout/logout.component';
+import { PasswordRequestComponent } from './pages/password-request/password-request.component';
+import { PasswordResetComponent } from './pages/password-reset/password-reset.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { PlansGuard } from '../core/guards/plans.guard';
 
@@ -18,14 +19,17 @@ const routes: Routes = [
     component: AuthComponent,
     children: [
       {
-        path: 'forgot-password',
-        component: ForgotPasswordComponent
-      },
-      {
         path: 'login',
         component: LoginComponent
       },
-      
+      {
+        path: 'password-request',
+        component: PasswordRequestComponent
+      },
+      {
+        path: 'password-reset',
+        component: PasswordResetComponent
+      },
       {
         path: 'register',
         canActivate: [PlansGuard],
