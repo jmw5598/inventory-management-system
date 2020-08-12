@@ -6,7 +6,10 @@ import { switchMap, catchError } from 'rxjs/operators';
 import { InvCoreConfig, INV_CORE_CONFIG } from '../inv-core.config';
 import { AbstractCrudService } from './abstract-crud.service'; 
 import { Account } from '../models/account.model';
+import { PasswordRequestReset } from '../models/password-request-reset.model';
+import { PasswordReset } from '../models/password-reset.model';
 import { RegistrationResult } from '../dtos/registration-result.dto';
+import { ResponseMessage } from '../models/response-message.model';
 import { ValidatorResult } from '../models/validator-result.model';
 
 @Injectable()
@@ -36,5 +39,13 @@ export class AccountsService extends AbstractCrudService<Account, number> {
       .pipe(
         switchMap(() => of({ isValid: false } as ValidatorResult))
       );
+  }
+
+  public passwordRequestReset(request: PasswordRequestReset): Observable<ResponseMessage> {
+    return this._http.post<ResponseMessage>(`${this._base}/password-request`, request);
+  }
+
+  public passwordReset(resetRequest: PasswordReset): Observable<ResponseMessage> {
+    return this._http.post<ResponseMessage>(`${this._base}/password-reset`, resetRequest);    
   }
 }
