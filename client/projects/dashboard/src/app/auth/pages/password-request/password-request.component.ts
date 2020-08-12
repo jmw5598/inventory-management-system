@@ -32,7 +32,8 @@ export class PasswordRequestComponent implements OnInit, OnDestroy {
     this.passwordRequestResetResult = this._store.select(selectPasswordRequestResult)
       .pipe(
         filter(result => result !== null),
-        distinctUntilChanged()
+        distinctUntilChanged(),
+        tap(() => this.form.reset())
       );
   }
 
