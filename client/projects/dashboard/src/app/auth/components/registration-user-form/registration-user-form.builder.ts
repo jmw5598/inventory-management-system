@@ -8,7 +8,7 @@ export const buildRegistrationUserFormGroup = (
       username: ['', 
         [
           Validators.required, 
-          Validators.pattern(/^(?=.{3,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/)
+          Validators.pattern(/^(?=[a-zA-Z0-9._]{3,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/)
         ], 
         [accountValidators.validateUsername()]
       ],
