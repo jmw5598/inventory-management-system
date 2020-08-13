@@ -44,7 +44,7 @@ const _productItemReducer = createReducer(
   on(updateProductItemSuccess, (state, { payload }) => {
     const message: ResponseMessage = { 
       status: ResponseStatus.SUCCESS, 
-      message: `We succesfully update your product item!` 
+      message: `We succesfully updated your product item!` 
     } as ResponseMessage;
     return {
       ...state,
@@ -55,7 +55,7 @@ const _productItemReducer = createReducer(
   on(createProductItemSuccess, (state, { payload }) => {
     const message: ResponseMessage = {
       status: ResponseStatus.SUCCESS,
-      message: `We successfully create your product item!`
+      message: `We successfully created your product item!`
     } as ResponseMessage;
     return {
       ...state,
