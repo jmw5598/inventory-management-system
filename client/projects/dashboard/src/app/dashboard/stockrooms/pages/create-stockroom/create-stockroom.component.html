@@ -6,6 +6,7 @@
   <nz-row>
     <nz-card nz-col [nzSpan]="8" nzXs="24" nzSm="24" nzMd="16" nzLg="12" nzXl="8">
       <inv-stockroom-form
+          [alertMessage]="(createStockroomResponseMessage$ | async)"
           (onSaveStockroom)="onCreateStockroom($event)">
       </inv-stockroom-form>
     </nz-card>

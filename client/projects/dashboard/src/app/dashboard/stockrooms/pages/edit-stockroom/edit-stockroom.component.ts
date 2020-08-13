@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
-import { Stockroom } from '@inv/core';
+import { Stockroom, ResponseMessage } from '@inv/core';
 import { IAppState } from '../../../../core/store/state/app.state';
-import { selectSelectedStockroom } from '../../../../core/store/selectors/stockroom.selector';
-import { updateStockroom } from '../../../../core/store/actions/stockroom.actions';
+import { selectSelectedStockroom, selectUpdateStockroomResponseMessage } from '../../../../core/store/selectors/stockroom.selector';
+import { updateStockroom, setUpdateStockroomResponseMessage } from '../../../../core/store/actions/stockroom.actions';
 
 @Component({
   selector: 'inv-edit-stockroom',
@@ -14,11 +15,20 @@ import { updateStockroom } from '../../../../core/store/actions/stockroom.action
 })
 export class EditStockroomComponent implements OnInit {
   public selectedStockroom$: Observable<Stockroom>;
+  public updateStockroomResponseMessage$: Observable<ResponseMessage>;
   
   constructor(private _store: Store<IAppState>) { }
 
   ngOnInit(): void {
     this.selectedStockroom$ = this._store.select(selectSelectedStockroom);
+    this.updateStockroomResponseMessage$ = this._store.select(selectUpdateStockroomResponseMessage)
+      .pipe(
+        tap((message: ResponseMessage) => {
+          if (message) {
+            setTimeout(() => this._store.dispatch(setUpdateStockroomResponseMessage(null)), 3000);
+          }
+        })
+      );
   }
 
   public onUpdateStockroom(stockroom: Stockroom): void {

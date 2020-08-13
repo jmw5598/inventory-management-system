@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
-import { Location, Stockroom } from '@inv/core';
+import { Location, Stockroom, ResponseMessage } from '@inv/core';
 
 @Component({
   selector: 'inv-stockroom-form',
@@ -8,6 +8,9 @@ import { Location, Stockroom } from '@inv/core';
   styleUrls: ['./stockroom-form.component.scss']
 })
 export class StockroomFormComponent {
+  @Input()
+  public alertMessage: ResponseMessage
+
   @Output()
   public onSaveStockroom: EventEmitter<Stockroom>;
   public form: FormGroup;
@@ -38,6 +41,11 @@ export class StockroomFormComponent {
     this.onSaveStockroom.emit(stockroom);
   }
 
+  public resetForm(): void {
+    if (this.form)
+      this.form.reset();
+  }
+
   public addStockroomLocation(location?: Location): void {
     this.locations.push(
       this._formBuilder.group({
@@ -63,7 +71,6 @@ export class StockroomFormComponent {
     } else {
       this.form.removeControl('locations');
     }
-    
   }
 
   private _validateFormGroup(group: FormGroup): void {
