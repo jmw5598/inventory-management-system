@@ -1,7 +1,13 @@
 import { createReducer, on } from '@ngrx/store';
-import { searchProductItemsSuccess, getProductItemsByPageSuccess, setSelectedProductItem, deleteProductItemSuccess } from '../actions/product-item.actions';
 import { initialProductItemState } from '../state/product-item.state';
 import { Page, ProductItem } from '@inv/core';
+import { 
+  searchProductItemsSuccess, 
+  getProductItemsByPageSuccess, 
+  setSelectedProductItem, 
+  deleteProductItemSuccess,
+  updateProductItemSuccess
+} from '../actions/product-item.actions';
 
 const _productItemReducer = createReducer(
   initialProductItemState,
@@ -32,6 +38,12 @@ const _productItemReducer = createReducer(
       searchResult: payload
     }
   }),
+  on(updateProductItemSuccess, (state, { payload }) => {
+    return {
+      ...state,
+      selectedProductItem: payload 
+    }
+  })
 );
 
 export function productItemReducer(state, action) {
