@@ -14,6 +14,7 @@ export class ProductItemFormComponent implements OnInit {
 
   @Output()
   public onSaveProductItem: EventEmitter<ProductItem>;
+  public product: ProductItem;
   public form: FormGroup;
 
   constructor(private _formBuiler: FormBuilder) {
@@ -34,14 +35,24 @@ export class ProductItemFormComponent implements OnInit {
 
   @Input()
   public set formValue(product: ProductItem) {
+    this.product = product;
     this.form.patchValue(product);
+    this.form.get('category').patchValue(product.category);
+    
   }
 
-  submitForm(product: ProductItem): void {
+  public onCategoryCompare(category1: Category, category2: Category): boolean {
+    if (category1 && category2) {
+      return category1.id === category2.id
+    } else {
+      return false;
+    } 
+  }
+
+  public submitForm(product: any): void {
     this._validateFormGroup(this.form);
     if (this.form.invalid) return;
     this.onSaveProductItem.emit(product);
-    console.log('form: ', product);
   }
 
   private _validateFormGroup(group: FormGroup): void {

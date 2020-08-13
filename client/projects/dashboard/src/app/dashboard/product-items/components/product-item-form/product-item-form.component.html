@@ -35,8 +35,7 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="5" nzRequired>Category</nz-form-label>
         <nz-form-control [nzSpan]="19" nzErrorTip="Category is required">
-          <nz-select formControlName="category">
-            <nz-option selected="selected" [nzValue]="null" [nzDisabled]="true" nzLabel="The product category"></nz-option>
+          <nz-select formControlName="category" nzPlaceHolder="The product item catgory" [compareWith]="onCategoryCompare">
             <nz-option *ngFor="let category of categories" [nzValue]="category" [nzLabel]="category.description"></nz-option>
           </nz-select>
         </nz-form-control>
