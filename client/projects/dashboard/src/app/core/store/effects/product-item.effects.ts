@@ -30,13 +30,6 @@ export class ProductItemEffects {
     )
   ));
 
-  createProductItemSuccess$ = createEffect(() => this._actions.pipe(
-    ofType(ProductItemActions.CREATE_PRODUCT_ITEM_SUCCESS),
-    tap(({ payload }) => {
-      this._openNewNotificationSuccess('We successfully created your product item');
-    })
-  ), { dispatch: false });
-
   deleteProductItem$ = createEffect(() => this._actions.pipe(
     ofType(ProductItemActions.DELETE_PRODUCT_ITEM),
     mergeMap(({ id }) => this._productItemsService.delete(id)
@@ -92,13 +85,6 @@ export class ProductItemEffects {
       )
     )
   ));
-
-  updateProductItemSuccess$ = createEffect(() => this._actions.pipe(
-    ofType(ProductItemActions.UPDATE_PRODUCT_TIEM_SUCCESS),
-    tap(product => {
-      this._openNewNotificationSuccess('We successfully updated your product item');
-    })
-  ), { dispatch: false });
 
   private _openNewNotificationSuccess(message: string): void {
     this._notificationService.blank(

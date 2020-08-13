@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Category, ProductItem } from '@inv/core';
+import { Category, ProductItem, ResponseMessage } from '@inv/core';
 
 @Component({
   selector: 'inv-product-item-form',
@@ -11,6 +11,9 @@ import { Category, ProductItem } from '@inv/core';
 export class ProductItemFormComponent implements OnInit {
   @Input()
   public categories: Category[];
+
+  @Input()
+  public alertMessage: ResponseMessage;
 
   @Output()
   public onSaveProductItem: EventEmitter<ProductItem>;
@@ -53,6 +56,11 @@ export class ProductItemFormComponent implements OnInit {
     this._validateFormGroup(this.form);
     if (this.form.invalid) return;
     this.onSaveProductItem.emit(product);
+  }
+
+  public resetForm(): void {
+    if (this.form)
+      this.form.reset();
   }
 
   private _validateFormGroup(group: FormGroup): void {

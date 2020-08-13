@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
-import { ProductItem, Category } from '@inv/core';
+import { ProductItemFormComponent } from '../../components/product-item-form/product-item-form.component';
+import { ProductItem, Category, ResponseMessage } from '@inv/core';
 import { IAppState } from '../../../../core/store/state/app.state';
-import { createProductItem } from '../../../../core/store/actions/product-item.actions';
+import { createProductItem, setCreateProductItemResponseMessage } from '../../../../core/store/actions/product-item.actions';
+import { selectCreateProductItemResponseMessage } from '../../../../core/store/selectors/product-item-selector'
 import { selectCategories } from '../../../../core/store/selectors/category.selector';
 
 @Component({
@@ -13,12 +16,25 @@ import { selectCategories } from '../../../../core/store/selectors/category.sele
   styleUrls: ['./create-product-item.component.scss']
 })
 export class CreateProductItemComponent implements OnInit {
+  @ViewChild(ProductItemFormComponent, { static: true })
+  public formComponent: ProductItemFormComponent;
+
   public categories$: Observable<Category[]>
+  public createProductItemResponseMessage$: Observable<ResponseMessage>
 
   constructor(private _store: Store<IAppState>) { }
 
   ngOnInit(): void {
     this.categories$ = this._store.select(selectCategories);
+    this.createProductItemResponseMessage$ = this._store.select(selectCreateProductItemResponseMessage)
+      .pipe(
+        tap((message: ResponseMessage) => {
+          if (message) {
+            this.formComponent.resetForm();
+            setTimeout(() => this._store.dispatch(setCreateProductItemResponseMessage(null)), 3000);
+          }
+        })
+      )
   }
 
   public onSaveProductItem(product: ProductItem): void {

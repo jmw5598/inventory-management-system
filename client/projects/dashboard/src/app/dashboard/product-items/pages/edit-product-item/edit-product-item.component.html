@@ -9,6 +9,7 @@
         <inv-product-item-form
             [categories]="(categories$ | async)"
             [formValue]="(selectedProductItem$ | async)"
+            [alertMessage]="(updateProductItemResponseMessage$ | async)"
             (onSaveProductItem)="onSaveProductItem($event)">
         </inv-product-item-form>
       </nz-card>

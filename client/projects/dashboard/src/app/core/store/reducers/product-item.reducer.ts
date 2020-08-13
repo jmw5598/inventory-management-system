@@ -1,12 +1,15 @@
 import { createReducer, on } from '@ngrx/store';
 import { initialProductItemState } from '../state/product-item.state';
-import { Page, ProductItem } from '@inv/core';
+import { Page, ProductItem, ResponseMessage, ResponseStatus } from '@inv/core';
 import { 
   searchProductItemsSuccess, 
   getProductItemsByPageSuccess, 
   setSelectedProductItem, 
   deleteProductItemSuccess,
-  updateProductItemSuccess
+  updateProductItemSuccess,
+  createProductItemSuccess,
+  setCreateProductItemResponseMessage,
+  setUpdateProductItemResponseMessage
 } from '../actions/product-item.actions';
 
 const _productItemReducer = createReducer(
@@ -39,9 +42,36 @@ const _productItemReducer = createReducer(
     }
   }),
   on(updateProductItemSuccess, (state, { payload }) => {
+    const message: ResponseMessage = { 
+      status: ResponseStatus.SUCCESS, 
+      message: `We succesfully update your product item!` 
+    } as ResponseMessage;
     return {
       ...state,
-      selectedProductItem: payload 
+      selectedProductItem: payload,
+      updateProductItemResponseMessage: message
+    }
+  }),
+  on(createProductItemSuccess, (state, { payload }) => {
+    const message: ResponseMessage = {
+      status: ResponseStatus.SUCCESS,
+      message: `We successfully create your product item!`
+    } as ResponseMessage;
+    return {
+      ...state,
+      createProductItemResponseMessage: message
+    }
+  }),
+  on(setUpdateProductItemResponseMessage, (state, { payload }) => {
+    return {
+      ...state,
+      updateProductItemResponseMessage: payload
+    }
+  }),
+  on(setCreateProductItemResponseMessage, (state, { payload }) => {
+    return {
+      ...state,
+      createProductItemResponseMessage: payload
     }
   })
 );

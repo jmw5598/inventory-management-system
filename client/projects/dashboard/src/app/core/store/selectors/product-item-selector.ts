@@ -17,3 +17,13 @@ export const selectSelectedProductItem = createSelector(
   selectProductItemState,
   (state: IProductItemState) => state.selectedProductItem
 );
+
+export const selectCreateProductItemResponseMessage = createSelector(
+  selectProductItemState,
+  (state: IProductItemState) => state.createProductItemResponseMessage
+);
+
+export const selectUpdateProductItemResponseMessage = createSelector(
+  selectProductItemState,
+  (state: IProductItemState) => state.updateProductItemResponseMessage
+);

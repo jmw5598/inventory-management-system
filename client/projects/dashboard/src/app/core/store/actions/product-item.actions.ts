@@ -1,9 +1,10 @@
 import { createAction, props } from '@ngrx/store';
-import { ProductItem, Page, IPageable } from '@inv/core';
+import { ProductItem, Page, IPageable, ResponseMessage } from '@inv/core';
 
 export enum ProductItemActions {
   CREATE_PRODUCT_ITEM = '[Product Item] Create Product Item',
   CREATE_PRODUCT_ITEM_SUCCESS = '[Product Item] Create Product Item Success',
+  CREATE_PRODUCT_ITEM_RESPONSE_MESSAGE = '[Product Item] Create Product Item Response Message',
   DELETE_PRODUCT_ITEM = '[Product Item] Delete Product Item',
   DELETE_PRODUCT_TIEM_SUCCESS = '[Product Item] Delete Product Item Success',
   GET_PRODUCT_ITEMS_BY_PAGE = '[Product Item] Get Product Items By Page',
@@ -13,7 +14,8 @@ export enum ProductItemActions {
   SEARCH_PRODUCT_ITEMS = '[Product Item] Search Product Items',
   SEARCH_PRODUCT_ITEMS_SUCCESS = '[Product Item] Search Product Items Success',
   UPDATE_PRODUCT_ITEM = '[Product Item] Update Product Item',
-  UPDATE_PRODUCT_TIEM_SUCCESS = '[Product Item] Update Product Item Success'
+  UPDATE_PRODUCT_TIEM_SUCCESS = '[Product Item] Update Product Item Success',
+  UPDATE_PRODUCT_ITEM_RESPONSE_MESSAGE = '[Product Item] Update Product Item Response Message'
 };
 
 export interface ProductItemSearch {
@@ -79,4 +81,14 @@ export const updateProductItem = createAction(
 export const updateProductItemSuccess = createAction(
   ProductItemActions.UPDATE_PRODUCT_TIEM_SUCCESS,
   (product: ProductItem) => ({ payload: product})
+);
+
+export const setCreateProductItemResponseMessage = createAction(
+  ProductItemActions.CREATE_PRODUCT_ITEM_RESPONSE_MESSAGE,
+  (message: ResponseMessage) => ({ payload: message })
+);
+
+export const setUpdateProductItemResponseMessage = createAction(
+  ProductItemActions.UPDATE_PRODUCT_ITEM_RESPONSE_MESSAGE,
+  (message: ResponseMessage) => ({ payload: message })
 );

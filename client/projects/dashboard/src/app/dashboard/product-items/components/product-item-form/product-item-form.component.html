@@ -1,6 +1,12 @@
 <form nz-form [formGroup]="form" (ngSubmit)="submitForm(form.value)" novalidate>
   <div nz-row>
     <div nz-col nzSpan="24">
+      <nz-alert 
+          *ngIf="alertMessage"
+          [nzType]="alertMessage?.status" 
+          [nzMessage]="alertMessage?.message" 
+          nzShowIcon>
+      </nz-alert>
       <nz-form-item>
         <input type="hidden" formControlName="id" />
         <nz-form-label [nzSpan]="5" nzRequired>Title</nz-form-label>
