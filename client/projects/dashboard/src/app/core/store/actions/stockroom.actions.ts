@@ -1,9 +1,11 @@
 import { createAction, props } from '@ngrx/store';
 import { Stockroom, StockroomSummary } from '@inv/core';
+import { ResponseMessage } from 'projects/core/src/public-api';
 
 export enum StockroomActions {
   CREATE_STOCKROOM = '[Stockroom] Create Stockroom',
   CREATE_STOCKROOM_SUCCESS = '[Stockroom] Create Stockroom Success',
+  CREATE_STOCKROOM_RESPONSE_MESSAGE = '[Stockroom] Create Stockroom Response Message',
   DELETE_STOCKROOM = '[Stockroom] Delete Stockroom',
   DELETE_STOCKROOM_SUCCESS = '[Stockroom] Delete Stockroom Success',
   GET_STOCKROOMS = '[Stockroom] Get Stockrooms',
@@ -14,6 +16,7 @@ export enum StockroomActions {
   SET_SELECTED_STOCKROOM = '[Stockroom] Set Selected Stockroom',
   UPDATE_STOCKROOM = '[Stockroom] Update Stockroom',
   UPDATE_STOCKROOM_SUCCESS = '[Stockroom] Update Stockroom Success',
+  UPDATE_STOCKROOM_RESPONSE_MESSAGE = '[Stockroom] Update Stockroom Response Message'
 };
 
 export const createStockroom = createAction(
@@ -24,6 +27,11 @@ export const createStockroom = createAction(
 export const createStockroomSuccess = createAction(
   StockroomActions.CREATE_STOCKROOM_SUCCESS,
   (stockroom: Stockroom) => ({ payload: stockroom })
+);
+
+export const setCreateStockroomResponseMessage = createAction(
+  StockroomActions.CREATE_STOCKROOM_RESPONSE_MESSAGE,
+  (message: ResponseMessage) => ({ payload: message })
 );
 
 export const deleteStockroom = createAction(
@@ -72,4 +80,9 @@ export const updateStockroom = createAction(
 export const updateStockroomSuccess = createAction(
   StockroomActions.UPDATE_STOCKROOM_SUCCESS,
   (stockroom: Stockroom) => ({ payload: stockroom })
+);
+
+export const setUpdateStockroomResponseMessage = createAction(
+  StockroomActions.UPDATE_STOCKROOM_RESPONSE_MESSAGE,
+  (message: ResponseMessage) => ({ payload: message })
 );

@@ -31,15 +31,6 @@ export class StockroomEffects {
     )
   ));
 
-  createStockroomSuccess$ = createEffect(() => this._actions.pipe(
-    ofType(StockroomActions.CREATE_STOCKROOM_SUCCESS),
-    tap(({ payload }) => {
-      const stockroom: Stockroom = payload as Stockroom;
-      this._openNewNotificationSuccess('We successfully created your new stockroom!');
-      this._router.navigate(['/dashboard', 'stockrooms', stockroom.id]);
-    })
-  ), { dispatch: false });
-
   deleteStockroom$ = createEffect(() => this._actions.pipe(
     ofType(StockroomActions.DELETE_STOCKROOM),
     mergeMap(({ id }) => this._stockroomsService.delete(id)
@@ -102,15 +93,6 @@ export class StockroomEffects {
       )
     )
   ));
-
-  updateStockroomSuccess$ = createEffect(() => this._actions.pipe(
-    ofType(StockroomActions.UPDATE_STOCKROOM_SUCCESS),
-    tap(({ payload }) => {
-      this._openNewNotificationSuccess(
-        'We successfully updated your stockroom details!'
-      );
-    })
-  ), { dispatch: false });
 
   private _openNewNotificationError(message: string): void {
     this._notificationService.blank(

@@ -17,3 +17,13 @@ export const selectStockroomSummaries = createSelector(
   selectStockroomState,
   (state: IStockroomState) => state.stockroomSummaries
 );
+
+export const selectCreateStockroomResponseMessage = createSelector(
+  selectStockroomState,
+  (state: IStockroomState) => state.createStockroomResponseMessage
+);
+
+export const selectUpdateStockroomResponseMessage = createSelector(
+  selectStockroomState,
+  (state: IStockroomState) => state.updateStockoormResponseMessage
+);

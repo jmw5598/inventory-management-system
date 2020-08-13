@@ -1,7 +1,16 @@
 import { createReducer, on } from '@ngrx/store';
-import { Stockroom } from '@inv/core';
-import { createStockroomSuccess, deleteStockroomSuccess, getStockroomsSuccess, setSelectedStockroom, updateStockroomSuccess, getStockroomSummariesSuccess } from '../actions/stockroom.actions'; 
+import { Stockroom, ResponseMessage, ResponseStatus } from '@inv/core';
 import { initialStockroomState } from '../state/stockroom.state';
+import { 
+  createStockroomSuccess, 
+  deleteStockroomSuccess, 
+  getStockroomsSuccess, 
+  setSelectedStockroom, 
+  updateStockroomSuccess, 
+  getStockroomSummariesSuccess,
+  setCreateStockroomResponseMessage,
+  setUpdateStockroomResponseMessage
+} from '../actions/stockroom.actions'; 
 
 const _stockroomReducer = createReducer(
   initialStockroomState,
@@ -18,21 +27,31 @@ const _stockroomReducer = createReducer(
     }
   }),
   on(createStockroomSuccess, (state, { payload }) => {
+    const message: ResponseMessage = {
+      status: ResponseStatus.SUCCESS,
+      message: `We successfully created your stockroom!`
+    } as ResponseMessage;
     const stockrooms: Stockroom[] = state.stockrooms.map(s => s);
     stockrooms.push(payload);
     return {
       ...state,
       stockrooms: stockrooms,
-      selectedStockroom: payload
+      selectedStockroom: payload,
+      createStockroomResponseMessage: message
     }
   }),
   on(updateStockroomSuccess, (state, { payload }) => {
+    const message: ResponseMessage = { 
+      status: ResponseStatus.SUCCESS, 
+      message: `We succesfully update your stockroom details!` 
+    } as ResponseMessage;
     const stockrooms: Stockroom[] = state.stockrooms.filter(s => s.id !== payload.id);
     stockrooms.push(payload);
     return {
       ...state,
       stockrooms: stockrooms,
-      selectedStockroom: state.selectedStockroom
+      selectedStockroom: state.selectedStockroom,
+      updateStockoormResponseMessage: message
     };
   }),
   on(deleteStockroomSuccess, (state, { payload }) => {
@@ -49,6 +68,18 @@ const _stockroomReducer = createReducer(
       selectedStockroom: stockroom
     }
   }),
+  on(setCreateStockroomResponseMessage, (state, { payload }) => {
+    return {
+      ...state,
+      createStockroomResponseMessage: payload
+    }
+  }),
+  on(setUpdateStockroomResponseMessage, (state, { payload }) => {
+    return {
+      ...state,
+      updateStockoormResponseMessage: payload
+    }
+  })
 );
 
 export function stockroomReducer(state, action) {
