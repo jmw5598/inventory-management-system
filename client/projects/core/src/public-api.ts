@@ -44,6 +44,10 @@ export * from './lib/models/paging/page-request.model';
 export * from './lib/models/paging/sort-direction.enum';
 export * from './lib/models/paging/sort.model';
 export * from './lib/models/paging/sortable.interface';
+export * from './lib/models/password-request-reset.model';
+export * from './lib/models/password-reset.model';
+export * from './lib/models/response-message.model';
+export * from './lib/enums/response-status.enum';
 export * from './lib/models/validator-result.model';
 
 // Dtos
