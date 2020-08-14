@@ -7,6 +7,7 @@ import { ManageStockroomsComponent } from './pages/manage-stockrooms/manage-stoc
 import { StockroomDetailsComponent } from './pages/stockroom-details/stockroom-details.component';
 import { StockroomDetailsGuard } from '../../core/guards/stockroom-details.guard';
 import { StockroomSummariesGuard } from '../../core/guards/stockroom-summaries.guard';
+import { StockItemsByStockroomGuard } from '../../core/guards/stock-items-by-stockroom.guard';
 
 const routes: Routes = [
   {
@@ -22,7 +23,10 @@ const routes: Routes = [
   },
   {
     path: ':id',
-    canActivate: [StockroomDetailsGuard],
+    canActivate: [
+      StockItemsByStockroomGuard,
+      StockroomDetailsGuard
+    ],
     data: { breadcrumb: '' },
     children: [
       {
