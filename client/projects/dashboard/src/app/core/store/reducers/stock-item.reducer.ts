@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
-import { searchStockItemSuccess } from '../actions/stock-item.actions';
+import { searchStockItemSuccess, updateStockItemSuccess } from '../actions/stock-item.actions';
 import { initialStockItemState } from '../state/stock-item.state';
-import { Page, StockItem } from '@inv/core';
+import { Page, StockItem, ResponseMessage, ResponseStatus } from '@inv/core';
 
 const _stockItemReducer = createReducer(
   initialStockItemState,
@@ -9,6 +9,12 @@ const _stockItemReducer = createReducer(
     return {
       ...state,
       searchResult: payload
+    }
+  }),
+  on(updateStockItemSuccess, (state, { payload }) => {
+    return {
+      ...state,
+      selectedStockItem: payload
     }
   })
 );
