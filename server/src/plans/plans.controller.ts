@@ -1,12 +1,10 @@
-import { Controller, Get, UseGuards } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { Plan } from './entities/plan.entity';
-import { JwtAuthenticationGuard } from 'src/authentication/guards/jwt-authentication.guard';
 
 @Controller('plans')
-@UseGuards(JwtAuthenticationGuard)
 export class PlansController {
   constructor(
     @InjectRepository(Plan)
