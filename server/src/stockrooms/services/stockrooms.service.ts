@@ -96,7 +96,7 @@ export class StockroomsService {
       locations = createLocationDto.map(location => {
         return this._locationRepository.create({
           description: location.description,
-          stockroomId: stockroomId
+          stockroom: { id: stockroomId }
         })
       })
     }
@@ -128,7 +128,7 @@ export class StockroomsService {
       return this._locationRepository.create({
         id: (e.id || null),
         description: e.description,
-        stockroomId: stockroomId
+        stockroom: { id: stockroomId }
       }) 
     });
     return this._locationRepository.save(locationsToSave);
