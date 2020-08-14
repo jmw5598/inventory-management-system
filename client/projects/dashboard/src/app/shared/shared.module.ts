@@ -3,9 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgZorroModule } from '../nz-modules.module';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    SpinnerComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -16,6 +19,7 @@ import { NgZorroModule } from '../nz-modules.module';
     FormsModule,
     NgZorroModule,
     ReactiveFormsModule,
+    SpinnerComponent,
   ]
 })
 export class SharedModule { }
