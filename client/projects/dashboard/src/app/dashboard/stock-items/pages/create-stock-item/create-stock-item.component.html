@@ -1,11 +1,25 @@
 <nz-page-header nzBackIcon>
-  <nz-page-header-title>Edit Stock Item</nz-page-header-title>
+  <nz-page-header-title>Create Stock Item</nz-page-header-title>
   <nz-page-header-subtitle></nz-page-header-subtitle>
 </nz-page-header>
 <nz-layout>
   <nz-row>
-    <nz-card nz-col [nzSpan]="8" nzXs="24" nzSm="24" nzMd="16" nzLg="12" nzXl="8">
+    <nz-card nz-col [nzSpan]="8" nzXs="24" nzSm="24" nzMd="16" nzLg="24" nzXl="24">
+      <nz-form-item>
+        <nz-select
+            nzShowSearch
+            nzServerSearch="true"
+            nzPlaceHolder="input search text"
+            [(ngModel)]="searchTerm"
+            [nzShowArrow]="false"
+            [nzFilterOption]="nzFilterOption"
+            (nzOnSearch)="onSearchStockItemsKeyup($event)"
+            (ngModelChange)="onSearchOptionSelected($event)">
+          <nz-option *ngFor="let o of searchResult?.elements" [nzLabel]="o.title" [nzValue]="o"> </nz-option>
+        </nz-select>
+      </nz-form-item>
       <inv-stock-item-form
+          [productItemValue]="productItem ? productItem : null"
           (onSaveStockItem)="onCreateStockItem($event)">
       </inv-stock-item-form>
     </nz-card>
