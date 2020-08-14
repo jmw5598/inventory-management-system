@@ -35,7 +35,7 @@ export class StockroomDetailsGuard implements CanActivate {
           this._store.dispatch(getStockroomById({ id: stockroomId }))
         }
       }),
-      filter((stockroom: Stockroom) => stockroom.id === stockroomId),
+      filter((stockroom: Stockroom) => !!stockroom),
       take(1),
     );
   }

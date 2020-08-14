@@ -34,7 +34,7 @@ export class ProductItemDetailsGuard implements CanActivate {
           this._store.dispatch(getProductItemById({ id: productItemId }));
         }
       }),
-      filter((product: ProductItem) => product.id === productItemId),
+      filter((product: ProductItem) => !!product),
       take(1),
     );
   }
