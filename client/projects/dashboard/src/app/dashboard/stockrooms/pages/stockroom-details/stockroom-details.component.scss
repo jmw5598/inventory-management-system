@@ -1,0 +1,12 @@
+.stock-items {
+  border: 1px solid #F0F0F0;
+  .stock-items-filter {
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+
+    div {
+      margin-right: 0.5rem;
+    }
+  }
+}

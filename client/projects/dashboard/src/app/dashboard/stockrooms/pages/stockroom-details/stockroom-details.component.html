@@ -1,5 +1,33 @@
 <nz-page-header nzBackIcon>
   <pre></pre>
-  <nz-page-header-title>{{ (selectedStockroom$ | async)?.name }} Details</nz-page-header-title>
+  <nz-page-header-title>Stockroom Details : {{ (selectedStockroom$ | async)?.name }}</nz-page-header-title>
   <nz-page-header-subtitle></nz-page-header-subtitle>
 </nz-page-header>
+<nz-layout class="stock-items">
+  <div class="stock-items-filter">
+    <div class="search-items">
+      <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+        <input type="text" nz-input placeholder="Search stock items" [(ngModel)]="searchTerm" (keyup)="onSearchStockItemsKeyup($event)" />
+      </nz-input-group>
+      <ng-template #suffixIconButton>
+        <button nz-button nzSearch (click)="onFilterStockItems()"><i nz-icon nzType="search"></i></button>
+      </ng-template>
+    </div>
+    <div>
+      <a class="btn-reload" nz-button (click)="onResetStockItemSearch()">
+        <i nz-icon nzType="reload" nzTheme="outline"></i>
+      </a>
+    </div>
+    <div>
+      <a class="btn-new-stock-item" [routerLink]="['../create']" nz-button nzType="primary">
+        <i nz-icon nzType="plus" nzTheme="outline"></i>
+        Create Stock Item 
+      </a>
+    </div>
+  </div>
+  <inv-stock-items-table 
+      [page]="currentPage"
+      (onDeleteStockItem)="onDeleteStockItem($event)"
+      (onPageChange)="onPageChange($event)">
+  </inv-stock-items-table>
+</nz-layout>
