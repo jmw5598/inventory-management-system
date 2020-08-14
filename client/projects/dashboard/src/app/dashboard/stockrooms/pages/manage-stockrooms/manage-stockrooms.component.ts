@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { StockroomSummary } from '@inv/core';
 import { IAppState } from '../../../../core/store/state/app.state';
 import { selectStockroomSummaries } from '../../../../core/store/selectors/stockroom.selector';
-import { deleteStockroom, getStockroomSummaries } from 'projects/dashboard/src/app/core/store/actions/stockroom.actions';
+import { deleteStockroom, getStockroomSummaries, getStockroomSummariesSuccess } from 'projects/dashboard/src/app/core/store/actions/stockroom.actions';
 
 class StockroomSummaryTotals {
   public stockroomCount: number = 0;
@@ -20,7 +20,7 @@ class StockroomSummaryTotals {
   templateUrl: './manage-stockrooms.component.html',
   styleUrls: ['./manage-stockrooms.component.scss']
 })
-export class ManageStockroomsComponent implements OnInit {
+export class ManageStockroomsComponent implements OnInit, OnDestroy {
   public stockroomSummaries$: Observable<StockroomSummary[]>;
   public stockroomSummaryTotals: StockroomSummaryTotals;
 
@@ -52,5 +52,9 @@ export class ManageStockroomsComponent implements OnInit {
         return total;
       }, new StockroomSummaryTotals());
     });
+  }
+
+  ngOnDestroy(): void {
+    this._store.dispatch(getStockroomSummariesSuccess(null));
   }
 }

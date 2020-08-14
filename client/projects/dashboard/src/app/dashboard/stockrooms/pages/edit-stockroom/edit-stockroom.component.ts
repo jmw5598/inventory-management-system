@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
@@ -6,14 +6,14 @@ import { Store } from '@ngrx/store';
 import { Stockroom, ResponseMessage } from '@inv/core';
 import { IAppState } from '../../../../core/store/state/app.state';
 import { selectSelectedStockroom, selectUpdateStockroomResponseMessage } from '../../../../core/store/selectors/stockroom.selector';
-import { updateStockroom, setUpdateStockroomResponseMessage } from '../../../../core/store/actions/stockroom.actions';
+import { updateStockroom, setUpdateStockroomResponseMessage, setSelectedStockroom } from '../../../../core/store/actions/stockroom.actions';
 
 @Component({
   selector: 'inv-edit-stockroom',
   templateUrl: './edit-stockroom.component.html',
   styleUrls: ['./edit-stockroom.component.scss']
 })
-export class EditStockroomComponent implements OnInit {
+export class EditStockroomComponent implements OnInit, OnDestroy {
   public selectedStockroom$: Observable<Stockroom>;
   public updateStockroomResponseMessage$: Observable<ResponseMessage>;
   
@@ -33,5 +33,9 @@ export class EditStockroomComponent implements OnInit {
 
   public onUpdateStockroom(stockroom: Stockroom): void {
     this._store.dispatch(updateStockroom({id: stockroom.id, stockroom: stockroom }));
+  }
+
+  ngOnDestroy(): void {
+    this._store.dispatch(setSelectedStockroom(null));
   }
 }
