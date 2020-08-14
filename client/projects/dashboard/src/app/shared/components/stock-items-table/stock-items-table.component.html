@@ -1,0 +1,45 @@
+<nz-table 
+    nzBordered 
+    nzServerRender="true"
+    [nzFrontPagination]="false"
+    [nzLoading]="false"
+    [nzData]="page?.elements"
+    [nzTotal]="page?.totalElements"
+    [nzPageSize]="page?.current.size"
+    [nzPageIndex]="page?.current.page"
+    (nzPageIndexChange)="pageChange($event)">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th nzWidth="30%">Description</th>
+      <th>Make</th>
+      <th>Model</th>
+      <th>Sku</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of page?.elements" class="editable-row">
+      <td>{{ product?.title }}</td>
+      <td>{{ product?.description }}</td>
+      <td>{{ product?.make }}</td>
+      <td>{{ product?.model }}</td>
+      <td>{{ product?.sku }}</td>
+      <td>
+        <a nz-typography 
+            nzType="warning" 
+            [routerLink]="['../', product.id, 'edit']">
+          <i nz-icon nzType="edit" nzTheme="outline"></i>
+        </a>
+        <a nz-typography 
+            nzType="danger" 
+            nz-popconfirm 
+            nzPopconfirmTitle="Are you sure you want to delete this item?" 
+            [nzOkText]="'Yes'" [nzCancelText]="'Cancel'" 
+            (nzOnConfirm)="deleteStockItem(product)">
+          <i nz-icon nzType="delete" nzTheme="outline"></i>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
