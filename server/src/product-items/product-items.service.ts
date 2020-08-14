@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm'; 
-import { Repository, Raw } from 'typeorm';
+import { Repository, Raw, IsNull } from 'typeorm';
 import { Page } from '../common/models/page.model';
 
+import { Category } from '../categories/entities/category.entity';
 import { ProductItemNotFoundException } from './exceptions/product-item-not-found.exception';
 import { ProductItem } from './entities/product-item.entity'
 import { IPageable } from '../common/models/pageable.interface';
@@ -20,7 +21,7 @@ export class ProductItemsService {
     const sort: {[key: string]: string} = pageable.getSort().asKeyValue();
     const result = await this._productItemRepository.findAndCount({ 
       relations: ['category'],
-      where: { account: { id: accountId } },
+      where: { account: { id: accountId }, deletedAt: IsNull() },
       order: sort,
       skip: ((pageable.getPageNumber() - 1) * pageable.getPageSize()),
       take: pageable.getPageSize()
@@ -65,13 +66,17 @@ export class ProductItemsService {
   }
 
   public async updateProductItem(accountId: number, productItemId: number, updateProductItemDto: UpdateProductItemDto): Promise<ProductItem> {
-    const productItem: ProductItem = await this._findProductItemByIdWithAccountId(accountId, productItemId);
+    let productItem: ProductItem = await this._findProductItemByIdWithAccountId(accountId, productItemId);
     if (!productItem) throw new ProductItemNotFoundException();
-
-    // TODO Patch dto values into product item
-    // Save product item
-    
-    return null;
+    productItem.title = updateProductItemDto.title
+    productItem.description = updateProductItemDto.description;
+    productItem.sku = updateProductItemDto.sku || null;
+    productItem.brand = updateProductItemDto.sku || null;
+    productItem.model = updateProductItemDto.model || null;
+    productItem.category = updateProductItemDto.category as Category
+    productItem.updatedAt = new Date();
+    this._productItemRepository.save(productItem);
+    return productItem;
   }
 
   public async deleteProductItem(accountId: number, productItemId: number): Promise<ProductItem> {
@@ -85,11 +90,11 @@ export class ProductItemsService {
   private async _generateSearchWhereClause(accountId: number, searchTerm: string): Promise<any> {
     const ilike = Raw(alias => `${alias} ILIKE '%${searchTerm.replace("/\s/g", "%")}%'`)
     return [
-      { title: ilike, account: { id: accountId } },
-      { description: ilike, account: { id: accountId } },
-      { brand: ilike, account: { id: accountId } },
-      { model: ilike, account: { id: accountId } },
-      { sku: ilike, account: { id: accountId } }
+      { title: ilike, account: { id: accountId }, deletedAt: IsNull() },
+      { description: ilike, account: { id: accountId }, deletedAt: IsNull() },
+      { brand: ilike, account: { id: accountId }, deletedAt: IsNull() },
+      { model: ilike, account: { id: accountId }, deletedAt: IsNull() },
+      { sku: ilike, account: { id: accountId }, deletedAt: IsNull() }
     ];
   }
 
@@ -105,7 +110,6 @@ export class ProductItemsService {
   }
 
   private _findProductItemByIdWithAccountId(accountId: number, productItemId: number): Promise<ProductItem> {
-    console.log("finding product item with id: ", productItemId);
     return this._productItemRepository.findOne({
       id: productItemId,
       account: { id: accountId }
