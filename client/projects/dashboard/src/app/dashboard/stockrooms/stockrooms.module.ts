@@ -17,8 +17,8 @@ import { EditStockroomComponent } from './pages/edit-stockroom/edit-stockroom.co
     StockroomsTableComponent,
     CreateStockroomComponent,
     StockroomFormComponent,
-    EditStockroomComponent
-  ],
+    EditStockroomComponent,
+ ],
   imports: [
     CommonModule,
     StockroomsRoutingModule,
