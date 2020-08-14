@@ -12,7 +12,7 @@
     <tr>
       <th>Title</th>
       <th nzWidth="30%">Description</th>
-      <th>Brand</th>
+      <th>Make</th>
       <th>Model</th>
       <th>Sku</th>
       <th>Action</th>
@@ -22,7 +22,7 @@
     <tr *ngFor="let product of page?.elements" class="editable-row">
       <td>{{ product?.title }}</td>
       <td>{{ product?.description }}</td>
-      <td>{{ product?.brand }}</td>
+      <td>{{ product?.make}}</td>
       <td>{{ product?.model }}</td>
       <td>{{ product?.sku }}</td>
       <td>

@@ -57,7 +57,7 @@ export class ProductItemsService {
       title: createProductItemDto.title,
       description: createProductItemDto.description,
       sku: createProductItemDto.sku || null,
-      brand: createProductItemDto.brand || null,
+      make: createProductItemDto.make || null,
       model: createProductItemDto.model || null,
       category: createProductItemDto.category,
       accountId: accountId
@@ -71,7 +71,7 @@ export class ProductItemsService {
     productItem.title = updateProductItemDto.title
     productItem.description = updateProductItemDto.description;
     productItem.sku = updateProductItemDto.sku || null;
-    productItem.brand = updateProductItemDto.sku || null;
+    productItem.make = updateProductItemDto.make || null;
     productItem.model = updateProductItemDto.model || null;
     productItem.category = updateProductItemDto.category as Category
     productItem.updatedAt = new Date();

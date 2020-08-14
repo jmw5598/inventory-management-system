@@ -62,8 +62,9 @@ export class ProductItemsController {
   public async updateProductItem(
       @Request() req, 
       @Param('id') id: number, 
-      updateProductItemDto: UpdateProductItemDto): Promise<ProductItem> {
+      @Body() updateProductItemDto: UpdateProductItemDto): Promise<ProductItem> {
     const accountId: number = req.user.accountId;
+    console.log("Controller ", updateProductItemDto);
     return this._productItemsService.updateProductItem(accountId, id, updateProductItemDto);
   }
 

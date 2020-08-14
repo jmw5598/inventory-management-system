@@ -12,13 +12,13 @@ export class ProductItem extends BaseEntity {
   @Column({ nullable: false })
   public description: string;
 
-  @Column({ nullable: false })
+  @Column({ nullable: true })
   public sku: string;
 
-  @Column({ nullable: false })
-  public brand: string;
+  @Column({ nullable: true })
+  public make: string;
 
-  @Column({ nullable: false })
+  @Column({ nullable: true })
   public model: string;
 
   @ManyToOne(type => Category)

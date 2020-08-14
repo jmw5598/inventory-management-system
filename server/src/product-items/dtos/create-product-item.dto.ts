@@ -9,7 +9,7 @@ export class CreateProductItemDto {
   public description: string;
 
   public sku: string;
-  public brand: string;
+  public make: string;
   public model: string;
 
   @IsNotEmpty()

@@ -27,7 +27,7 @@ export class ProductItemFormComponent implements OnInit {
       title: ['', [Validators.required]],
       description: ['', [Validators.required]],
       sku: [''],
-      brand: [''],
+      make: [''],
       model: [''],
       category: [null, [Validators.required]]
     });
@@ -41,7 +41,6 @@ export class ProductItemFormComponent implements OnInit {
     this.product = product;
     this.form.patchValue(product);
     this.form.get('category').patchValue(product.category);
-    
   }
 
   public onCategoryCompare(category1: Category, category2: Category): boolean {
