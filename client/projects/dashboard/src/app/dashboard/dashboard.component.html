@@ -1,4 +1,4 @@
-<nz-layout>
+<nz-layout [@fadeAnimation]>
   <nz-sider nzCollapsible nzTheme="light" [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
     <div class="logo"></div>
     <ul nz-menu nzTheme="light" nzMode="inline">
@@ -22,13 +22,13 @@
           </ng-container>
         </ul>
       </li>
-      <li nz-submenu nzTitle="Stock Items" nzIcon="tags" [nzOpen]="false">
+      <li nz-submenu nzTitle="Stock Items" nzIcon="group" [nzOpen]="false">
         <ul>
           <li nz-menu-item [nzMatchRouter]="true" [routerLink]="['stock-items', 'create']">Create</li> 
           <li nz-menu-item [nzMatchRouter]="true" [routerLink]="['stock-items', 'manage']">Manage</li>
         </ul>
       </li>
-      <li nz-submenu nzTitle="Listings" nzIcon="group" [nzOpen]="false">
+      <li nz-submenu nzTitle="Listings" nzIcon="tags" [nzOpen]="false">
         <ul>
           <li nz-menu-item>Active</li>
           <li nz-menu-item>Sold</li>
