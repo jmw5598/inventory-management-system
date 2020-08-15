@@ -3,10 +3,10 @@ import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil, debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 
-import { IAppState } from '../../../../core/store/state/app.state';
-import { IPageable, Page, PageRequest, StockItem, ProductItem } from '@inv/core';
-import { searchProductItems } from '../../../../core/store/actions/product-item.actions';
-import { selectProductItemSearchResult } from '../../../../core/store/selectors/product-item-selector';
+import { IAppState } from '@dashboard/core/store/state';
+import { Page, PageRequest, StockItem, ProductItem } from '@inv/core';
+import { searchProductItems } from '@dashboard/core/store/actions';
+import { selectProductItemSearchResult } from '@dashboard/core/store/selectors';
 
 @Component({
   selector: 'inv-create-stock-item',
