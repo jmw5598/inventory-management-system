@@ -19,6 +19,9 @@
       "@inv/core": [
         "dist/core/core",
         "dist/core"
+      ],
+      "@dashboard/*": [
+        "projects/dashboard/src/app/*"
       ]
     }
   },
