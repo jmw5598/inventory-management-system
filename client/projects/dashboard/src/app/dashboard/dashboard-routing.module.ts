@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { DashboardComponent } from './dashboard.component';
-import { StockroomsGuard } from '../core/guards/stockrooms.guard';
+import { StockroomsGuard } from '@dashboard/core/guards';
 
 const routes: Routes = [
   {

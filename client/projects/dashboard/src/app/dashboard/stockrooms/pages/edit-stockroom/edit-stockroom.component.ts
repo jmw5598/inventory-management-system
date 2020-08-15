@@ -4,9 +4,9 @@ import { tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
 import { Stockroom, ResponseMessage } from '@inv/core';
-import { IAppState } from '../../../../core/store/state/app.state';
-import { selectSelectedStockroom, selectUpdateStockroomResponseMessage } from '../../../../core/store/selectors/stockroom.selector';
-import { updateStockroom, setUpdateStockroomResponseMessage, setSelectedStockroom } from '../../../../core/store/actions/stockroom.actions';
+import { IAppState } from '@dashboard/core/store/state';
+import { selectSelectedStockroom, selectUpdateStockroomResponseMessage } from '@dashboard/core/store/selectors';
+import { updateStockroom, setUpdateStockroomResponseMessage, setSelectedStockroom } from '@dashboard/core/store/actions';
 
 @Component({
   selector: 'inv-edit-stockroom',

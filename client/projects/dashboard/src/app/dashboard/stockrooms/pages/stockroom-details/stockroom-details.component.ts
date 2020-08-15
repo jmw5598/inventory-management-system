@@ -4,10 +4,9 @@ import { Observable, Subject } from 'rxjs';
 import { takeUntil, debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 
 import { Page, Stockroom, StockItem, IPageable, PageRequest } from '@inv/core';
-import { IAppState } from '../../../../core/store/state/app.state';
-import { selectSelectedStockroom } from '../../../../core/store/selectors/stockroom.selector';
-import { selectStockItemSearchResult } from '../../../../core/store/selectors/stock-item.selector';
-import { searchStockItems } from 'projects/dashboard/src/app/core/store/actions/stock-item.actions';
+import { IAppState } from '@dashboard/core/store/state';
+import { selectSelectedStockroom, selectStockItemSearchResult } from '@dashboard/core/store/selectors';
+import { searchStockItems } from '@dashboard/core/store/actions';
 
 @Component({
   selector: 'inv-stockroom-details',

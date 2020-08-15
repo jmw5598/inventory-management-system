@@ -5,9 +5,9 @@ import { Store } from '@ngrx/store';
 
 import { StockroomFormComponent } from '../../components/stockroom-form/stockroom-form.component';
 import { Stockroom, ResponseMessage } from '@inv/core';
-import { IAppState } from '../../../../core/store/state/app.state';
-import { createStockroom, setCreateStockroomResponseMessage } from '../../../../core/store/actions/stockroom.actions'; 
-import { selectSelectedStockroom, selectCreateStockroomResponseMessage } from '../../../../core/store/selectors/stockroom.selector';
+import { IAppState } from '@dashboard/core/store/state';
+import { createStockroom, setCreateStockroomResponseMessage } from '@dashboard/core/store/actions'; 
+import { selectSelectedStockroom, selectCreateStockroomResponseMessage } from '@dashboard/core/store/selectors';
 
 @Component({
   selector: 'inv-create-stockroom',

@@ -4,9 +4,9 @@ import { tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
 import { StockroomSummary } from '@inv/core';
-import { IAppState } from '../../../../core/store/state/app.state';
-import { selectStockroomSummaries } from '../../../../core/store/selectors/stockroom.selector';
-import { deleteStockroom, getStockroomSummaries, getStockroomSummariesSuccess } from 'projects/dashboard/src/app/core/store/actions/stockroom.actions';
+import { IAppState } from '@dashboard/core/store/state';
+import { selectStockroomSummaries } from '@dashboard/core/store/selectors';
+import { deleteStockroom, getStockroomSummaries, getStockroomSummariesSuccess } from '@dashboard/core/store/actions';
 
 class StockroomSummaryTotals {
   public stockroomCount: number = 0;

@@ -5,9 +5,10 @@ import { CreateStockroomComponent } from './pages/create-stockroom/create-stockr
 import { EditStockroomComponent } from './pages/edit-stockroom/edit-stockroom.component';
 import { ManageStockroomsComponent } from './pages/manage-stockrooms/manage-stockrooms.component';
 import { StockroomDetailsComponent } from './pages/stockroom-details/stockroom-details.component';
-import { StockroomDetailsGuard } from '../../core/guards/stockroom-details.guard';
-import { StockroomSummariesGuard } from '../../core/guards/stockroom-summaries.guard';
-import { StockItemsByStockroomGuard } from '../../core/guards/stock-items-by-stockroom.guard';
+import { 
+  StockroomDetailsGuard, 
+  StockroomSummariesGuard, 
+  StockItemsByStockroomGuard } from '@dashboard/core/guards';
 
 const routes: Routes = [
   {

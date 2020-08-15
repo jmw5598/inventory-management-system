@@ -2,12 +2,10 @@ import { Component, OnInit, ComponentFactoryResolver } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { Stockroom } from '@inv/core';
-import { IAppState } from '../core/store/state/app.state';
-import { selectAuthenticatedUser } from '../core/store/selectors/authentication.selector';
-import { selectCurrentStockrooms } from '../core/store/selectors/stockroom.selector';
-import { fadeAnimation } from '../shared/animations/fade-in-out.animation';
-import { AuthenticatedUser } from 'projects/core/src/public-api';
+import { AuthenticatedUser, Stockroom } from '@inv/core';
+import { IAppState } from '@dashboard/core/store/state';
+import { selectAuthenticatedUser, selectCurrentStockrooms } from '@dashboard/core/store/selectors';
+import { fadeAnimation } from '@dashboard/shared/animations';
 
 @Component({
   selector: 'inv-dashboard',
