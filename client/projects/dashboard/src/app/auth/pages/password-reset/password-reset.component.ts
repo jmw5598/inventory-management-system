@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { take, tap, filter } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
+
 import { MatchValidators, PasswordReset, ResponseMessage } from '@inv/core';
-import { IAppState } from '../../../core/store/state/app.state'
-import { fadeAnimation } from '../../../shared/animations/fade-in-out.animation';
-import { passwordReset, passwordResetResult } from '../../../core/store/actions/account.actions';
-import { selectPasswordResetResult } from '../../../core/store/selectors/account.selector';
+import { IAppState } from '@dashboard/core/store/state'
+import { fadeAnimation } from '@dashboard/shared/animations';
+import { passwordReset, passwordResetResult } from '@dashboard/core/store/actions';
+import { selectPasswordResetResult } from '@dashboard/core/store/selectors';
 
 @Component({
   selector: 'inv-password-reset',

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { fadeAnimation } from '../shared/animations/fade-in-out.animation';
+import { fadeAnimation } from '@dashboard/shared/animations';
 
 @Component({
   selector: 'inv-auth',

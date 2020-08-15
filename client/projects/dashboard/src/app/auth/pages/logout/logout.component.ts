@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { IAppState } from '../../../core/store/state/app.state';
-import { logoutUser } from '../../../core/store/actions/authentication.actions';
-import { fadeAnimation } from '../../../shared/animations/fade-in-out.animation';
+import { IAppState } from '@dashboard/core/store/state';
+import { logoutUser } from '@dashboard/core/store/actions';
+import { fadeAnimation } from '@dashboard/shared/animations';
 
 @Component({
   selector: 'inv-logout',

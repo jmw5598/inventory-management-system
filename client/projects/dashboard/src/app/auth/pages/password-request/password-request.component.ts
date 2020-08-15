@@ -1,13 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter, map, tap, distinctUntilChanged } from 'rxjs/operators';
+
 import { PasswordRequestReset, ResponseMessage } from '@inv/core';
-import { Store } from '@ngrx/store';
-import { passwordRequestReset, passwordRequestResetResult } from '../../../core/store/actions/account.actions';
-import { IAppState } from '../../../core/store/state/app.state'
-import { fadeAnimation } from '../../../shared/animations/fade-in-out.animation';
-import { selectPasswordRequestResult } from '../../../core/store/selectors/account.selector';
+import { passwordRequestReset, passwordRequestResetResult } from '@dashboard/core/store/actions';
+import { IAppState } from '@dashboard/core/store/state'
+import { fadeAnimation } from '@dashboard/shared/animations';
+import { selectPasswordRequestResult } from '@dashboard/core/store/selectors';
 
 @Component({
   selector: 'inv-password-request',

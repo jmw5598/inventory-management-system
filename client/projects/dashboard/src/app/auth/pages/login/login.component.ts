@@ -5,12 +5,11 @@ import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { IAppState } from '../../../core/store/state/app.state';
-import { IAuthenticationState } from '../../../core/store/state/authentication.state';
-import { loginUser } from '../../../core/store/actions/authentication.actions';
-import { selectAuthenticationState } from '../../../core/store/selectors/authentication.selector';
 import { AuthenticationService, AuthenticatedStatus, UserCredentials } from '@inv/core';
-import { fadeAnimation } from '../../../shared/animations/fade-in-out.animation';
+import { IAppState, IAuthenticationState } from '@dashboard/core/store/state';
+import { loginUser } from '@dashboard/core/store/actions';
+import { selectAuthenticationState } from '@dashboard/core/store/selectors';
+import { fadeAnimation } from '@dashboard/shared/animations';
 
 @Component({
   selector: 'inv-login',

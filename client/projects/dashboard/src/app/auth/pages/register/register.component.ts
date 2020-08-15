@@ -1,21 +1,20 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
 
 import { buildRegistrationUserFormGroup } from '../../components/registration-user-form/registration-user-form.builder';
 import { buildRegistrationProfileFormGroup } from '../../components/registration-profile-form/registration-profile-form.builder';
 import { buildRegistrationAccountFormGroup } from '../../components/registration-account-form/registration-account-form.builder';
 
 import { AccountValidators, Plan, Registration, RegistrationResult } from '@inv/core';
-import { registerNewAccount, registerNewAccountResult } from '../../../core/store/actions/account.actions';
-import { IAppState } from '../../../core/store/state/app.state';
-import { fadeAnimation } from '../../../shared/animations/fade-in-out.animation';
+import { registerNewAccount, registerNewAccountResult } from '@dashboard/core/store/actions';
+import { IAppState } from '@dashboard/core/store/state';
+import { fadeAnimation } from '@dashboard/shared/animations';
 import { RegistrationStep } from './registration-step.enum';
-import { selectRegistrationResult } from '../../../core/store/selectors/account.selector';
-import { selectPlans } from '../../../core/store/selectors/plan.selector';
+import { selectPlans, selectRegistrationResult } from '@dashboard/core/store/selectors';
 
 @Component({
   selector: 'inv-register',
