@@ -38,16 +38,27 @@
   </nz-sider>
   <nz-layout class="layout-main-content">
     <nz-header>
-      <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="isCollapsed = !isCollapsed"></i>
-      <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu" nzPlacement="bottomRight">
-        <nz-avatar nzText="U"></nz-avatar>
-      </a>
-      <nz-dropdown-menu #menu="nzDropdownMenu">
-        <ul nz-menu style="margin-top: 1rem;">
-          <li nz-menu-item [routerLink]="['/dashboard', 'account']">Account Details</li>
-          <li nz-menu-item [routerLink]="['/auth', 'logout']">Logout</li>
-        </ul>
-      </nz-dropdown-menu>
+      <nz-row>
+        <nz-col nzSpan="12" class="header-left-content">
+          <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="isCollapsed = !isCollapsed"></i>
+        </nz-col>
+        <nz-col nzSpan="12" class="header-right-content">
+          <div class="notifications-dropdown">
+
+          </div>
+          <div class="user-dropdown">
+            <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu" nzPlacement="bottomRight">
+              <nz-avatar [nzText]="getUserInitials(authenticatedUser$ | async)"></nz-avatar>
+            </a>
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+              <ul nz-menu style="margin-top: 1rem;">
+                <li nz-menu-item [routerLink]="['/dashboard', 'account']">Account Details</li>
+                <li nz-menu-item [routerLink]="['/auth', 'logout']">Logout</li>
+              </ul>
+            </nz-dropdown-menu>
+          </div>
+        </nz-col>
+      </nz-row>
     </nz-header>
     <nz-content>
       <nz-breadcrumb [nzAutoGenerate]="true" [nzRouteLabel]="'breadcrumb'">
