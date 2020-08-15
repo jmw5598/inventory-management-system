@@ -5,10 +5,9 @@ import { Store } from '@ngrx/store';
 
 import { ProductItemFormComponent } from '../../components/product-item-form/product-item-form.component';
 import { ProductItem, Category, ResponseMessage } from '@inv/core';
-import { IAppState } from '../../../../core/store/state/app.state';
-import { createProductItem, setCreateProductItemResponseMessage } from '../../../../core/store/actions/product-item.actions';
-import { selectCreateProductItemResponseMessage } from '../../../../core/store/selectors/product-item-selector'
-import { selectCategories } from '../../../../core/store/selectors/category.selector';
+import { IAppState } from '@dashboard/core/store/state';
+import { createProductItem, setCreateProductItemResponseMessage } from '@dashboard/core/store/actions';
+import { selectCreateProductItemResponseMessage, selectCategories } from '@dashboard/core/store/selectors'
 
 @Component({
   selector: 'inv-create-product-item',

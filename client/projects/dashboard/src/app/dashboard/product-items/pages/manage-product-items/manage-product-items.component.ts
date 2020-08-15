@@ -4,10 +4,9 @@ import { Subject } from 'rxjs';
 import { tap, takeUntil, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 import { ProductItem, Page, IPageable, PageRequest } from '@inv/core';
-import { IAppState } from '../../../../core/store/state/app.state';
-import { selectProductItemSearchResult } from '../../../../core/store/selectors/product-item-selector';
-import { searchProductItems, deleteProductItem } from '../../../../core/store/actions/product-item.actions';
-
+import { IAppState } from '@dashboard/core/store/state';
+import { selectProductItemSearchResult } from '@dashboard/core/store/selectors';
+import { searchProductItems, deleteProductItem } from '@dashboard/core/store/actions';
 
 @Component({
   selector: 'inv-manage-product-items',

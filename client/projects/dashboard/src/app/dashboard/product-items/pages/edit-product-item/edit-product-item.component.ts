@@ -3,11 +3,13 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
-import { IAppState } from '../../../../core/store/state/app.state';
+import { IAppState } from '@dashboard/core/store/state';
 import { Category, ProductItem, ResponseMessage } from '@inv/core';
-import { selectSelectedProductItem, selectUpdateProductItemResponseMessage } from '../../../../core/store/selectors/product-item-selector';
-import { selectCategories } from 'projects/dashboard/src/app/core/store/selectors/category.selector';
-import { updateProductItem, setUpdateProductItemResponseMessage } from 'projects/dashboard/src/app/core/store/actions/product-item.actions';
+import { updateProductItem, setUpdateProductItemResponseMessage } from '@dashboard/core/store/actions';
+import { 
+  selectCategories, 
+  selectSelectedProductItem, 
+  selectUpdateProductItemResponseMessage } from '@dashboard/core/store/selectors';
 
 @Component({
   selector: 'inv-edit-product-item',
