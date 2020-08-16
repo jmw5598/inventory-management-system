@@ -1,8 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [
+import { AccountDetailsComponent } from './pages/account-details/account-details.component';
 
+const routes: Routes = [
+  {
+    path: 'details',
+    component: AccountDetailsComponent
+  }
 ];
 
 @NgModule({

@@ -34,6 +34,12 @@
           <li nz-menu-item>Sold</li>
         </ul>
       </li>
+      <li nz-submenu nzTitle="Account" nzIcon="user" [nzOpen]="false">
+        <ul>
+          <li nz-menu-item [nzMatchRouter]="true" [routerLink]="['/dashboard', 'account', 'details']">Account Details</li>
+          <li nz-menu-item [routerLink]="['/auth', 'logout']">Logout</li>
+        </ul>
+      </li>
     </ul>
   </nz-sider>
   <nz-layout class="layout-main-content">
@@ -52,7 +58,7 @@
             </a>
             <nz-dropdown-menu #menu="nzDropdownMenu">
               <ul nz-menu style="margin-top: 1rem;">
-                <li nz-menu-item [routerLink]="['/dashboard', 'account']">Account Details</li>
+                <li nz-menu-item [routerLink]="['/dashboard', 'account', 'details']">Account Details</li>
                 <li nz-menu-item [routerLink]="['/auth', 'logout']">Logout</li>
               </ul>
             </nz-dropdown-menu>
