@@ -12,10 +12,16 @@ import {
 const _accountReducer = createReducer(
   initialAccountState,
   on(getAccountDetailsSuccess, (state, { payload }) => {
-    return {}
+    return {
+      ...state,
+      details: payload
+    }
   }),
   on(getAccountProfileSuccess, (state, { payload }) => {
-    return {}
+    return {
+      ...state,
+      profile: payload
+    }
   }),
   on(registerNewAccountResult, (state, { payload }) => {
     return {
