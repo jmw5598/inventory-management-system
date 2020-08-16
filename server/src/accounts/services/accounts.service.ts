@@ -36,6 +36,19 @@ export class AccountsService {
     private readonly _emailerService: EmailerService 
   ) {}
 
+  public async getAccountDetails(accountId: number): Promise<Partial<Account>> {
+    const account: Account = await this._accountRepository.findOne(accountId);
+    const { comfirmationToken, ...result } = account;
+    return result;
+  }
+
+  public async getAccountProfile(accountId: number): Promise<Profile> {
+    return this._profileRepository.findOne({
+      relations: ['address'],
+      where: { account: { id: accountId } }
+    });
+  }
+
   public async registerNewAccount(registrationDto: RegistrationDto): Promise<any> {    
     const account: Account = await this._createNewAccount(registrationDto.account);
     const user: User = await this._createNewUser(registrationDto.user, account);

@@ -7,6 +7,7 @@ import { PasswordRequestResetDto } from './dtos/password-request-reset.dto';
 import { ResponseMessage } from '../common/models/response-message.model';
 import { ResponseStatus } from '../common/enums/response-status.enum';
 import { ConfigService } from '@nestjs/config';
+import { JwtAuthenticationGuard } from 'src/authentication/guards/jwt-authentication.guard';
 
 @Controller('accounts')
 export class AccountsController {
@@ -14,6 +15,20 @@ export class AccountsController {
     private readonly _accountsService: AccountsService,
     private readonly _configService: ConfigService
   ) {}
+
+  @Get('details')
+  @UseGuards(JwtAuthenticationGuard)
+  public async getAccountDetails(@Request() req): Promise<any> {
+    const accountId: number = +req.user.accountId;  
+    return this._accountsService.getAccountDetails(accountId);
+  }
+
+  @Get('profile')
+  @UseGuards(JwtAuthenticationGuard)
+  public async getAccountProfile(@Request() req): Promise<any> {
+    const accountId: number = +req.user.accountId;
+    return this._accountsService.getAccountProfile(accountId);
+  }
 
   @Post('register')
   public async registerAccount(@Body() registrationDto: RegistrationDto): Promise<RegistrationResult> {
