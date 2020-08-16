@@ -6,6 +6,7 @@ import { switchMap, catchError } from 'rxjs/operators';
 import { InvCoreConfig, INV_CORE_CONFIG } from '../inv-core.config';
 import { AbstractCrudService } from './abstract-crud.service'; 
 import { Account } from '../models/account.model';
+import { Profile } from '../models/profile.model';
 import { PasswordRequestReset } from '../models/password-request-reset.model';
 import { PasswordReset } from '../models/password-reset.model';
 import { RegistrationResult } from '../dtos/registration-result.dto';
@@ -20,6 +21,14 @@ export class AccountsService extends AbstractCrudService<Account, number> {
     protected _http: HttpClient
   ) { 
     super(_http, `${_config.api.baseUrl}/accounts`);
+  }
+
+  public getAccountDetails(): Observable<Account> {
+    return this._http.get<Account>(`${this._base}/details`);
+  }
+
+  public getAccountProfile(): Observable<Profile> {
+    return this._http.get<Profile>(`${this._base}/profile`);
   }
 
   public registerNewAccount(
