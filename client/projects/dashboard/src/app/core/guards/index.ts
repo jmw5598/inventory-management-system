@@ -1,3 +1,5 @@
+export * from './account-details.guard';
+export * from './account-profile.guard';
 export * from './authentication.guard';
 export * from './categories.guard';
 export * from './plans.guard';
