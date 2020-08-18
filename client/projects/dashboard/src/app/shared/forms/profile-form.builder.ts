@@ -1,8 +1,8 @@
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AccountValidators } from '@inv/core';
-import { buildRegistrationAddressFormGroup } from '../registration-address-form/registration-address-form.builder';
+import { buildAddressFormGroup } from './address-form.builder';
 
-export const buildRegistrationProfileFormGroup = (
+export const buildProfileFormGroup = (
     formBuilder: FormBuilder,
     accountValidators: AccountValidators): FormGroup => {
   return formBuilder.group({
@@ -22,7 +22,7 @@ export const buildRegistrationProfileFormGroup = (
       [Validators.required, Validators.email], 
       [accountValidators.validateEmail()]
     ],
-    address: buildRegistrationAddressFormGroup(
+    address: buildAddressFormGroup(
       formBuilder,
       accountValidators
     )

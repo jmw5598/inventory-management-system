@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, ControlContainer } from '@angular/forms';
-import { State, STATES } from './states.data';
+import { State, STATES } from '@dashboard/shared/data';
 
 @Component({
   selector: 'inv-registration-address-form',

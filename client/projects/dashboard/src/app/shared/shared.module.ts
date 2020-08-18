@@ -10,7 +10,7 @@ import { StockItemsTableComponent } from './components/stock-items-table/stock-i
 @NgModule({
   declarations: [
     SpinnerComponent,
-    StockItemsTableComponent
+    StockItemsTableComponent,
   ],
   imports: [
     CommonModule,
@@ -24,7 +24,7 @@ import { StockItemsTableComponent } from './components/stock-items-table/stock-i
     NgZorroModule,
     ReactiveFormsModule,
     SpinnerComponent,
-    StockItemsTableComponent
+    StockItemsTableComponent,
   ]
 })
 export class SharedModule { }

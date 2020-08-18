@@ -5,9 +5,7 @@ import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { buildRegistrationUserFormGroup } from '../../components/registration-user-form/registration-user-form.builder';
-import { buildRegistrationProfileFormGroup } from '../../components/registration-profile-form/registration-profile-form.builder';
-import { buildRegistrationAccountFormGroup } from '../../components/registration-account-form/registration-account-form.builder';
+import { buildUserFormGroup, buildProfileFormGroup, buildAccountFormGroup } from '@dashboard/shared/forms';
 
 import { AccountValidators, Plan, Registration, RegistrationResult } from '@inv/core';
 import { registerNewAccount, registerNewAccountResult } from '@dashboard/core/store/actions';
@@ -40,15 +38,15 @@ export class RegisterComponent implements OnInit {
   ) {
     this._subscriptionSubject$ = new Subject<void>();
     this.form = this._formBuilder.group({
-      user: buildRegistrationUserFormGroup(
+      user: buildUserFormGroup(
         this._formBuilder,
         this._accountValidators
       ),
-      profile: buildRegistrationProfileFormGroup(
+      profile: buildProfileFormGroup(
         this._formBuilder,
         this._accountValidators
       ),
-      account: buildRegistrationAccountFormGroup(
+      account: buildAccountFormGroup(
         this._formBuilder,
         this._accountValidators
       )
