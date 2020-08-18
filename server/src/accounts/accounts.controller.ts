@@ -1,4 +1,4 @@
-import { Controller, UseGuards, Get, Post, Request, Query, Redirect, Body, Head, Response, HttpCode, NotFoundException, UnprocessableEntityException } from '@nestjs/common';
+import { Controller, UseGuards, Get, Post, Request, Query, Redirect, Body, Head, Response, HttpCode, NotFoundException, UnprocessableEntityException, Put } from '@nestjs/common';
 import { AccountsService } from './services/accounts.service';
 import { RegistrationDto } from './dtos/registration.dto';
 import { RegistrationResult } from './dtos/registration-result.dto';
@@ -7,6 +7,8 @@ import { PasswordRequestResetDto } from './dtos/password-request-reset.dto';
 import { ResponseMessage } from '../common/models/response-message.model';
 import { ResponseStatus } from '../common/enums/response-status.enum';
 import { ConfigService } from '@nestjs/config';
+import { UpdateAccountDto } from './dtos/update-account.dto';
+import { UpdateProfileDto } from './dtos/update-profile.dto';
 import { JwtAuthenticationGuard } from 'src/authentication/guards/jwt-authentication.guard';
 
 @Controller('accounts')
@@ -21,6 +23,24 @@ export class AccountsController {
   public async getAccountDetails(@Request() req): Promise<any> {
     const accountId: number = +req.user.accountId;  
     return this._accountsService.getAccountDetails(accountId);
+  }
+ 
+  @Put('details')
+  @UseGuards(JwtAuthenticationGuard)
+  public async udpateAccountDetails(
+      @Request() req, 
+      @Body() updateAccountDto: UpdateAccountDto): Promise<any> {
+    const accountId: number = +req.user.accountId;
+    return this._accountsService.updateAccountDetails(accountId, updateAccountDto);
+  }
+
+  @Put('profile')
+  @UseGuards(JwtAuthenticationGuard)
+  public async updateAccountProfile(
+      @Request() req, 
+      @Body() updateProfileDto: UpdateProfileDto): Promise<any> {
+    const accountId: number = +req.user.accountId;
+    return this._accountsService.updateAccountProfile(accountId, updateProfileDto);
   }
 
   @Get('profile')

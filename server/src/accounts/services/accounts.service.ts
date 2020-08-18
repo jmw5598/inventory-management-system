@@ -8,6 +8,7 @@ import { Account } from '../entities/account.entity';
 import { Address } from '../entities/address.entity';
 import { EmailerService } from '../../common/services/emailer/emailer.service';
 import { Profile } from '../entities/profile.entity';
+
 import { User } from '../../users/entities/user.entity';
 import { Role } from '../../users/entities/role.entity';
 import { RoleType } from '../../users/enums/role-type.enum';
@@ -19,6 +20,9 @@ import { CreateUserDto } from '../dtos/create-user.dto';
 import { RegistrationResult } from '../dtos/registration-result.dto';
 import { ResponseMessage } from 'src/common/models/response-message.model';
 import { ResponseStatus } from 'src/common/enums/response-status.enum';
+import { UpdateAccountDto } from '../dtos/update-account.dto';
+import { UpdateProfileDto } from '../dtos/update-profile.dto';
+import { AccountNotFoundException } from '../exceptions/account-not-found.exception';
 
 @Injectable()
 export class AccountsService {
@@ -42,11 +46,35 @@ export class AccountsService {
     return result;
   }
 
+  public async updateAccountDetails(accountId: number, updateAccountDto: UpdateAccountDto): Promise<Account> {
+    const account: Account = await this._accountRepository.findOne(accountId);
+    if (!account) throw new AccountNotFoundException();
+    account.plan = updateAccountDto.plan;
+    return this._accountRepository.save(account);
+  }
+
   public async getAccountProfile(accountId: number): Promise<Profile> {
     return this._profileRepository.findOne({
       relations: ['address'],
       where: { account: { id: accountId } }
     });
+  }
+
+  public async updateAccountProfile(accountId: number, updateProfileDto: UpdateProfileDto): Promise<Profile> {
+    const profile: Profile = await this._profileRepository.findOne({ 
+      relations: ['address'],
+      where: { account: { id: accountId } }
+    });
+    profile.firstName = updateProfileDto.firstName;
+    profile.lastName = updateProfileDto.lastName;
+    profile.address.street = updateProfileDto.address.street;
+    profile.address.street2 = updateProfileDto.address.street2;
+    profile.address.city = updateProfileDto.address.city ;
+    profile.address.state = updateProfileDto.address.state;
+    profile.address.zip = updateProfileDto.address.zip;
+    this._profileRepository.save(profile);
+    this._addressRepository.save(profile.address);
+    return profile;
   }
 
   public async registerNewAccount(registrationDto: RegistrationDto): Promise<any> {    
