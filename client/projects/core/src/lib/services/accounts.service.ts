@@ -27,8 +27,16 @@ export class AccountsService extends AbstractCrudService<Account, number> {
     return this._http.get<Account>(`${this._base}/details`);
   }
 
+  public updateAccountDetails(details: Account): Observable<Account> {
+    return this._http.put<Account>(`${this._base}/details`, details);
+  } 
+
   public getAccountProfile(): Observable<Profile> {
     return this._http.get<Profile>(`${this._base}/profile`);
+  }
+  
+  public updateAccountProfile(profile: Profile): Observable<Profile> {
+    return this._http.put<Profile>(`${this._base}/profile`, profile);
   }
 
   public registerNewAccount(
