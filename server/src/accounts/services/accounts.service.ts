@@ -41,7 +41,10 @@ export class AccountsService {
   ) {}
 
   public async getAccountDetails(accountId: number): Promise<Partial<Account>> {
-    const account: Account = await this._accountRepository.findOne(accountId);
+    const account: Account = await this._accountRepository.findOne({
+      relations: ['plan'],
+      where: { account: { id: accountId } }
+    });
     const { comfirmationToken, ...result } = account;
     return result;
   }
