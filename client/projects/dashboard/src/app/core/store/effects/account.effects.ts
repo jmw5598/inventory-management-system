@@ -1,23 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 import { handleHttpError } from '../actions/http-error.actions';
 import { AccountsService } from '@inv/core';
 import { of } from 'rxjs';
-import { map, mergeMap, catchError } from 'rxjs/operators';
+import { tap, map, mergeMap, catchError } from 'rxjs/operators';
 import { 
   AccountActions, 
   registerNewAccountResult, 
   passwordRequestResetResult, 
   passwordResetResult, 
   getAccountDetailsSuccess, 
-  getAccountProfileSuccess } from '../actions/account.actions';
+  getAccountProfileSuccess, 
+  updateAccountDetailsSuccess,
+  updateAccountProfileSuccess } from '../actions/account.actions';
 
 @Injectable()
 export class AccountEffects {
   constructor(
     private _actions: Actions,
-    private _accountsService: AccountsService
+    private _accountsService: AccountsService,
+    private _notificationService: NzNotificationService
   ) {}
 
   getAccountDetails$ = createEffect(() => this._actions.pipe(
@@ -72,4 +76,44 @@ export class AccountEffects {
       )
     )
   ));
+
+  updateAccountDetails$ = createEffect(() => this._actions.pipe(
+    ofType(AccountActions.UPDATE_ACCOUNT_DETAILS),
+    mergeMap(details => this._accountsService.updateAccountDetails(details)
+      .pipe(
+        map(response => updateAccountDetailsSuccess(response)),
+        catchError(error => of(handleHttpError(error)))
+      )
+    )
+  ));
+
+  updateAccountDetailsSuccess$ = createEffect(() => this._actions.pipe(
+    ofType(AccountActions.UPDATE_ACCOUNT_DETAILS_SUCCESS),
+    tap(({ payload }) => {
+      this._openNewNotificationSuccess(`We successfully updated your account details!`);
+    })
+  ), { dispatch: false });
+
+  updateAccountProfile$ = createEffect(() => this._actions.pipe(
+    ofType(AccountActions.UPDATE_ACCOUNT_PROFILE),
+    mergeMap(profile => this._accountsService.updateAccountProfile(profile)
+      .pipe(
+        map(response => updateAccountProfileSuccess(response)),
+        catchError(error => of(handleHttpError(error)))
+      )
+    )
+  ));
+
+  updateAccountProfileSuccess$ = createEffect(() => this._actions.pipe(
+    ofType(AccountActions.UPDATE_ACCOUNT_PROFILE_SUCCESS),
+    tap(({ payload }) => {
+      this._openNewNotificationSuccess(`We successfully updated your account profile!`);
+    })
+  ), { dispatch: false });
+
+  private _openNewNotificationSuccess(message: string): void {
+    this._notificationService.blank(
+        'Success', message, { nzPlacement: 'topRight', nzDuration: 3000 }
+      );
+  }
 }

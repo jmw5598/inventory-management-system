@@ -13,6 +13,10 @@ export enum AccountActions {
   PASSWORD_RESET_RESULT = '[Account] Password Reset Result',
   REGISTER_NEW_ACCOUNT = '[Acount] Register New Account',
   REGISTER_NEW_ACCOUNT_RESULT= '[Account] Register New Account Result',
+  UPDATE_ACCOUNT_DETAILS = '[Account] Update Account Details',
+  UPDATE_ACCOUNT_DETAILS_SUCCESS = '[Account] Update Account Details Success',
+  UPDATE_ACCOUNT_PROFILE = '[Account] Update Account Profile',
+  UPDATE_ACCOUNT_PROFILE_SUCCESS = '[Account] Update Account Profile Success',
 };
 
 export const getAccountDetails = createAction(
@@ -61,4 +65,24 @@ export const passwordReset = createAction(
 export const passwordResetResult = createAction(
   AccountActions.PASSWORD_RESET_RESULT,
   (result: ResponseMessage) => ({ payload: result })
+);
+
+export const updateAccountDetails = createAction(
+  AccountActions.UPDATE_ACCOUNT_DETAILS,
+  props<Account>()
+);
+
+export const updateAccountDetailsSuccess = createAction(
+  AccountActions.UPDATE_ACCOUNT_DETAILS_SUCCESS,
+  (account: Account) => ({ payload: account })
+);
+
+export const updateAccountProfile = createAction(
+  AccountActions.UPDATE_ACCOUNT_PROFILE,
+  props<Profile>()
+);
+
+export const updateAccountProfileSuccess = createAction(
+  AccountActions.UPDATE_ACCOUNT_PROFILE_SUCCESS,
+  (profile: Profile) => ({ payload: profile })
 );

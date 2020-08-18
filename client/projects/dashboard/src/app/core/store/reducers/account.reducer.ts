@@ -6,7 +6,9 @@ import {
   getAccountProfileSuccess, 
   registerNewAccountResult, 
   passwordRequestResetResult, 
-  passwordResetResult 
+  passwordResetResult, 
+  updateAccountDetailsSuccess,
+  updateAccountProfileSuccess
 } from '../actions/account.actions';
 
 const _accountReducer = createReducer(
@@ -39,6 +41,18 @@ const _accountReducer = createReducer(
     return {
       ...state,
       passwordResetResult: payload
+    }
+  }),
+  on(updateAccountDetailsSuccess, (state, { payload }) => {
+    return {
+      ...state,
+      details: payload
+    }
+  }),
+  on(updateAccountProfileSuccess, (state, { payload }) => {
+    return {
+      ...state,
+      profile: payload 
     }
   })
 );
