@@ -1,0 +1,25 @@
+.user-details {
+  display: flex;
+  flex-direction: row;
+
+  .user-avatar {
+    margin-right: 1rem;
+  }
+
+  .user-info {
+    h1 {
+      font-weight: bold;
+      margin-bottom: 0;
+    }
+  }
+
+  .user-email {
+    margin-bottom: 0.25rem;
+    i {
+      margin-right: 0.5rem;
+    }
+    span {
+      font-style: italic;
+    }
+  }
+}

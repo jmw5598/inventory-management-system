@@ -1,0 +1,47 @@
+<nz-layout style="background: transparent; margin-top: 1rem;">
+  <nz-row [nzGutter]="[16, 16]">
+    <nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="8">
+      <nz-card>
+        <div class="user-details">
+          <div class="user-avatar">
+            <nz-avatar [nzShape]="'square'" [nzSize]="128" [nzIcon]="'user'"></nz-avatar>
+          </div>
+          <div class="user-info">
+            <h1 class="">{{ (accountProfile$ | async).firstName + ' ' + (accountProfile$ | async).lastName }}</h1>
+            <div class="user-email">
+              <i nz-icon nzType="mail" nzTheme="outline"></i>
+              <span>{{ (accountProfile$ | async).email }}</span>
+            </div>
+            <ng-container *ngIf="(accountDetails$ | async)?.isConfirmed; else emailNotConfirmedTag">
+              <nz-tag nzColor="success">Verified</nz-tag>
+            </ng-container>
+            <ng-template #emailNotConfirmedTag>
+              <nz-tag nzColor="error">Unverified</nz-tag>
+            </ng-template>
+          </div>
+        </div>
+      </nz-card>
+    </nz-col>
+    <nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="16">
+      <nz-card>
+        <nz-tabset nzLinkRouter>
+          <nz-tab>
+            <a nz-tab-link [routerLink]="['./overview']">Overview</a>
+            <h1>Overview</h1>
+          </nz-tab>
+          <nz-tab>
+            <a nz-tab-link [routerLink]="['./profile']">Profile</a>
+            <h1>Profile</h1>
+          </nz-tab>
+          <nz-tab>
+            <a nz-tab-link [routerLink]="['./details']">Details</a>
+            <h1>Details</h1>
+          </nz-tab>
+        </nz-tabset>
+        <div>
+          <router-outlet></router-outlet>
+        </div>
+      </nz-card>
+    </nz-col>
+  </nz-row>
+</nz-layout>
