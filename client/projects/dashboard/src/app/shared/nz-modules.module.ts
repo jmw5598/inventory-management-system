@@ -22,6 +22,7 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzStatisticModule } from 'ng-zorro-antd/statistic';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzTypographyModule } from 'ng-zorro-antd/typography'
 
@@ -62,6 +63,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons)
     NzStatisticModule,
     NzStepsModule,
     NzTableModule,
+    NzTabsModule,
     NzTagModule,
     NzTypographyModule,
   ]

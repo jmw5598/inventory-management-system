@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { NgZorroModule } from '../nz-modules.module';
+import { NgZorroModule } from './nz-modules.module';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { StockItemsTableComponent } from './components/stock-items-table/stock-items-table.component';
 
