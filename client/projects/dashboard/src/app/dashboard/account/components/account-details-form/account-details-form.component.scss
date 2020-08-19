@@ -1,0 +1,27 @@
+// nz-radio-group {
+//   display: flex;
+//   flex-direction: row;
+//   // flex-grow: 1;
+//   // flex-basis: 0;
+//   label {
+//     flex-grow: 1;
+//     flex-basis: 0;
+//   }
+//   // width: 100%;
+// }
+
+nz-radio-group {
+  display: block;
+
+  label {
+    display: block;
+    width: 100%;
+    border: 1px solid #d9d9d9;
+    border-radius: 2px !important;
+    margin-bottom: 0.75rem;
+    outline: 0;
+    &::before {
+      display: none;
+    }
+  }
+}
