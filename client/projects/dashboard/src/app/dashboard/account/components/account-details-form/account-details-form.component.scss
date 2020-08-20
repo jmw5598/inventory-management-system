@@ -1,14 +1,6 @@
-// nz-radio-group {
-//   display: flex;
-//   flex-direction: row;
-//   // flex-grow: 1;
-//   // flex-basis: 0;
-//   label {
-//     flex-grow: 1;
-//     flex-basis: 0;
-//   }
-//   // width: 100%;
-// }
+nz-form-label {
+  padding-bottom: 0 !important;
+}
 
 nz-radio-group {
   display: block;

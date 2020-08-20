@@ -1,40 +1,51 @@
 <div [formGroup]="form.get('profile')">
   <!-- First & Last Name Inputs -->
   <nz-row [nzGutter]="['16', '0']">
-    <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12">
-      <nz-form-item>
-        <nz-form-label nzSpan="24" nzFor="">First Name</nz-form-label>
-        <nz-form-control nzSpan="24" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="firstNameErrorTpl">
-          <input nzSize="large" formControlName="firstName" nz-input name="firstName" type="text" id="firstName">
-          <ng-template #firstNameErrorTpl let-control>
-            <ng-container *ngIf="control.hasError('required')">
-              Please input your first name!
-            </ng-container>
-            <ng-container *ngIf="control.hasError('pattern')">
-              First name must be 3 to 20 characters!
-            </ng-container>
-          </ng-template>
-        </nz-form-control>
-      </nz-form-item>
-    </div>
-    <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12">
-      <nz-form-item nzRow>
-        <nz-form-label nzSpan="24" nzFor="lastName">Last Name</nz-form-label>
-        <nz-form-control nzSpan="24" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="lastNameErrorTpl">
-          <input nzSize="large" formControlName="lastName" nz-input name="lastName" type="text" id="lastName">
-          <ng-template #lastNameErrorTpl let-control>
-            <ng-container *ngIf="control.hasError('required')">
-              Please input your last name!
-            </ng-container>
-            <ng-container *ngIf="control.hasError('pattern')">
-              Last name must be 3 to 20 characters!
-            </ng-container>
-          </ng-template>
-        </nz-form-control>
-      </nz-form-item>
-    </div>
+    <nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="12" nzXl="12">
+      <nz-row [nzGutter]="['16', '0']">
+        <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+          <nz-form-item>
+            <nz-form-label nzSpan="24" nzFor="">First Name</nz-form-label>
+            <nz-form-control nzSpan="24" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="firstNameErrorTpl">
+              <input nzSize="large" formControlName="firstName" nz-input name="firstName" type="text" id="firstName">
+              <ng-template #firstNameErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                  Please input your first name!
+                </ng-container>
+                <ng-container *ngIf="control.hasError('pattern')">
+                  First name must be 3 to 20 characters!
+                </ng-container>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </nz-row>
+      <nz-row [nzGutter]="['16', '0']">
+        <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+          <nz-form-item nzRow>
+            <nz-form-label nzSpan="24" nzFor="lastName">Last Name</nz-form-label>
+            <nz-form-control nzSpan="24" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="lastNameErrorTpl">
+              <input nzSize="large" formControlName="lastName" nz-input name="lastName" type="text" id="lastName">
+              <ng-template #lastNameErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                  Please input your last name!
+                </ng-container>
+                <ng-container *ngIf="control.hasError('pattern')">
+                  Last name must be 3 to 20 characters!
+                </ng-container>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </nz-row>
+    </nz-col>
+    <!-- Address Form -->
+    <nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="12" nzXl="12">
+      <nz-row [nzGutter]="['16', '0']">
+        <nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+          <inv-account-address-form></inv-account-address-form>
+        </nz-col>
+      </nz-row>
+    </nz-col>
   </nz-row>
-
-  <!-- Address Form -->
-  <inv-account-address-form></inv-account-address-form>
 </div>
