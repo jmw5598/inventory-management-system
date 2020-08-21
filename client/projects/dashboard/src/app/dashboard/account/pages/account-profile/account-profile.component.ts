@@ -26,9 +26,9 @@ export class AccountProfileComponent implements OnInit, OnDestroy {
     private _accountValidators: AccountValidators
   ) {
     this._subscriptionSubject = new Subject<void>();
-    this.form = this._formBuilder.group({
-      profile: buildProfileFormGroup(this._formBuilder, this._accountValidators)
-    })
+    const profileFormGroup: FormGroup = buildProfileFormGroup(this._formBuilder, this._accountValidators);
+    profileFormGroup.removeControl('email');
+    this.form = this._formBuilder.group({ profile: profileFormGroup })
   }
 
   ngOnInit(): void {
@@ -44,7 +44,6 @@ export class AccountProfileComponent implements OnInit, OnDestroy {
 
   public submitForm(form: any): void {
     const profile: Profile = form.profile || {} as Profile;
-    console.log(profile);
     this._store.dispatch(updateAccountProfile(profile));
   }
 
