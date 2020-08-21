@@ -53,7 +53,8 @@ export class AccountsService {
     const account: Account = await this._accountRepository.findOne(accountId);
     if (!account) throw new AccountNotFoundException();
     account.plan = updateAccountDto.plan;
-    return this._accountRepository.save(account);
+    const { comfirmationToken, ...result } = await this._accountRepository.save(account);
+    return result as Account;
   }
 
   public async getAccountProfile(accountId: number): Promise<Profile> {
