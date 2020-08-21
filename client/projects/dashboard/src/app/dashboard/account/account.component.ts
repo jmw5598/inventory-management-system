@@ -25,23 +25,4 @@ export class AccountComponent implements OnInit {
     this.accountDetails$ = this._store.select(selectAccountDetails);
     this.accountProfile$ = this._store.select(selectAccountProfile);
   }
-
-  // TODO REMOVE THIS
-  tabs: Array<{ name: string; content: string }> = [
-    {
-      name: 'Profile',
-      content: 'Profile section'
-    },
-    {
-      name: 'Details',
-      content: 'Details seciton'
-    }
-  ];
-  nzTabPosition: NzTabPosition = 'left';
-  selectedIndex = 0;
-
-  /* tslint:disable-next-line:no-any */
-  log(args: any[]): void {
-    console.log(args);
-  }
 }
