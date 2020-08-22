@@ -1,29 +1,13 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" novalidate>
-  <div class="search-items">
-    <nz-form-item>
-      <nz-form-label [nzOffset]="5">
-        <label nz-checkbox>
-          Create new product item
-        </label>
-      </nz-form-label>
-    </nz-form-item>
-    <nz-form-item>
-      <ng-container *ngIf="productItem">
-        <nz-card>
-          <pre>{{ productItem | json }}</pre>
-          <button type="button" (click)="deselectProductItem()">X</button>
-        </nz-card>
-      </ng-container>
-      <!-- 
-        Card here with selected product item details.  Provide
-        an X to clear this.  ALso if checkbox is checked display form
-        to add a new product item isntead.
-      -->
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-control [nzOffset]="5" [nzSpan]="19">
-        <button nz-button nzType="primary">Save</button>
-      </nz-form-control>
-    </nz-form-item>
-  </div>
+<form >
+  <nz-row class="search-items">
+
+    <!-- Product Item Column -->
+    <nz-col nzSpan="24">
+      
+    </nz-col>
+
+    <!-- Stock Item Column -->
+
+
+  </nz-row>
 </form> 

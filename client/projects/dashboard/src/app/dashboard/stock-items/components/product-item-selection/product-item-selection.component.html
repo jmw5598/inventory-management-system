@@ -1,0 +1,6 @@
+<nz-card nzType="inner" style="margin-top:16px;" nzTitle="Inner Card Title" [nzExtra]="extraTemplate">
+  <pre>{{ productItem | json }}</pre>
+</nz-card>
+<ng-template #extraTemplate>
+  <a (click)="deselectProductItem()">Deselect</a>
+</ng-template>

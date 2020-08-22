@@ -1,12 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, ControlContainer } from '@angular/forms';
 
 @Component({
-  selector: 'inv-stock-item-form',
-  templateUrl: './stock-item-form.component.html',
-  styleUrls: ['./stock-item-form.component.scss']
+  selector: 'inv-product-item-form',
+  templateUrl: './product-item-form.component.html',
+  styleUrls: ['./product-item-form.component.scss']
 })
-export class StockItemFormComponent implements OnInit {
+export class ProductItemFormComponent implements OnInit {
   public form: FormGroup;
 
   constructor(private _parentControl: ControlContainer) { }

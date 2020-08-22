@@ -3,25 +3,52 @@
   <nz-page-header-subtitle></nz-page-header-subtitle>
 </nz-page-header>
 <nz-layout>
-  <nz-row>
-    <nz-card nz-col [nzSpan]="8" nzXs="24" nzSm="24" nzMd="16" nzLg="24" nzXl="24">
-      <nz-form-item>
-        <nz-select
-            nzShowSearch
-            nzServerSearch="true"
-            nzPlaceHolder="input search text"
-            [(ngModel)]="searchTerm"
-            [nzShowArrow]="false"
-            [nzFilterOption]="nzFilterOption"
-            (nzOnSearch)="onSearchStockItemsKeyup($event)"
-            (ngModelChange)="onSearchOptionSelected($event)">
-          <nz-option *ngFor="let o of searchResult?.elements" [nzLabel]="o.title" [nzValue]="o"> </nz-option>
-        </nz-select>
-      </nz-form-item>
-      <inv-stock-item-form
-          [productItemValue]="productItem ? productItem : null"
-          (onSaveStockItem)="onCreateStockItem($event)">
-      </inv-stock-item-form>
-    </nz-card>
-  </nz-row>
-</nz-layout>
+  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" novalidates>
+    <nz-row [nzGutter]="['16', '16']">
+
+      <!-- Product Item Form -->
+      <nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="12" nzXl="12">
+        <nz-card >
+          <nz-tabset [nzType]="'card'" (nzSelectChange)="onTabChange($event)">
+            <nz-tab [nzTitle]="'Search'">
+              <inv-product-item-search
+                  [productItem]="(selectedProductItemFromSearch$ | async)"
+                  (onSelection)="onProductItemSelection($event)"
+                  (onDeselection)="onProductItemDeselection($event)">
+              </inv-product-item-search>
+            </nz-tab>
+            <nz-tab [nzTitle]="'Create New'">
+              <inv-product-item-form></inv-product-item-form>
+            </nz-tab>
+          </nz-tabset>
+        </nz-card>
+      </nz-col>
+
+      <!-- Stock Item Form -->
+      <nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="12" nzXl="12">
+        <nz-card>
+          <h1>Stock Item Details</h1>
+          <nz-form-item>
+            <nz-form-control [nzOffset]="5" [nzSpan]="19">
+              <button nz-button nzType="primary">Save</button>
+            </nz-form-control>
+          </nz-form-item>
+        </nz-card>
+      </nz-col>
+      
+    </nz-row>
+  </form>  
+
+  <!--
+  Form Layout:
+  - Create Stock Item (outer form)
+    * Two Columsn (product left, stock right)
+    * Product Left
+      * Has two tabs (search create)
+        - Search content contains product Item search component
+          * Search will display product item search selection component
+            - selelciton componet will patch throught value to form?
+            - will contain hidden fields for product tiems values
+        - Create contains product item form
+          * Will contain form with inputs for fields
+  -->

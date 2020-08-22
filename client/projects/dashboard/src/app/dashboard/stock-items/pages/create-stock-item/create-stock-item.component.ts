@@ -1,12 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { Observable, Subject } from 'rxjs';
-import { takeUntil, debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
+import { NzTabChangeEvent } from 'ng-zorro-antd/tabs';
 
+import { ProductItem } from '@inv/core';
 import { IAppState } from '@dashboard/core/store/state';
-import { Page, PageRequest, StockItem, ProductItem } from '@inv/core';
-import { searchProductItems } from '@dashboard/core/store/actions';
-import { selectProductItemSearchResult } from '@dashboard/core/store/selectors';
+import { selectSelectedProductItemFromSearch } from '@dashboard/core/store/selectors';
+import { setSelectedProductItemFromSearch } from '@dashboard/core/store/actions';
 
 @Component({
   selector: 'inv-create-stock-item',
@@ -14,58 +16,66 @@ import { selectProductItemSearchResult } from '@dashboard/core/store/selectors';
   styleUrls: ['./create-stock-item.component.scss']
 })
 export class CreateStockItemComponent implements OnInit, OnDestroy {
-  private readonly SEARCH_PAGE_OPTIONS = PageRequest.from(1, 5, 'title', 'ASC');
   private _subscriptionSubject: Subject<void>;
-  private _autocompleteSearchTextChangeSubject: Subject<string>;
-  public searchResult: Page<ProductItem>;
-  public searchTerm: string = '';
-
-  nzFilterOption = () => true;
-
-  public productItem: ProductItem | string;
+  public selectedProductItemFromSearch$: Observable<ProductItem>;
+  public form: FormGroup;
   
-  constructor(private _store: Store<IAppState>) {
+  constructor(
+    private _store: Store<IAppState>,
+    private _formBuilder: FormBuilder
+  ) {
     this._subscriptionSubject = new Subject<void>();
-    this._autocompleteSearchTextChangeSubject = new Subject<string>();
+    this.form = this._formBuilder.group({
+      isNewProductItem: [false, [Validators.required]],
+      productItem: this._formBuilder.group({
+        id: [],
+        title: ['', [Validators.required]],
+        sku: [''],
+        brand: [''],
+        model: [''],
+        category: ['', [Validators.required]]
+      }),
+      stockItem: this._formBuilder.group({
+        id: [],
+        purchaseDate: ['', [Validators.required]],
+        purchasePrice: ['', [Validators.required, Validators.min(0)]],
+        quantity: ['', [Validators.required, Validators.min(1)]],
+        itemCondition: ['', [Validators.required]],
+        stockroom: ['', [Validators.required]],
+        location: ['', [Validators.required]]
+      })
+    });
   }
 
   ngOnInit(): void {
-    // Update store for autocomplete serach values for stock items?
-    // Create endpoint for this search?? or use existing paged search??
-    // select and subscirbe to this piece of state
-    this._store.select(selectProductItemSearchResult)
-      .pipe(takeUntil(this._subscriptionSubject))
-      .subscribe(page => this.searchResult = page)
-   
-    // sub to search change and debounce
-    this._autocompleteSearchTextChangeSubject
+    this.selectedProductItemFromSearch$ = this._store.select(selectSelectedProductItemFromSearch)
       .pipe(
-        takeUntil(this._subscriptionSubject),
-        debounceTime(500),
-        distinctUntilChanged(),
-        tap(search => this.onFilterStockItems(search))
-      ).subscribe();
+        tap((productItem: ProductItem) => {
+          if (productItem) {
+            this.form.get('productItem').patchValue(productItem);
+            this.form.get('isNewProductItem').patchValue(false);
+          } else {
+            this.form.get('productItem').reset();
+            this.form.get('isNewProductItem').patchValue(true);
+          }
+        })
+      );
   }
 
-  public onCreateStockItem(item: StockItem): void {
-    console.log("creating ", item);
+  public onSubmit(value: any): void {
+    console.log(value);
   }
 
-  public onSearchStockItemsKeyup(searchTerm): void {
-    this._autocompleteSearchTextChangeSubject.next(searchTerm);
+  public onTabChange(value: NzTabChangeEvent): void {
+    this._store.dispatch(setSelectedProductItemFromSearch(null));
   }
 
-  public onFilterStockItems(searchTerm: string): void {
-    this._store.dispatch(searchProductItems({
-      searchTerm: searchTerm,
-      pageable: this.SEARCH_PAGE_OPTIONS 
-    }));
+  public onProductItemSelection(productItem: ProductItem): void {
+    this._store.dispatch(setSelectedProductItemFromSearch(productItem));
   }
 
-  public onSearchOptionSelected(productItem: ProductItem): void {
-    console.log('selected: ', productItem);
-    this.productItem = productItem;
-    console.log('this.productItem: ', this.productItem);
+  public onProductItemDeselection(productItem: ProductItem): void {
+    this._store.dispatch(setSelectedProductItemFromSearch(productItem));
   }
 
   ngOnDestroy() {

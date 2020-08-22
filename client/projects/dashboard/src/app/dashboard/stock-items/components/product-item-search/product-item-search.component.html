@@ -1,0 +1,26 @@
+<div class="product-item-form">
+  <!-- Product Item Search -->
+  <div class="product-item-search">
+    <nz-form-item>
+      <nz-select
+          nzShowSearch
+          nzServerSearch="true"
+          nzPlaceHolder="Search your existing products"
+          [(ngModel)]="searchTerm"
+          [nzShowArrow]="false"
+          [nzFilterOption]="nzFilterOption"
+          (nzOnSearch)="onSearchStockItemsKeyup($event)"
+          (ngModelChange)="onSearchOptionSelected($event)">
+        <nz-option *ngFor="let o of searchResult?.elements" [nzLabel]="o.title" [nzValue]="o"> </nz-option>
+      </nz-select>
+    </nz-form-item>
+  </div>
+  <!-- Product Item Selection -->
+  <div class="product-item-selection" [formGroup]="form">
+    <inv-product-item-selection
+        *ngIf="productItem"
+        [productItem]="productItem"
+        (onDeselectProductItem)="onDeselectProductItem($event)">
+    </inv-product-item-selection>
+  </div>
+</div>
