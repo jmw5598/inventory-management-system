@@ -92,7 +92,7 @@ export class ProductItemsService {
     return [
       { title: ilike, account: { id: accountId }, deletedAt: IsNull() },
       { description: ilike, account: { id: accountId }, deletedAt: IsNull() },
-      { brand: ilike, account: { id: accountId }, deletedAt: IsNull() },
+      { make: ilike, account: { id: accountId }, deletedAt: IsNull() },
       { model: ilike, account: { id: accountId }, deletedAt: IsNull() },
       { sku: ilike, account: { id: accountId }, deletedAt: IsNull() }
     ];
