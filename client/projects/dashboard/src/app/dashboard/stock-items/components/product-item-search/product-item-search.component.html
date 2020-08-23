@@ -18,7 +18,6 @@
   <!-- Product Item Selection -->
   <div class="product-item-selection" [formGroup]="form">
     <inv-product-item-selection
-        *ngIf="productItem"
         [productItem]="productItem"
         (onDeselectProductItem)="onDeselectProductItem($event)">
     </inv-product-item-selection>

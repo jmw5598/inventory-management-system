@@ -1,6 +1,46 @@
-<nz-card nzType="inner" style="margin-top:16px;" nzTitle="Inner Card Title" [nzExtra]="extraTemplate">
-  <pre>{{ productItem | json }}</pre>
-</nz-card>
-<ng-template #extraTemplate>
-  <a (click)="deselectProductItem()">Deselect</a>
+<ng-container *ngIf="productItem; else noProductItemSelected">
+  <nz-card  style="margin-top:16px;" [nzExtra]="extraTemplate">
+    <nz-list>
+      <nz-list-item>
+        <span nz-typography><strong>Title</strong></span>
+        {{ productItem.title }}
+      </nz-list-item>
+      <nz-list-item>
+        <span nz-typography><strong>Description</strong></span>
+        {{ productItem.description }}
+      </nz-list-item>
+      <nz-list-item>
+        <span nz-typography><strong>Sku</strong></span>
+        {{ productItem.sku }}
+      </nz-list-item>
+      <nz-list-item>
+        <span nz-typography><strong>Make</strong></span>
+        {{ productItem.make }}
+      </nz-list-item>
+      <nz-list-item>
+        <span nz-typography><strong>Model</strong></span>
+        {{ productItem.model }}
+      </nz-list-item>
+      <nz-list-item>
+        <span nz-typography><strong>Category</strong></span>
+        {{ productItem.category.description}}
+      </nz-list-item>
+    </nz-list>
+    <ng-template #extraTemplate>
+      <a (click)="deselectProductItem()">
+        <i nz-icon nzType="close-square" style="font-size: 1.5rem;" nzTheme="outline"></i>
+      </a>
+    </ng-template>
+  </nz-card>
+</ng-container>
+<ng-template #noProductItemSelected>
+  <nz-card nzType="inner" style="margin-top:16px;">
+    <nz-empty
+        nzNotFoundImage="simple"
+        [nzNotFoundContent]="noProductItemSelectedContent">
+      <ng-template #noProductItemSelectedContent>
+        <span> No Product Item Selected </span>
+      </ng-template>
+    </nz-empty>
+  </nz-card>
 </ng-template>

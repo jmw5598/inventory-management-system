@@ -8,9 +8,11 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzListModule } from 'ng-zorro-antd/list';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
@@ -49,10 +51,12 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons)
     NzCardModule,
     NzCheckboxModule,
     NzDropDownModule,
+    NzEmptyModule,
     NzFormModule,
     NzIconModule,
     NzInputModule,
     NzLayoutModule,
+    NzListModule,
     NzMenuModule,
     NzNotificationModule,
     NzPageHeaderModule,
