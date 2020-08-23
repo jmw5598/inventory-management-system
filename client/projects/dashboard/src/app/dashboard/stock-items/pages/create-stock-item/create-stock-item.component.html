@@ -29,7 +29,11 @@
       <!-- Stock Item Form -->
       <nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="12" nzXl="12">
         <nz-card>
-          <h1>Stock Item Details</h1>
+          <inv-stock-item-form
+              [stockrooms]="null"
+              [itemConditions]="null"
+              [locations]="null">
+          </inv-stock-item-form>
           <nz-form-item>
             <nz-form-control [nzOffset]="5" [nzSpan]="19">
               <button nz-button nzType="primary">Save</button>

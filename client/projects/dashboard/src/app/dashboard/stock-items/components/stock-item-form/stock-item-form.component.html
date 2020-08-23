@@ -1,13 +1,93 @@
-<form >
-  <nz-row class="search-items">
+<nz-card class="stock-item-form" [formGroup]="form.get('stockItem')">
+  <h2 style="font-weight: bold;">Stock item details</h2>
+  <!-- Purchase Date Input -->
+  <nz-form-item>
+    <nz-form-label nzSpan="24" nzFor="purchaseDate" nzRequired>Purchase Date</nz-form-label>
+    <nz-form-control nzSpan="24" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="purchaseDateErrorTpl">
+      <input nzSize="large" formControlName="purchaseDate" nz-input name="purchaseDate" type="text" id="purchaseDate">
+      <ng-template #purchaseDateErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">
+          Please input a purchase date!
+        </ng-container>
+        <ng-container *ngIf="control.hasError('pattern')">
+          Invalid date format!
+        </ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
 
-    <!-- Product Item Column -->
-    <nz-col nzSpan="24">
-      
-    </nz-col>
+  <!-- Purchase Price Input -->
+  <nz-form-item nzRow>
+    <nz-form-label nzSpan="24" nzFor="purchasePrice" nzRequired>Purchase Price</nz-form-label>
+    <nz-form-control nzSpan="24" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="purchasePriceErrorTpl">
+      <input nzSize="large" formControlName="purchasePrice" nz-input name="purchasePrice" type="text" id="purchasePrice">
+      <ng-template #purchasePriceErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">
+          Please input a purchase price!
+        </ng-container>
+        <ng-container *ngIf="control.hasError('pattern')">
+          Purchase price must be numerical! 
+        </ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
 
-    <!-- Stock Item Column -->
+  <!-- Quantity Input -->
+  <nz-form-item>
+    <nz-form-label nzSpan="24" nzFor="quantity">Quantity</nz-form-label>
+    <nz-form-control nzSpan="24" nzHasFeedback>
+      <input nzSize="large" formControlName="quantity" nz-input name="quantity" type="text" id="quantity">
+    </nz-form-control>
+  </nz-form-item> 
 
+  <!-- Item Condition Input -->
+  <nz-form-item>
+    <nz-form-label [nzSpan]="24" nzFor="itemCondition" nzRequired>Item Condition</nz-form-label>
+    <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Item condition is required">
+      <nz-select formControlName="itemCondition" nzPlaceHolder="">
+        <nz-option 
+            *ngFor="let condition of itemConditions" 
+            [nzValue]="condition" 
+            [nzLabel]="condition.description">
+        </nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
 
-  </nz-row>
-</form> 
+  <!-- Stockroom Input -->
+  <nz-form-item>
+    <nz-form-label [nzSpan]="24" nzFor="stockroom" nzRequired>Stockroom</nz-form-label>
+    <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Stockroom is required">
+      <nz-select formControlName="stockroom" nzPlaceHolder="">
+        <nz-option 
+            *ngFor="let stockroom of stockrooms" 
+            [nzValue]="stockroom" 
+            [nzLabel]="stockroom.description">
+        </nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <!-- Locaiton Select -->
+  <nz-form-item>
+    <nz-form-label [nzSpan]="24" nzFor="location" nzRequired>Location</nz-form-label>
+    <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Location is required">
+      <nz-select formControlName="location" nzPlaceHolder="">
+        <nz-option 
+            *ngFor="let location of locations" 
+            [nzValue]="location" 
+            [nzLabel]="location.description">
+        </nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+</nz-card>
+
+<!--
+  purchaseDate
+  purchasePrice
+  quantity
+  itemCondition
+  stockroom
+  location
+-->
