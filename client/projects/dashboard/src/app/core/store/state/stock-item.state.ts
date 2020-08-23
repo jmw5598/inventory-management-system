@@ -1,11 +1,13 @@
-import { StockItem, Page } from '@inv/core';
+import { StockItem, Page, ProductItem } from '@inv/core';
 
 export interface IStockItemState {
   searchResult: Page<StockItem>,
-  selectedStockItem: StockItem
+  selectedStockItem: StockItem,
+  selectedProductItemFromSearch: ProductItem
 }
 
 export const initialStockItemState: IStockItemState = {
   searchResult: null,
-  selectedStockItem: null
+  selectedStockItem: null,
+  selectedProductItemFromSearch: null 
 };

@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { StockItem, Page, IPageable } from '@inv/core';
+import { ProductItem, StockItem, Page, IPageable } from '@inv/core';
 
 export enum StockItemActions {
   CREATE_STOCK_ITEM = '[Stock Item] Create Stock Item',
@@ -11,7 +11,8 @@ export enum StockItemActions {
   SEARCH_STOCK_ITEMS = '[Stock Item] Search Stock Items',
   SEARCH_STOCK_ITEMS_SUCCESS = '[Stock Item] Search Stock Items Success',
   UPDATE_STOCK_ITEM = '[Stock Item] Update Stock Item',
-  UPDATE_STOCK_ITEM_SUCCESS = '[Stock Item] Update Stock Item Success'
+  UPDATE_STOCK_ITEM_SUCCESS = '[Stock Item] Update Stock Item Success',
+  SET_SELECTED_PRODUCT_ITEM_FROM_SEARCH = '[Stock Item] Set Selected Product Item From Search'
 };
 
 export interface StockItemSearch {
@@ -68,4 +69,9 @@ export const updateStockItem = createAction(
 export const updateStockItemSuccess = createAction(
   StockItemActions.UPDATE_STOCK_ITEM_SUCCESS,
   (item: StockItem) => ({ payload: item })
+);
+
+export const setSelectedProductItemFromSearch = createAction(
+  StockItemActions.SET_SELECTED_PRODUCT_ITEM_FROM_SEARCH,
+  (item: ProductItem) => ({ payload: item })
 );

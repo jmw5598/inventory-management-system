@@ -7,3 +7,8 @@ export const selectStockItemSearchResult = createSelector(
   selectStockItemState,
   (state: IStockItemState) => state.searchResult
 );
+
+export const selectSelectedProductItemFromSearch = createSelector(
+  selectStockItemState,
+  (state: IStockItemState) => state.selectedProductItemFromSearch
+);
