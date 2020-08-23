@@ -7,10 +7,12 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
@@ -50,11 +52,13 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons)
     NzButtonModule,
     NzCardModule,
     NzCheckboxModule,
+    NzDatePickerModule,
     NzDropDownModule,
     NzEmptyModule,
     NzFormModule,
     NzIconModule,
     NzInputModule,
+    NzInputNumberModule,
     NzLayoutModule,
     NzListModule,
     NzMenuModule,
