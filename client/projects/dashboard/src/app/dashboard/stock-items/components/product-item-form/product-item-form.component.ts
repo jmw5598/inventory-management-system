@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, ControlContainer } from '@angular/forms';
+import { Category } from '@inv/core';
 
 @Component({
   selector: 'inv-product-item-form',
@@ -7,6 +8,8 @@ import { FormGroup, ControlContainer } from '@angular/forms';
   styleUrls: ['./product-item-form.component.scss']
 })
 export class ProductItemFormComponent implements OnInit {
+  @Input()
+  public categories: Category[];
   public form: FormGroup;
 
   constructor(private _parentControl: ControlContainer) { }

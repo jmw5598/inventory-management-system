@@ -4,11 +4,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { CreateStockItemComponent } from './pages/create-stock-item/create-stock-item.component';
 import { EditStockItemComponent } from './pages/edit-stock-item/edit-stock-item.component';
 import { ManageStockItemsComponent } from './pages/manage-stock-items/manage-stock-items.component';
+import { CategoriesGuard } from '@dashboard/core/guards';
 
 const routes: Routes = [
   {
     path: 'create',
     component: CreateStockItemComponent,
+    canActivate: [CategoriesGuard],
     data: { breadcrumb: 'Create' }
   },
   {

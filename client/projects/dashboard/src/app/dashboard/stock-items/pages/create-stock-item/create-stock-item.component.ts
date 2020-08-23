@@ -5,9 +5,9 @@ import { tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { NzTabChangeEvent } from 'ng-zorro-antd/tabs';
 
-import { ProductItem } from '@inv/core';
+import { ProductItem, Category } from '@inv/core';
 import { IAppState } from '@dashboard/core/store/state';
-import { selectSelectedProductItemFromSearch } from '@dashboard/core/store/selectors';
+import { selectSelectedProductItemFromSearch, selectCategories } from '@dashboard/core/store/selectors';
 import { setSelectedProductItemFromSearch } from '@dashboard/core/store/actions';
 
 @Component({
@@ -18,6 +18,7 @@ import { setSelectedProductItemFromSearch } from '@dashboard/core/store/actions'
 export class CreateStockItemComponent implements OnInit, OnDestroy {
   private _subscriptionSubject: Subject<void>;
   public selectedProductItemFromSearch$: Observable<ProductItem>;
+  public categories$: Observable<Category[]>;
   public form: FormGroup;
   
   constructor(
@@ -29,9 +30,10 @@ export class CreateStockItemComponent implements OnInit, OnDestroy {
       isNewProductItem: [false, [Validators.required]],
       productItem: this._formBuilder.group({
         id: [],
-        title: ['', [Validators.required]],
+        title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+        description: ['', [Validators.required, Validators.minLength(3)]],
         sku: [''],
-        brand: [''],
+        make: [''],
         model: [''],
         category: ['', [Validators.required]]
       }),
@@ -48,6 +50,7 @@ export class CreateStockItemComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.categories$ = this._store.select(selectCategories);
     this.selectedProductItemFromSearch$ = this._store.select(selectSelectedProductItemFromSearch)
       .pipe(
         tap((productItem: ProductItem) => {

@@ -17,8 +17,10 @@
                   (onDeselection)="onProductItemDeselection($event)">
               </inv-product-item-search>
             </nz-tab>
-            <nz-tab [nzTitle]="'Create New'">
-              <inv-product-item-form></inv-product-item-form>
+            <nz-tab [nzTitle]="'Create'">
+              <inv-product-item-form
+                  [categories]="(categories$ | async)">
+              </inv-product-item-form>
             </nz-tab>
           </nz-tabset>
         </nz-card>

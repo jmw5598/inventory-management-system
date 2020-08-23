@@ -1,4 +1,72 @@
-<div class="product-item-form">
-  <h1>New product item form</h1>
-  <pre>{{ form.value | json }}</pre>
-</div>
+<nz-card class="product-item-form" [formGroup]="form.get('productItem')">
+  <h2 style="font-weight: bold;">Create a new product item</h2>
+  <!-- Title Input -->
+  <nz-form-item>
+    <nz-form-label nzSpan="24" nzFor="title" nzRequired>Title</nz-form-label>
+    <nz-form-control nzSpan="24" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="titleErrorTpl">
+      <input nzSize="large" formControlName="title" nz-input name="title" type="text" id="title">
+      <ng-template #titleErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">
+          Please input a title!
+        </ng-container>
+        <ng-container *ngIf="control.hasError('pattern')">
+          Title must be 3 to 20 characters!
+        </ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+
+  <!-- Description Input -->
+  <nz-form-item nzRow>
+    <nz-form-label nzSpan="24" nzFor="description" nzRequired>Description</nz-form-label>
+    <nz-form-control nzSpan="24" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="descriptionErrorTpl">
+      <input nzSize="large" formControlName="description" nz-input name="description" type="text" id="description">
+      <ng-template #descriptionErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">
+          Please input a description!
+        </ng-container>
+        <ng-container *ngIf="control.hasError('pattern')">
+          Description must be at least 3 characters!
+        </ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+
+  <!-- Sku Input -->
+  <nz-form-item>
+    <nz-form-label nzSpan="24" nzFor="sku">Sku</nz-form-label>
+    <nz-form-control nzSpan="24" nzHasFeedback>
+      <input nzSize="large" formControlName="sku" nz-input name="sku" type="text" id="sku">
+    </nz-form-control>
+  </nz-form-item> 
+
+  <!-- Make Input -->
+  <nz-form-item>
+    <nz-form-label nzSpan="24" nzFor="make">Make</nz-form-label>
+    <nz-form-control nzSpan="24" nzHasFeedback>
+      <input nzSize="large" formControlName="make" nz-input name="make" type="text" id="make">
+    </nz-form-control>
+  </nz-form-item> 
+
+  <!-- Model Input -->
+  <nz-form-item>
+    <nz-form-label nzSpan="24" nzFor="model">Model</nz-form-label>
+    <nz-form-control nzSpan="24" nzHasFeedback>
+      <input nzSize="large" formControlName="model" nz-input name="model" type="text" id="model">
+    </nz-form-control>
+  </nz-form-item> 
+
+  <!-- Category Select -->
+  <nz-form-item>
+    <nz-form-label [nzSpan]="24" nzRequired>Category</nz-form-label>
+    <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Category is required">
+      <nz-select formControlName="category" nzPlaceHolder="The product item catgory">
+        <nz-option 
+            *ngFor="let category of categories" 
+            [nzValue]="category" 
+            [nzLabel]="category.description">
+        </nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+</nz-card>
