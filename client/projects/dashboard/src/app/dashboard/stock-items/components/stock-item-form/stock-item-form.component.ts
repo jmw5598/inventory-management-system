@@ -13,15 +13,17 @@ export class StockItemFormComponent implements OnInit {
 
   @Input()
   public itemConditions: ItemCondition[];
-
-  @Input()
   public locations: Location[];
-
   public form: FormGroup;
 
   constructor(private _parentControl: ControlContainer) { }
 
   ngOnInit(): void {
     this.form = this._parentControl.control as FormGroup;
+  }
+
+  public onStockroomChange(stockroom: Stockroom): void {
+    this.form.get('stockItem').get('location').reset();
+    this.locations = stockroom.locations;
   }
 }

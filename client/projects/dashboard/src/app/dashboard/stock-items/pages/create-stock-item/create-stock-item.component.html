@@ -30,9 +30,8 @@
       <nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="12" nzXl="12">
         <nz-card>
           <inv-stock-item-form
-              [stockrooms]="null"
-              [itemConditions]="null"
-              [locations]="null">
+              [stockrooms]="(stockrooms$ | async)"
+              [itemConditions]="(itemConditions$ | async)">
           </inv-stock-item-form>
           <nz-form-item>
             <nz-form-control [nzOffset]="5" [nzSpan]="19">

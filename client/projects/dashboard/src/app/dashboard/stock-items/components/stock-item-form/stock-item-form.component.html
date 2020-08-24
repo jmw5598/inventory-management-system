@@ -34,7 +34,7 @@
 
   <!-- Quantity Input -->
   <nz-form-item>
-    <nz-form-label nzSpan="24" nzFor="quantity">Quantity</nz-form-label>
+    <nz-form-label nzSpan="24" nzFor="quantity" nzRequired>Quantity</nz-form-label>
     <nz-form-control nzSpan="24" nzHasFeedback>
       <input nzSize="large" formControlName="quantity" nz-input name="quantity" type="text" id="quantity">
     </nz-form-control>
@@ -58,11 +58,11 @@
   <nz-form-item>
     <nz-form-label [nzSpan]="24" nzFor="stockroom" nzRequired>Stockroom</nz-form-label>
     <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Stockroom is required">
-      <nz-select formControlName="stockroom" nzPlaceHolder="">
+      <nz-select formControlName="stockroom" nzPlaceHolder="" (ngModelChange)="onStockroomChange($event)">
         <nz-option 
             *ngFor="let stockroom of stockrooms" 
             [nzValue]="stockroom" 
-            [nzLabel]="stockroom.description">
+            [nzLabel]="stockroom.name">
         </nz-option>
       </nz-select>
     </nz-form-control>
@@ -70,9 +70,9 @@
 
   <!-- Locaiton Select -->
   <nz-form-item>
-    <nz-form-label [nzSpan]="24" nzFor="location" nzRequired>Location</nz-form-label>
-    <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Location is required">
-      <nz-select formControlName="location" nzPlaceHolder="">
+    <nz-form-label [nzSpan]="24" nzFor="location">Location</nz-form-label>
+    <nz-form-control [nzSpan]="24" nzHasFeedback>
+      <nz-select formControlName="location" [nzDisabled]="!form.get('stockItem').value.stockroom">
         <nz-option 
             *ngFor="let location of locations" 
             [nzValue]="location" 

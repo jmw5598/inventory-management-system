@@ -5,9 +5,9 @@ import { tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { NzTabChangeEvent } from 'ng-zorro-antd/tabs';
 
-import { ProductItem, Category } from '@inv/core';
+import { ProductItem, Category, ItemCondition, Stockroom, Location } from '@inv/core';
 import { IAppState } from '@dashboard/core/store/state';
-import { selectSelectedProductItemFromSearch, selectCategories } from '@dashboard/core/store/selectors';
+import { selectSelectedProductItemFromSearch, selectCategories, selectItemConditions, selectCurrentStockrooms } from '@dashboard/core/store/selectors';
 import { setSelectedProductItemFromSearch } from '@dashboard/core/store/actions';
 
 @Component({
@@ -19,6 +19,8 @@ export class CreateStockItemComponent implements OnInit, OnDestroy {
   private _subscriptionSubject: Subject<void>;
   public selectedProductItemFromSearch$: Observable<ProductItem>;
   public categories$: Observable<Category[]>;
+  public itemConditions$: Observable<ItemCondition[]>;
+  public stockrooms$: Observable<Stockroom[]>;
   public form: FormGroup;
   
   constructor(
@@ -44,13 +46,15 @@ export class CreateStockItemComponent implements OnInit, OnDestroy {
         quantity: ['', [Validators.required, Validators.min(1)]],
         itemCondition: ['', [Validators.required]],
         stockroom: ['', [Validators.required]],
-        location: ['', [Validators.required]]
+        location: []
       })
     });
   }
 
   ngOnInit(): void {
     this.categories$ = this._store.select(selectCategories);
+    this.itemConditions$ = this._store.select(selectItemConditions);
+    this.stockrooms$ = this._store.select(selectCurrentStockrooms);
     this.selectedProductItemFromSearch$ = this._store.select(selectSelectedProductItemFromSearch)
       .pipe(
         tap((productItem: ProductItem) => {
