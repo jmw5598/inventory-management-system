@@ -23,6 +23,7 @@ export class StockroomsService {
 
   public async getAllStockrooms(accountId: number): Promise<Stockroom[]> {
     return this._stockroomRepository.find({
+      relations: ['locations'],
       where: { account: { id: accountId }, deletedAt: IsNull() },
       order: { name: "ASC" }
     });
