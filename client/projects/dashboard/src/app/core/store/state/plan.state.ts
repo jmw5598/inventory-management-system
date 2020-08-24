@@ -5,5 +5,5 @@ export interface IPlanState {
 };
 
 export const initialPlanState: IPlanState = {
-  plans: []
+  plans: null
 };

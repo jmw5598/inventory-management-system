@@ -27,7 +27,7 @@ export class PlansGuard implements CanActivate {
   private _getPlansFromStoreOrApi(): Observable<Plan[]> {
     return this._store.select(selectPlans).pipe(
       tap((plans: Plan[]) => {
-        if (!plans || plans.length === 0) {
+        if (!plans) {
           this._store.dispatch(getPlans())
         }
       }),

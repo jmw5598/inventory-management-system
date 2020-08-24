@@ -5,5 +5,5 @@ export interface IItemConditionState {
 };
 
 export const initialItemConditionState: IItemConditionState = {
-  itemConditions: []
+  itemConditions: null
 };
