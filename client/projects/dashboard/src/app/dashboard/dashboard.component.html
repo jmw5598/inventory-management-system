@@ -6,11 +6,9 @@
         <i nz-icon nzType="pie-chart"></i>
         <span>Dashboard</span>
       </li>
-      <li nz-submenu nzTitle="Product Items" nzIcon="barcode" [nzOpen]="false">
-        <ul>
-          <li nz-menu-item [nzMatchRouter]="true" [routerLink]="['product-items', 'create']">Create</li> 
-          <li nz-menu-item [nzMatchRouter]="true" [routerLink]="['product-items', 'manage']">Manage</li>
-        </ul>
+      <li nz-menu-item [nzMatchRouter]="true" [routerLink]="['product-items', 'manage']">
+        <i nz-icon nzType="barcode"></i>
+        <span>Products</span>
       </li>
       <li nz-submenu nzTitle="Stockrooms" nzIcon="reconciliation" [nzOpen]="false">
         <ul>
