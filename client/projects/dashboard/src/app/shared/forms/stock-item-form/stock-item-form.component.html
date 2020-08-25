@@ -1,5 +1,4 @@
-<nz-card class="stock-item-form" [formGroup]="form.get('stockItem')">
-  <h2 style="font-weight: bold;">Stock item details</h2>
+<div class="stock-item-form" [formGroup]="form.get('stockItem')">
   <!-- Purchase Date Input -->
   <nz-form-item>
     <nz-form-label nzSpan="24" nzFor="purchaseDate" nzRequired>Purchase Date</nz-form-label>
@@ -44,7 +43,7 @@
   <nz-form-item>
     <nz-form-label [nzSpan]="24" nzFor="itemCondition" nzRequired>Item Condition</nz-form-label>
     <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Item condition is required">
-      <nz-select formControlName="itemCondition" nzPlaceHolder="">
+      <nz-select nzSize="large" formControlName="itemCondition" nzPlaceHolder="">
         <nz-option 
             *ngFor="let condition of itemConditions" 
             [nzValue]="condition" 
@@ -58,7 +57,7 @@
   <nz-form-item>
     <nz-form-label [nzSpan]="24" nzFor="stockroom" nzRequired>Stockroom</nz-form-label>
     <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Stockroom is required">
-      <nz-select formControlName="stockroom" nzPlaceHolder="" (ngModelChange)="onStockroomChange($event)">
+      <nz-select nzSize="large" formControlName="stockroom" nzPlaceHolder="" (ngModelChange)="onStockroomChange($event)">
         <nz-option 
             *ngFor="let stockroom of stockrooms" 
             [nzValue]="stockroom" 
@@ -72,7 +71,7 @@
   <nz-form-item>
     <nz-form-label [nzSpan]="24" nzFor="location">Location</nz-form-label>
     <nz-form-control [nzSpan]="24" nzHasFeedback>
-      <nz-select formControlName="location" [nzDisabled]="!form.get('stockItem').value.stockroom">
+      <nz-select nzSize="large" formControlName="location" [nzDisabled]="!form.get('stockItem').value.stockroom">
         <nz-option 
             *ngFor="let location of locations" 
             [nzValue]="location" 
@@ -81,4 +80,4 @@
       </nz-select>
     </nz-form-control>
   </nz-form-item>
-</nz-card>
+</div>

@@ -1,5 +1,4 @@
-<nz-card class="product-item-form" [formGroup]="form.get('productItem')">
-  <h2 style="font-weight: bold;">Create a new product item</h2>
+<div class="product-item-form" [formGroup]="form.get('productItem')">
   <!-- Title Input -->
   <nz-form-item>
     <nz-form-label nzSpan="24" nzFor="title" nzRequired>Title</nz-form-label>
@@ -60,7 +59,7 @@
   <nz-form-item>
     <nz-form-label [nzSpan]="24" nzRequired>Category</nz-form-label>
     <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Category is required">
-      <nz-select formControlName="category" nzPlaceHolder="The product item category">
+      <nz-select nzSize="large" formControlName="category" nzPlaceHolder="The product item category">
         <nz-option 
             *ngFor="let category of categories" 
             [nzValue]="category" 
@@ -69,4 +68,4 @@
       </nz-select>
     </nz-form-control>
   </nz-form-item>
-</nz-card>
+</div>
