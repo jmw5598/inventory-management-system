@@ -15,6 +15,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzListModule } from 'ng-zorro-antd/list';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
@@ -62,6 +63,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons)
     NzLayoutModule,
     NzListModule,
     NzMenuModule,
+    NzModalModule,
     NzNotificationModule,
     NzPageHeaderModule,
     NzPopconfirmModule,
