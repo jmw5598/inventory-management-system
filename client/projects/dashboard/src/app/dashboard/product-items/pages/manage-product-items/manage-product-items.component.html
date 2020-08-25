@@ -7,19 +7,34 @@
     <div class="product-items-filter">
       <div class="search-items">
         <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
-          <input type="text" nz-input placeholder="Search product items" [(ngModel)]="searchTerm" (keyup)="onSearchProductItemsKeyup($event)" />
+          <input 
+              type="text" 
+              nz-input 
+              placeholder="Search product items" 
+              [(ngModel)]="searchTerm" 
+              (keyup)="onSearchProductItemsKeyup($event)" />
         </nz-input-group>
         <ng-template #suffixIconButton>
-          <button nz-button nzSearch (click)="onFilterProductItems()"><i nz-icon nzType="search"></i></button>
+          <button 
+              nz-button 
+              nzSearch 
+              (click)="onFilterProductItems()">
+            <i nz-icon nzType="search"></i>
+          </button>
         </ng-template>
       </div>
       <div>
-        <a class="btn-reload" nz-button (click)="onResetProductItemSearch()">
+        <a nz-button 
+            class="btn-reload" 
+            (click)="onResetProductItemSearch()">
           <i nz-icon nzType="reload" nzTheme="outline"></i>
         </a>
       </div>
       <div>
-        <a class="btn-new-product-item" [routerLink]="['../create']" nz-button nzType="primary">
+        <a nz-button 
+            class="btn-new-product-item" 
+            (click)="showCreateProductItemModal()" 
+            nzType="primary">
           <i nz-icon nzType="plus" nzTheme="outline"></i>
           Create Product Item 
         </a>
