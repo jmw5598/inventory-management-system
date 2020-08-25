@@ -4,11 +4,10 @@
 </nz-page-header>
 <nz-layout>
   <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" novalidates>
-    <nz-row [nzGutter]="['16', '16']">
-
-      <!-- Product Item Form -->
-      <nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="12" nzXl="12">
-        <nz-card >
+    <nz-card>
+      <nz-row [nzGutter]="['16', '16']">
+        <!-- Product Item Form -->
+        <nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="12" nzXl="8">
           <nz-tabset [nzType]="'card'" (nzSelectChange)="onTabChange($event)">
             <nz-tab [nzTitle]="'Search'">
               <inv-product-item-search
@@ -23,12 +22,10 @@
               </inv-shared-product-item-form>
             </nz-tab>
           </nz-tabset>
-        </nz-card>
-      </nz-col>
+        </nz-col>
 
-      <!-- Stock Item Form -->
-      <nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="12" nzXl="12">
-        <nz-card>
+        <!-- Stock Item Form -->
+        <nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="12" nzXl="12">
           <inv-shared-stock-item-form
               [stockrooms]="(stockrooms$ | async)"
               [itemConditions]="(itemConditions$ | async)">
@@ -38,22 +35,9 @@
               <button nz-button nzType="primary">Save</button>
             </nz-form-control>
           </nz-form-item>
-        </nz-card>
-      </nz-col>
-      
-    </nz-row>
+        </nz-col>
+        
+      </nz-row>
+    </nz-card> 
   </form>  
-
-  <!--
-  Form Layout:
-  - Create Stock Item (outer form)
-    * Two Columsn (product left, stock right)
-    * Product Left
-      * Has two tabs (search create)
-        - Search content contains product Item search component
-          * Search will display product item search selection component
-            - selelciton componet will patch throught value to form?
-            - will contain hidden fields for product tiems values
-        - Create contains product item form
-          * Will contain form with inputs for fields
-  -->
+  
