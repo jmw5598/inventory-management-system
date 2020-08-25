@@ -1,21 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { CreateProductItemComponent } from './pages/create-product-item/create-product-item.component';
 import { ManageProductItemsComponent } from './pages/manage-product-items/manage-product-items.component';
 import { EditProductItemComponent } from './pages/edit-product-item/edit-product-item.component';
 import { CategoriesGuard, ProductItemDetailsGuard } from '@dashboard/core/guards';
 
 const routes: Routes = [
   {
-    path: 'create',
-    component: CreateProductItemComponent,
-    canActivate: [CategoriesGuard],
-    data: { breadcrumb: 'Create' }
-  },
-  {
     path: 'manage',
     component: ManageProductItemsComponent,
+    canActivate: [CategoriesGuard],
     data: { breadcrumb: 'Manage' }
   },
   {
