@@ -9,6 +9,7 @@ import { ProductItem, Category, ItemCondition, Stockroom, Location } from '@inv/
 import { IAppState } from '@dashboard/core/store/state';
 import { selectSelectedProductItemFromSearch, selectCategories, selectItemConditions, selectCurrentStockrooms } from '@dashboard/core/store/selectors';
 import { setSelectedProductItemFromSearch } from '@dashboard/core/store/actions';
+import { buildProductItemFormGroup, buildStockItemFormGroup } from '@dashboard/shared/forms';
 
 @Component({
   selector: 'inv-create-stock-item',
@@ -30,24 +31,8 @@ export class CreateStockItemComponent implements OnInit, OnDestroy {
     this._subscriptionSubject = new Subject<void>();
     this.form = this._formBuilder.group({
       isNewProductItem: [false, [Validators.required]],
-      productItem: this._formBuilder.group({
-        id: [],
-        title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-        description: ['', [Validators.required, Validators.minLength(3)]],
-        sku: [''],
-        make: [''],
-        model: [''],
-        category: ['', [Validators.required]]
-      }),
-      stockItem: this._formBuilder.group({
-        id: [],
-        purchaseDate: ['', [Validators.required]],
-        purchasePrice: ['', [Validators.required, Validators.min(0)]],
-        quantity: ['', [Validators.required, Validators.min(1)]],
-        itemCondition: ['', [Validators.required]],
-        stockroom: ['', [Validators.required]],
-        location: []
-      })
+      productItem: buildProductItemFormGroup(this._formBuilder),
+      stockItem: buildStockItemFormGroup(this._formBuilder)
     });
   }
 

@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, ControlContainer } from '@angular/forms';
-import { Stockroom, ItemCondition, Location } from '@inv/core';
+import { ItemCondition, Stockroom, Location } from '@inv/core';
 
 @Component({
-  selector: 'inv-stock-item-form',
+  selector: 'inv-shared-stock-item-form',
   templateUrl: './stock-item-form.component.html',
   styleUrls: ['./stock-item-form.component.scss']
 })

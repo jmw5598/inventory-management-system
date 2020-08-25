@@ -3,7 +3,7 @@ import { FormGroup, ControlContainer } from '@angular/forms';
 import { Category } from '@inv/core';
 
 @Component({
-  selector: 'inv-product-item-form',
+  selector: 'inv-shared-product-item-form',
   templateUrl: './product-item-form.component.html',
   styleUrls: ['./product-item-form.component.scss']
 })
