@@ -10,31 +10,40 @@
         <nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="12" nzXl="8">
           <nz-tabset [nzType]="'card'" (nzSelectChange)="onTabChange($event)">
             <nz-tab [nzTitle]="'Search'">
-              <inv-product-item-search
-                  [productItem]="(selectedProductItemFromSearch$ | async)"
-                  (onSelection)="onProductItemSelection($event)"
-                  (onDeselection)="onProductItemDeselection($event)">
-              </inv-product-item-search>
+              <nz-card>
+                <h2 class="card-section-header">Search existing product items</h2>
+                <inv-product-item-search
+                    [productItem]="(selectedProductItemFromSearch$ | async)"
+                    (onSelection)="onProductItemSelection($event)"
+                    (onDeselection)="onProductItemDeselection($event)">
+                </inv-product-item-search>
+              </nz-card>
             </nz-tab>
             <nz-tab [nzTitle]="'Create'">
-              <inv-shared-product-item-form
-                  [categories]="(categories$ | async)">
-              </inv-shared-product-item-form>
+              <nz-card>
+                <h2 class="card-section-header">Create a new product item</h2>
+                <inv-shared-product-item-form
+                    [categories]="(categories$ | async)">
+                </inv-shared-product-item-form>
+              </nz-card>
             </nz-tab>
           </nz-tabset>
         </nz-col>
 
         <!-- Stock Item Form -->
         <nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="12" nzXl="12">
-          <inv-shared-stock-item-form
-              [stockrooms]="(stockrooms$ | async)"
-              [itemConditions]="(itemConditions$ | async)">
-          </inv-shared-stock-item-form>
-          <nz-form-item>
-            <nz-form-control [nzOffset]="5" [nzSpan]="19">
-              <button nz-button nzType="primary">Save</button>
-            </nz-form-control>
-          </nz-form-item>
+          <nz-card>
+            <h2 style="font-weight: bold;">Stock item details</h2>
+            <inv-shared-stock-item-form
+                [stockrooms]="(stockrooms$ | async)"
+                [itemConditions]="(itemConditions$ | async)">
+            </inv-shared-stock-item-form>
+            <nz-form-item>
+              <nz-form-control [nzOffset]="5" [nzSpan]="19">
+                <button nz-button nzType="primary">Save</button>
+              </nz-form-control>
+            </nz-form-item>
+          </nz-card>
         </nz-col>
         
       </nz-row>
