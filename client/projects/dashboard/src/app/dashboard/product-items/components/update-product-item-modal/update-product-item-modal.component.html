@@ -1,0 +1,30 @@
+<form [formGroup]="form" novalidate>
+  <div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" novalidate>
+      <nz-alert 
+          *ngIf="(createProductItemResponseMessage$ | async)"
+          [nzType]="(createProductItemResponseMessage$ | async).status" 
+          [nzMessage]="(createProductItemResponseMessage$ | async).message" 
+          nzShowIcon>
+      </nz-alert>
+      <inv-shared-product-item-form
+          [categories]="(categories$ | async)">
+    </inv-shared-product-item-form>
+    </form>
+  </div>
+  <div *nzModalFooter>
+    <button 
+        nz-button 
+        nzType="primary" 
+        [disabled]="form.invalid" 
+        (click)="onSubmit(form.value)">
+      Save
+    </button>
+    <button 
+        nz-button 
+        nzType="default" 
+        (click)="onCloseModal()">
+      Close
+    </button>
+  </div>
+</form>
