@@ -9,6 +9,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { CreateStockroomComponent } from './pages/create-stockroom/create-stockroom.component';
 import { StockroomFormComponent } from './components/stockroom-form/stockroom-form.component';
 import { EditStockroomComponent } from './pages/edit-stockroom/edit-stockroom.component';
+import { CreateStockroomModalComponent } from './components/create-stockroom-modal/create-stockroom-modal.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { EditStockroomComponent } from './pages/edit-stockroom/edit-stockroom.co
     CreateStockroomComponent,
     StockroomFormComponent,
     EditStockroomComponent,
+    CreateStockroomModalComponent,
  ],
   imports: [
     CommonModule,
