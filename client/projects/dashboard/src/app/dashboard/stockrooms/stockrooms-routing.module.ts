@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { CreateStockroomComponent } from './pages/create-stockroom/create-stockroom.component';
-import { EditStockroomComponent } from './pages/edit-stockroom/edit-stockroom.component';
 import { ManageStockroomsComponent } from './pages/manage-stockrooms/manage-stockrooms.component';
 import { StockroomDetailsComponent } from './pages/stockroom-details/stockroom-details.component';
 import { 
@@ -11,11 +9,6 @@ import {
   StockItemsByStockroomGuard } from '@dashboard/core/guards';
 
 const routes: Routes = [
-  {
-    path: 'create',
-    component: CreateStockroomComponent,
-    data: { breadcrumb: 'Create' }
-  },
   {
     path: 'manage',
     component: ManageStockroomsComponent,
@@ -34,11 +27,6 @@ const routes: Routes = [
         path: 'details',
         component: StockroomDetailsComponent,
         data: { breadcrumb: 'Details' }
-      },
-      {
-        path: 'edit',
-        component: EditStockroomComponent,
-        data: { breadcrumb: 'Edit' }
       },
       {
         path: '**',
