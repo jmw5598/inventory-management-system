@@ -33,7 +33,7 @@ const providers: any[] = [
 
 @NgModule({})
 export class InvCoreModule {
-  public static forRoot(config: InvCoreConfig): ModuleWithProviders {
+  public static forRoot(config: InvCoreConfig): ModuleWithProviders<InvCoreModule> {
     return {
       ngModule: InvCoreModule,
       providers: [
