@@ -15,7 +15,7 @@
   </nz-page-header>
   <div class="stockroom-summaries">
     <div class="stockroom-summaries-filter">
-      <a class="btn-new-stockroom" [routerLink]="['../create']" nz-button nzType="primary">
+      <a class="btn-new-stockroom" (click)="showCreateStockroomModal()" nz-button nzType="primary">
         <i nz-icon nzType="plus" nzTheme="outline"></i>
         Create Stockroom
       </a>

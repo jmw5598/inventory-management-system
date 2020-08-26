@@ -1,12 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, take } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 
 import { StockroomSummary } from '@inv/core';
 import { IAppState } from '@dashboard/core/store/state';
 import { selectStockroomSummaries } from '@dashboard/core/store/selectors';
 import { deleteStockroom, getStockroomSummaries, getStockroomSummariesSuccess } from '@dashboard/core/store/actions';
+import { CreateStockroomModalComponent, CreateStockroomModalCloseResponse } from '../../components/create-stockroom-modal/create-stockroom-modal.component';
 
 class StockroomSummaryTotals {
   public stockroomCount: number = 0;
@@ -24,7 +26,10 @@ export class ManageStockroomsComponent implements OnInit, OnDestroy {
   public stockroomSummaries$: Observable<StockroomSummary[]>;
   public stockroomSummaryTotals: StockroomSummaryTotals;
 
-  constructor(private _store: Store<IAppState>) {
+  constructor(
+    private _store: Store<IAppState>,
+    private _modalService: NzModalService
+  ) {
     this.stockroomSummaryTotals = new StockroomSummaryTotals();
   }
 
@@ -52,6 +57,23 @@ export class ManageStockroomsComponent implements OnInit, OnDestroy {
         return total;
       }, new StockroomSummaryTotals());
     });
+  }
+
+  public showCreateStockroomModal(): void {
+    const modalRef: NzModalRef = this._modalService.create({
+      nzMaskClosable: false,
+      nzCloseIcon: '',
+      nzTitle: 'Create New Stockroom',
+      nzContent: CreateStockroomModalComponent
+    });
+
+    modalRef.afterClose
+      .pipe(take(1))
+      .subscribe((data: CreateStockroomModalCloseResponse) => {
+        if (data.hasStockroomsBeenCreated) {
+          this.onReloadStockroomSummaries();
+        }
+      })
   }
 
   ngOnDestroy(): void {
