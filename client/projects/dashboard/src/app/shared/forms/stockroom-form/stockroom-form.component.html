@@ -1,1 +1,77 @@
-<p>stockroom-form works!</p>
+<div class="stock-item-form" [formGroup]="form.get('stockroom')">
+  <!-- Stockroom Id Input (Hidden) -->
+  <input type="hidden" name="id" id="id" formControlName="id" />
+
+  <!-- Stockroom Name Input -->
+  <nz-form-item>
+    <nz-form-label nzSpan="24" nzFor="name" nzRequired>Name</nz-form-label>
+    <nz-form-control nzSpan="24" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="nameErrorTpl">
+      <input nzSize="large" formControlName="name" nz-input name="name" type="text" id="name">
+      <ng-template #nameErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">
+          Please input a stockroom name!
+        </ng-container>
+        <ng-container *ngIf="control.hasError('minLength')">
+          Name must be 3 characters!
+        </ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+
+  <!-- Stockroom Description Input -->
+  <nz-form-item>
+    <nz-form-label nzSpan="24" nzFor="description" nzRequired>Description</nz-form-label>
+    <nz-form-control nzSpan="24" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="descriptionErrorTpl">
+      <input nzSize="large" formControlName="description" nz-input name="description" type="text" id="description">
+      <ng-template #descriptionErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">
+          Please input a purchase date!
+        </ng-container>
+        <ng-container *ngIf="control.hasError('minLength')">
+          Description must be 10 characters!
+        </ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+
+  <!-- Add Stockroom Locations Checkbox -->
+  <nz-form-item>
+    <nz-form-label>
+      <label nz-checkbox
+          formControlName="hasStockroomLocations"
+          (change)="onAddStockroomLocationsChange($event)" 
+          (click)="onAddStockroomLocationsChange($event)">
+        Add Stockroom Locations
+      </label>
+    </nz-form-label>
+  </nz-form-item>
+
+  <!-- Stockroom Locations Input List -->
+  <ng-container *ngIf="form.get('stockroom').value.hasStockroomLocations">
+    <div *ngFor="let group of locations.controls; index as i">
+      <nz-form-item [formGroup]="group">
+        <input type="hidden" formControlName="id" />
+        <nz-form-label [nzSpan]="24" *ngIf="i == 0" [nzFor]="group">Locations </nz-form-label>
+        <nz-form-control [nzSpan]="24"
+          nzErrorTip="Please enter a location name or delete this entry">
+          <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+            <input type="text" nzSize="large" nz-input placeholder="{{ 'Location (e.g Bin ' + (i + 1) + ')' }}" formControlName="description" />
+          </nz-input-group>
+          <ng-template #suffixIconButton>
+            <button nz-button nzSearch type="button" (click)="removeStockroomLocation(i)">
+              <i nz-icon nzType="minus-circle-o"></i>
+            </button>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+    </div> 
+    <nz-form-item>
+      <nz-form-control>
+        <button nz-button style="width: 100%;" nzType="dashed" class="add-button" (click)="addStockroomLocation($event)" type="button">
+          <i nz-icon nzType="plus"></i>
+          Add Location 
+        </button>
+      </nz-form-control>
+    </nz-form-item>
+  </ng-container>
+</div>

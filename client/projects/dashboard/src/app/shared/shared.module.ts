@@ -8,7 +8,7 @@ import { ProductItemFormComponent } from './forms/product-item-form/product-item
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { StockItemFormComponent } from './forms/stock-item-form/stock-item-form.component';
 import { StockItemsTableComponent } from './components/stock-items-table/stock-items-table.component';
-
+import { StockroomFormComponent } from './forms/stockroom-form/stockroom-form.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +16,7 @@ import { StockItemsTableComponent } from './components/stock-items-table/stock-i
     SpinnerComponent,
     StockItemFormComponent,
     StockItemsTableComponent,
+    StockroomFormComponent
   ],
   imports: [
     CommonModule,
@@ -32,6 +33,7 @@ import { StockItemsTableComponent } from './components/stock-items-table/stock-i
     SpinnerComponent,
     StockItemFormComponent,
     StockItemsTableComponent,
+    StockroomFormComponent
   ]
 })
 export class SharedModule { }
