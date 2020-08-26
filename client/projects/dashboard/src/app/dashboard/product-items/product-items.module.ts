@@ -6,7 +6,6 @@ import { CreateProductItemModalComponent } from './components/create-product-ite
 import { ProductItemsRoutingModule } from './product-items-routing.module';
 import { ManageProductItemsComponent } from './pages/manage-product-items/manage-product-items.component';
 import { ProductItemsTableComponent } from './components/product-items-table/product-items-table.component';
-import { EditProductItemComponent } from './pages/edit-product-item/edit-product-item.component';
 import { UpdateProductItemModalComponent } from './components/update-product-item-modal/update-product-item-modal.component';
 
 @NgModule({
@@ -14,7 +13,6 @@ import { UpdateProductItemModalComponent } from './components/update-product-ite
     CreateProductItemModalComponent,
     ManageProductItemsComponent, 
     ProductItemsTableComponent, 
-    EditProductItemComponent,
     UpdateProductItemModalComponent
   ],
   imports: [
