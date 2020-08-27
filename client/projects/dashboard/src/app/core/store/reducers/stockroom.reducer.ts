@@ -62,10 +62,10 @@ const _stockroomReducer = createReducer(
       selectedStockroom: state.selectedStockroom,
     };
   }),
-  on(setSelectedStockroom, (state, stockroom) => {
+  on(setSelectedStockroom, (state, { payload }) => {
     return {
       ...state,
-      selectedStockroom: stockroom
+      selectedStockroom: payload
     }
   }),
   on(setCreateStockroomResponseMessage, (state, { payload }) => {

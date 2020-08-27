@@ -69,7 +69,7 @@ export const getStockroomById = createAction(
 
 export const setSelectedStockroom = createAction(
   StockroomActions.SET_SELECTED_STOCKROOM,
-  props<Stockroom>()
+  (stockroom: Stockroom) => ({ payload: stockroom })
 );
 
 export const updateStockroom = createAction(
