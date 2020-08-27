@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, ControlContainer } from '@angular/forms';
-import { Category } from '@inv/core';
+import { Category, ProductItem } from '@inv/core';
 
 @Component({
   selector: 'inv-shared-product-item-form',
@@ -16,5 +16,10 @@ export class ProductItemFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this._parentControl.control as FormGroup;
+  }
+
+  public onCompareProductItems(category1: Category, category2: Category): boolean {
+    if (!category1 || !category2) return false;
+    return category1.id === category2.id;
   }
 }
