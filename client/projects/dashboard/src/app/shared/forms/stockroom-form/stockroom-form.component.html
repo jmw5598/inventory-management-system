@@ -48,7 +48,7 @@
 
   <!-- Stockroom Locations Input List -->
   <ng-container *ngIf="form.get('stockroom').value.hasStockroomLocations">
-    <div *ngFor="let group of locations.controls; index as i">
+    <div *ngFor="let group of getLocationControls(); index as i">
       <nz-form-item [formGroup]="group">
         <input type="hidden" formControlName="id" />
         <nz-form-label [nzSpan]="24" *ngIf="i == 0" [nzFor]="group">Locations </nz-form-label>
