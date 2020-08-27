@@ -25,7 +25,8 @@
     </div>
     <inv-stockrooms-table 
         [summaries]="(stockroomSummaries$ | async)"
-        (onDeleteStockroom)="onDeleteStockroom($event)">
+        (onDeleteStockroom)="onDeleteStockroom($event)"
+        (onEditStockroom)="onEditStockroom($event)">
     </inv-stockrooms-table>
   </div>
 </div>
