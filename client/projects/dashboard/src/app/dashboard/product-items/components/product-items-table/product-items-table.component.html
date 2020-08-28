@@ -28,7 +28,7 @@
       <td>
         <a nz-typography 
             nzType="warning" 
-            [routerLink]="['../', product.id, 'edit']">
+            (click)="editProductItem(product)">
           <i nz-icon nzType="edit" nzTheme="outline"></i>
         </a>
         <a nz-typography 
