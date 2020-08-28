@@ -4,9 +4,8 @@ import {
   FormBuilder, 
   FormGroup, 
   FormArray, 
-  ControlContainer, 
-  Validators } from '@angular/forms';
-import { Location } from '@inv/core';
+  ControlContainer } from '@angular/forms';
+import { buildLocationFormGroup } from './stockroom-form.builder';
 
 @Component({
   selector: 'inv-shared-stockroom-form',
@@ -16,7 +15,6 @@ import { Location } from '@inv/core';
 export class StockroomFormComponent implements OnInit {
   public form: FormGroup;
   public locations: FormArray;
-  private _locations: Location[];
 
   constructor(
     private _parentControl: ControlContainer,
@@ -25,19 +23,12 @@ export class StockroomFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this._parentControl.control as FormGroup;
-    this.locations = this._formBuilder.array([]);
-    this.addStockroomLocation();
+    this.locations = this.form.get('stockroom').get('locations') as FormArray;
   }
 
-  public addStockroomLocation(location?: Location): void {
-    const stockroom: FormGroup = this.form.get('stockroom') as FormGroup;
-    const locations: FormArray = stockroom.get('locations') as FormArray;
-    this.locations.push(
-      this._formBuilder.group({
-        id: [(location ? location.id : '')],
-        description: [(location ? location.description : ''), [Validators.required]]
-      })
-    );
+  public addStockroomLocation(): void {
+    const locationFormGroup: FormGroup = buildLocationFormGroup(this._formBuilder);
+    this.locations.push(locationFormGroup);
   }
 
   public removeStockroomLocation(index: number): void {
@@ -63,6 +54,6 @@ export class StockroomFormComponent implements OnInit {
   public getLocationControls(): AbstractControl[] {
     const stockroom: FormGroup = this.form.get('stockroom') as FormGroup;
     const locations: FormArray = stockroom.get('locations') as FormArray;
-    return locations.controls;
+    return locations.controls ? locations.controls : null;
   }
 }

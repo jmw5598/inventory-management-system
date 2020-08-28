@@ -5,6 +5,14 @@ export const buildStockroomFormGroup = (formBuilder: FormBuilder): FormGroup => 
     id: [''],
     name: ['', [Validators.required, Validators.minLength(3)]],
     description: ['', [Validators.required, Validators.minLength(10)]],
-    hasStockroomLocations: [false]
+    hasStockroomLocations: [false],
+    locations: formBuilder.array([])
+  });
+}
+
+export const buildLocationFormGroup = (formBuilder: FormBuilder) => {
+  return formBuilder.group({
+    id: [],
+    description: ['', [Validators.required]]
   });
 }
