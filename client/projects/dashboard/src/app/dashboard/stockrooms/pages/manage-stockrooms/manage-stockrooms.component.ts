@@ -7,7 +7,7 @@ import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { Stockroom, StockroomSummary } from '@inv/core';
 import { IAppState } from '@dashboard/core/store/state';
 import { selectStockroomSummaries } from '@dashboard/core/store/selectors';
-import { deleteStockroom, getStockroomSummaries, getStockroomSummariesSuccess } from '@dashboard/core/store/actions';
+import { deleteStockroom, getStockroomSummaries, getStockroomSummariesSuccess, getStockroomById } from '@dashboard/core/store/actions';
 import { CreateStockroomModalComponent, CreateStockroomModalCloseResponse } from '../../components/create-stockroom-modal/create-stockroom-modal.component';
 import { UpdateStockroomModalComponent, UpdateStockroomModalCloseResponse } from '../../components/update-stockroom-modal/update-stockroom-modal.component';
 
@@ -45,9 +45,10 @@ export class ManageStockroomsComponent implements OnInit, OnDestroy {
   }
 
   public onEditStockroom(stockroom: Stockroom): void {
-    // TODO - Figure out how stockroom data will be passed to modal?
-    // Not sure if using ngrx store is the wrong way to do this?
-    this.showEditStockroomModal();  
+    if (stockroom && stockroom.id) {
+      this._store.dispatch(getStockroomById({ id: stockroom.id }));
+      this.showEditStockroomModal();
+    }
   }
 
   public onReloadStockroomSummaries(): void {
