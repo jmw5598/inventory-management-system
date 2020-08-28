@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators'; 
+import { tap, take, filter } from 'rxjs/operators'; 
 import { NzModalRef } from 'ng-zorro-antd/modal';
 
 import { Category, ProductItem, ResponseMessage } from '@inv/core';
 import { IAppState } from '@dashboard/core/store/state';
 import { buildProductItemFormGroup } from '@dashboard/shared/forms';
 import { updateProductItem, setUpdateProductItemResponseMessage } from '@dashboard/core/store/actions';
-import { selectCategories, selectUpdateProductItemResponseMessage } from '@dashboard/core/store/selectors';
+import { selectCategories, selectUpdateProductItemResponseMessage, selectSelectedProductItem } from '@dashboard/core/store/selectors';
 
 export interface UpdateProductItemModalCloseResponse {
   hasProductItemsBeenUpdated: boolean
@@ -35,8 +35,12 @@ export class UpdateProductItemModalComponent implements OnInit {
       productItem: buildProductItemFormGroup(this._formBuilder)
     });
     
-    // @@@ TODO - Need to patch through product-item values to form.
-
+    this._store.select(selectSelectedProductItem)
+      .pipe(
+        filter((productItem: ProductItem) => !!productItem),
+        tap((productItem: ProductItem) => this._patchProductItemToForm(productItem)),
+        take(1)
+      ).subscribe(); 
   }
 
   ngOnInit(): void {
@@ -46,7 +50,6 @@ export class UpdateProductItemModalComponent implements OnInit {
       .pipe(
         tap((message: ResponseMessage) => {
           if (message) {
-            this.form.reset();
             setTimeout(() => this._store.dispatch(setUpdateProductItemResponseMessage(null)), 3000);
           }
         })
@@ -66,5 +69,9 @@ export class UpdateProductItemModalComponent implements OnInit {
     this._modal.destroy({
       hasProductItemsBeenUpdated: this._hasProductItemsBeenUpdated
     } as UpdateProductItemModalCloseResponse);
+  }
+
+  private _patchProductItemToForm(productItem: ProductItem): void {
+    this.form.get('productItem').patchValue(productItem);
   }
 }

@@ -7,8 +7,10 @@ import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { ProductItem, Page, IPageable, PageRequest } from '@inv/core';
 import { IAppState } from '@dashboard/core/store/state';
 import { selectProductItemSearchResult } from '@dashboard/core/store/selectors';
-import { searchProductItems, deleteProductItem } from '@dashboard/core/store/actions';
+import { searchProductItems, deleteProductItem, getProductItemById } from '@dashboard/core/store/actions';
 import { CreateProductItemModalComponent, CreateProductItemModalCloseResponse } from '../../components/create-product-item-modal/create-product-item-modal.component';
+import { UpdateProductItemModalComponent, UpdateProductItemModalCloseResponse } from '../../components/update-product-item-modal/update-product-item-modal.component';
+import { UpdateStockroomModalCloseResponse } from '@dashboard/dashboard/stockrooms/components/update-stockroom-modal/update-stockroom-modal.component';
 
 @Component({
   selector: 'inv-manage-product-items',
@@ -69,6 +71,13 @@ export class ManageProductItemsComponent implements OnInit {
     this._store.dispatch(deleteProductItem({ id: product.id }));
   }
 
+  public onEditProductItem(product: ProductItem): void {
+    if (product && product.id) {
+      this._store.dispatch(getProductItemById({ id: product.id }));
+      this.showEditProductItemModal();
+    }
+  }
+
   public onSearchProductItemsKeyup($event): void {
     this._searchTextChangeSubject.next($event.target.value);
   }
@@ -83,6 +92,8 @@ export class ManageProductItemsComponent implements OnInit {
 
   public showCreateProductItemModal(): void {
     const modalRef: NzModalRef = this._modalService.create({
+      nzMaskClosable: false,
+      nzCloseIcon: '',
       nzTitle: 'Create New Product Item',
       nzContent: CreateProductItemModalComponent
     });
@@ -91,6 +102,23 @@ export class ManageProductItemsComponent implements OnInit {
       .pipe(take(1))
       .subscribe((data: CreateProductItemModalCloseResponse) => {
         if (data.hasProductItemsBeenCreated) {
+          this.onFilterProductItems();
+        }
+      });
+  }
+
+  public showEditProductItemModal(): void {
+    const modalRef: NzModalRef = this._modalService.create({
+      nzMaskClosable: false,
+      nzCloseIcon: '',
+      nzTitle: 'Update Product Item',
+      nzContent: UpdateProductItemModalComponent
+    });
+
+    modalRef.afterClose
+      .pipe(take(1))
+      .subscribe((data: UpdateProductItemModalCloseResponse) => {
+        if (data.hasProductItemsBeenUpdated) {
           this.onFilterProductItems();
         }
       });
