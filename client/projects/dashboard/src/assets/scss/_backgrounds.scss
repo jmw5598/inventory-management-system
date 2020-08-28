@@ -1,0 +1,7 @@
+.bg-gradient-primary-to-secondary {
+  @include gradient-primary-to-secondary;
+}
+
+.bg-gradient-secondary-to-primary {
+  @include gradient-secondary-to-primary;
+}

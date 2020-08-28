@@ -1,0 +1,7 @@
+@mixin gradient-primary-to-secondary {
+  background-image: linear-gradient(135deg, $primary-color 26%, $secondary-color);
+}
+
+@mixin gradient-secondary-to-primary {
+  background-image: linear-gradient(135deg, $secondary-color 26%, $primary-color);
+}
