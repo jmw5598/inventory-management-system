@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 
+import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete'
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
@@ -76,6 +77,9 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons)
     NzTabsModule,
     NzTagModule,
     NzTypographyModule,
+  ],
+  providers: [
+    { provide: NZ_I18N, useValue: en_US }
   ]
 })
 export class NgZorroModule {}
