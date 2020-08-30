@@ -14,6 +14,7 @@ import { InvoicesModule } from './invoices/invoices.module';
 import { ListedItemsModule } from './listed-items/listed-items.module';
 import { PlansModule } from './plans/plans.module';
 import { StockItemsModule } from './stock-items/stock-items.module';
+import { LoggerModule } from './logger/logger.module';
 
 @Module({
   imports: [
@@ -30,7 +31,8 @@ import { StockItemsModule } from './stock-items/stock-items.module';
     InvoicesModule,
     ListedItemsModule,
     PlansModule,
-    StockItemsModule
+    StockItemsModule,
+    LoggerModule
   ],
   controllers: [],
   providers: [],
