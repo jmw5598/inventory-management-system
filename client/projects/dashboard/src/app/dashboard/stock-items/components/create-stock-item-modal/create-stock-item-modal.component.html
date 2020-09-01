@@ -1,0 +1,47 @@
+<form [formGroup]="form" novalidate>
+  <div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" novalidate>
+      <nz-alert 
+          *ngIf="(createStockItemResponseMessage$ | async)"
+          [nzType]="(createStockItemResponseMessage$ | async).status" 
+          [nzMessage]="(createStockItemResponseMessage$ | async).message" 
+          nzShowIcon>
+      </nz-alert>
+      <div>
+        <nz-steps 
+            [nzCurrent]="currentStep" 
+            nzLabelPlacement="vertical" 
+            nzSize="small">
+          <nz-step [nzTitle]="CreateStockItemStep.PRODUCT_ITEM | titlecase"></nz-step>
+          <nz-step [nzTitle]="CreateStockItemStep.STOCK_ITEM | titlecase"></nz-step>
+        </nz-steps>
+        <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" novalidate>
+          <ng-container [ngSwitch]="step">
+            <div *ngSwitchCase="CreateStockItemStep.PRODUCT_ITEM">
+              <inv-step-product-item></inv-step-product-item>
+            </div>
+            <div *ngSwitchCase="CreateStockItemStep.STOCK_ITEM">
+              <inv-step-stock-item></inv-step-stock-item>
+            </div>
+          </ng-container>
+        </form>
+      </div>
+      <!-- <inv-shared-stockroom-form></inv-shared-stockroom-form> -->
+    </form>
+  </div>
+  <div *nzModalFooter>
+    <button 
+        nz-button 
+        nzType="primary" 
+        [disabled]="form.invalid" 
+        (click)="onSubmit(form.value)">
+      Create
+    </button>
+    <button 
+        nz-button 
+        nzType="default" 
+        (click)="onCloseModal()">
+      Close
+    </button>
+  </div>
+</form>

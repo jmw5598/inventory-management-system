@@ -3,7 +3,10 @@
   <nz-form-item>
     <nz-form-label nzSpan="24" nzFor="purchaseDate" nzRequired>Purchase Date</nz-form-label>
     <nz-form-control nzSpan="24" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="purchaseDateErrorTpl">
-      <input nzSize="large" formControlName="purchaseDate" nz-input name="purchaseDate" type="text" id="purchaseDate">
+      <!-- <input nzSize="large" formControlName="purchaseDate" nz-input name="purchaseDate" type="text" id="purchaseDate"> -->
+      <nz-date-picker style="width: 100%" [nzSize]="'large'" formControlName="purchaseDate" name="purchaseDate" id="purchaseDate">
+
+      </nz-date-picker>
       <ng-template #purchaseDateErrorTpl let-control>
         <ng-container *ngIf="control.hasError('required')">
           Please input a purchase date!
@@ -34,8 +37,16 @@
   <!-- Quantity Input -->
   <nz-form-item>
     <nz-form-label nzSpan="24" nzFor="quantity" nzRequired>Quantity</nz-form-label>
-    <nz-form-control nzSpan="24" nzHasFeedback>
+    <nz-form-control nzSpan="24" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="quantityErrorTpl">
       <input nzSize="large" formControlName="quantity" nz-input name="quantity" type="text" id="quantity">
+      <ng-template #quantityErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">
+          Please input a quantity!
+        </ng-container>
+        <ng-container *ngIf="control.hasError('pattern')">
+          Quantity must be numerical! 
+        </ng-container>
+      </ng-template>
     </nz-form-control>
   </nz-form-item> 
 

@@ -8,6 +8,9 @@ import { ManageStockItemsComponent } from './pages/manage-stock-items/manage-sto
 import { ProductItemSelectionComponent } from './components/product-item-selection/product-item-selection.component';
 import { StockItemsRoutingModule } from './stock-items-routing.module';
 import { ProductItemSearchComponent } from './components/product-item-search/product-item-search.component';
+import { CreateStockItemModalComponent } from './components/create-stock-item-modal/create-stock-item-modal.component';
+import { StepStockItemComponent } from './components/step-stock-item/step-stock-item.component';
+import { StepProductItemComponent } from './components/step-product-item/step-product-item.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +19,9 @@ import { ProductItemSearchComponent } from './components/product-item-search/pro
     ManageStockItemsComponent,
     ProductItemSelectionComponent,
     ProductItemSearchComponent,
+    CreateStockItemModalComponent,
+    StepStockItemComponent,
+    StepProductItemComponent,
   ],
   imports: [
     CommonModule,
