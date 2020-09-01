@@ -1,1 +1,7 @@
-<p>step-stock-item works!</p>
+<div>
+  <h2 style="font-weight: bold;">Stock item details</h2>
+  <inv-shared-stock-item-form
+      [stockrooms]="(stockrooms$ | async)"
+      [itemConditions]="(itemConditions$ | async)">
+  </inv-shared-stock-item-form>
+</div>

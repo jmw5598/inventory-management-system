@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -37,8 +37,9 @@ export class CreateStockItemModalComponent implements OnInit {
     private _modal: NzModalRef
   ) {
     this.form = this._formBuilder.group({
-      productItem: [],
-      stockItem: []
+      isNewProductItem: [false, [Validators.required]],
+      productItem: buildProductItemFormGroup(this._formBuilder), 
+      stockItem: buildStockItemFormGroup(this._formBuilder)
     });
   }
 
@@ -56,7 +57,7 @@ export class CreateStockItemModalComponent implements OnInit {
       );
   }
 
-  public pre(): void {
+  public prev(): void {
     this.currentStep -= 1;
     this.changeContent();
   }
@@ -86,8 +87,7 @@ export class CreateStockItemModalComponent implements OnInit {
       }
     }
   }
-  // TODO FIX THIS AND FORM
-  // A ProuctItem should be in the StockItem class???
+  
   public onSubmit(formValue: { productItem: ProductItem, stockItem: StockItem }): void {
     this._hasStockItemsBeenCreated = true;
     // this._store.dispatch(createStockItem()) 

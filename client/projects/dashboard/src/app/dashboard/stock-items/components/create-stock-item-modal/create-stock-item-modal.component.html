@@ -30,18 +30,35 @@
     </form>
   </div>
   <div *nzModalFooter>
+    <button
+        *ngIf="step === CreateStockItemStep.STOCK_ITEM"
+        nz-button
+        nzType="default"
+        [disabled]="form.get('productItem').invalid"
+        (click)="prev()">
+      <i nz-icon nzType="left" nzTheme="outline"></i> Back
+    </button>
+    <button
+        *ngIf="step === CreateStockItemStep.PRODUCT_ITEM"
+        nz-button
+        nzType="primary"
+        [disabled]="form.get('productItem').invalid"
+        (click)="next()">
+      Next <i nz-icon nzType="right" nzTheme="outline"></i>
+    </button>
     <button 
+        *ngIf="step === CreateStockItemStep.STOCK_ITEM"
         nz-button 
         nzType="primary" 
         [disabled]="form.invalid" 
         (click)="onSubmit(form.value)">
-      Create
+      <i nz-icon nzType="check" nzTheme="outline"></i> Create
     </button>
     <button 
         nz-button 
         nzType="default" 
         (click)="onCloseModal()">
-      Close
+      <i nz-icon nzType="close" nzTheme="outline"></i> Close
     </button>
   </div>
 </form>

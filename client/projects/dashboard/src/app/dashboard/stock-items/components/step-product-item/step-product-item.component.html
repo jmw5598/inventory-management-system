@@ -1,1 +1,16 @@
-<p>step-product-item works!</p>
+<nz-tabset [nzType]="'line'" (nzSelectChange)="onTabChange($event)">
+  <nz-tab [nzTitle]="'Search'" style="margin-top: 1.5rem;">
+    <h2 class="card-section-header">Search existing product items</h2>
+    <inv-product-item-search
+        [productItem]="(selectedProductItemFromSearch$ | async)"
+        (onSelection)="onProductItemSelection($event)"
+        (onDeselection)="onProductItemDeselection($event)">
+    </inv-product-item-search>
+  </nz-tab>
+  <nz-tab [nzTitle]="'Create'">
+    <h2 class="card-section-header">Create a new product item</h2>
+    <inv-shared-product-item-form
+        [categories]="(categories$ | async)">
+    </inv-shared-product-item-form>
+  </nz-tab>
+</nz-tabset>

@@ -16,6 +16,11 @@ const routes: Routes = [
   {
     path: 'manage',
     component: ManageStockItemsComponent,
+    canActivate: [
+      CategoriesGuard,
+      ItemConditionsGuard,
+      StockroomsGuard
+    ],
     data: { breadcrumb: 'Manage ' }
   },
   {

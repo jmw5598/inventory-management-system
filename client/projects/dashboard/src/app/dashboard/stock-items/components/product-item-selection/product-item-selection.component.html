@@ -1,5 +1,5 @@
 <ng-container *ngIf="productItem; else noProductItemSelected">
-  <nz-card  style="margin-top:16px;" [nzExtra]="extraTemplate">
+  <nz-card  style="margin-top:16px;">
     <nz-list>
       <nz-list-item>
         <span nz-typography><strong>Title</strong></span>
@@ -26,12 +26,12 @@
         {{ productItem.category.description}}
       </nz-list-item>
     </nz-list>
-    <ng-template #extraTemplate>
-      <a (click)="deselectProductItem()">
-        <i nz-icon nzType="close-square" style="font-size: 1.5rem;" nzTheme="outline"></i>
-      </a>
-    </ng-template>
   </nz-card>
+  <div class="product-item-deselection text-left" style="margin-left: 0.5rem;">
+    <a (click)="deselectProductItem()">
+      <i nz-icon nzType="close-square" style="font-size: 1rem;" nzTheme="outline"></i> Deselect
+    </a>
+  </div>
 </ng-container>
 <ng-template #noProductItemSelected>
   <nz-card nzType="inner" style="margin-top:16px;">
