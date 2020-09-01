@@ -12,3 +12,8 @@ export const selectSelectedProductItemFromSearch = createSelector(
   selectStockItemState,
   (state: IStockItemState) => state.selectedProductItemFromSearch
 );
+
+export const selectCreateStockItemResponseMessage = createSelector(
+  selectStockItemState,
+  (state: IStockItemState) => state.createStockItemResponseMessage
+);

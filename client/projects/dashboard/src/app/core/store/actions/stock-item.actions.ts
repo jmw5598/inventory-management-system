@@ -1,9 +1,10 @@
 import { createAction, props } from '@ngrx/store';
-import { ProductItem, StockItem, Page, IPageable } from '@inv/core';
+import { ProductItem, StockItem, Page, IPageable, ResponseMessage } from '@inv/core';
 
 export enum StockItemActions {
   CREATE_STOCK_ITEM = '[Stock Item] Create Stock Item',
   CREATE_STOCK_ITEM_SUCCESS = '[Stock Item] Create Stock Item Success',
+  CREATE_STOCK_ITEM_RESPONSE_MESSAGE = '[Stock Item] Create Stock Item Response Message',
   DELETE_STOCK_ITEM = '[Stock Item] Delete Stock Item',
   DELETE_STOCK_ITEM_SUCCESS = '[Stock Item] Delete Stock Item Success',
   LIST_STOCK_ITEM = '[Stock Item] List Stock Item',
@@ -75,3 +76,8 @@ export const setSelectedProductItemFromSearch = createAction(
   StockItemActions.SET_SELECTED_PRODUCT_ITEM_FROM_SEARCH,
   (item: ProductItem) => ({ payload: item })
 );
+
+export const setCreateStockItemResponseMessage = createAction(
+  StockItemActions.CREATE_STOCK_ITEM_RESPONSE_MESSAGE,
+  (message: ResponseMessage) => ({ payload: message })
+)
