@@ -1,2 +1,50 @@
-<p>manage-stock-items works!</p>
-<button (click)="showCreateStockItemModal()">Create Stock Item</button>
+<div>
+  <nz-page-header nzBackIcon>
+    <nz-page-header-title>Manage Stock Items</nz-page-header-title>
+    <nz-page-header-subtitle></nz-page-header-subtitle>
+  </nz-page-header>
+  <div class="stock-items">
+    <div class="stock-items-filter">
+      <div class="search-items">
+        <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+          <input 
+              type="text" 
+              nz-input 
+              placeholder="Search stock items" 
+              [(ngModel)]="searchTerm" 
+              (keyup)="onSearchStockItemsKeyup($event)" />
+        </nz-input-group>
+        <ng-template #suffixIconButton>
+          <button 
+              nz-button 
+              nzSearch 
+              (click)="onFilterStockItems()">
+            <i nz-icon nzType="search"></i>
+          </button>
+        </ng-template>
+      </div>
+      <div>
+        <a nz-button 
+            class="btn-reload" 
+            (click)="onResetStockItemSearch()">
+          <i nz-icon nzType="reload" nzTheme="outline"></i>
+        </a>
+      </div>
+      <div>
+        <a nz-button 
+            class="btn-new-stock-item" 
+            (click)="showCreateStockItemModal()" 
+            nzType="primary">
+          <i nz-icon nzType="plus" nzTheme="outline"></i>
+          Create Stock Item 
+        </a>
+      </div>
+    </div>
+    <inv-stock-items-table 
+        [page]="currentPage"
+        (onDeleteProductItem)="onDeleteStockItem($event)"
+        (onEditProductItem)="onEditStockItem($event)"
+        (onPageChange)="onPageChange($event)">
+    </inv-stock-items-table>
+  </div>
+</div>
