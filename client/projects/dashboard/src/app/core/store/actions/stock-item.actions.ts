@@ -13,7 +13,9 @@ export enum StockItemActions {
   SEARCH_STOCK_ITEMS_SUCCESS = '[Stock Item] Search Stock Items Success',
   UPDATE_STOCK_ITEM = '[Stock Item] Update Stock Item',
   UPDATE_STOCK_ITEM_SUCCESS = '[Stock Item] Update Stock Item Success',
-  SET_SELECTED_PRODUCT_ITEM_FROM_SEARCH = '[Stock Item] Set Selected Product Item From Search'
+  SET_SELECTED_PRODUCT_ITEM_FROM_SEARCH = '[Stock Item] Set Selected Product Item From Search',
+  GET_STOCK_ITEM_BY_ID = '[Stock Item] Get Stock Item By Id',
+  SET_SELECTED_STOCK_ITEM = '[Stock Item] Set Selected Stock Item'
 };
 
 export interface StockItemSearch {
@@ -81,3 +83,13 @@ export const setCreateStockItemResponseMessage = createAction(
   StockItemActions.CREATE_STOCK_ITEM_RESPONSE_MESSAGE,
   (message: ResponseMessage) => ({ payload: message })
 )
+
+export const getStockItemById = createAction(
+  StockItemActions.GET_STOCK_ITEM_BY_ID,
+  props<{ id: number }>()
+);
+
+export const setSelectedStockItem = createAction(
+  StockItemActions.SET_SELECTED_STOCK_ITEM,
+  (stockItem: StockItem) => ({ payload: stockItem})
+);
