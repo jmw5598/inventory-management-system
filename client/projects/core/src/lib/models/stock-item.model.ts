@@ -4,6 +4,7 @@ import { ProductItem } from './product-item.model';
 import { Stockroom } from './stockroom.model';
 
 export class StockItem {
+  public id: number;
   public purchaseDate: Date;
   public purchasePrice: number;
   public quantity: number;
