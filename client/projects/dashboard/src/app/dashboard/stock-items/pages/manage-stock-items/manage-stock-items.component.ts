@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { take, tap, takeUntil, debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -15,7 +15,7 @@ import { CreateStockItemModalComponent, CreateStockItemModalCloseResponse } from
   templateUrl: './manage-stock-items.component.html',
   styleUrls: ['./manage-stock-items.component.scss']
 })
-export class ManageStockItemsComponent implements OnInit {
+export class ManageStockItemsComponent implements OnInit, OnDestroy {
   public readonly DEFAULT_PAGE: IPageable;
   private _subscriptionSubject: Subject<void>;
   private _searchTextChangeSubject: Subject<string>;
@@ -32,7 +32,17 @@ export class ManageStockItemsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    this._store.select(selectStockItemSearchResult)
+      .pipe(takeUntil(this._subscriptionSubject))
+      .subscribe(page => this.currentPage = page); 
+
+    this._searchTextChangeSubject
+      .pipe(
+        takeUntil(this._subscriptionSubject),
+        debounceTime(500),
+        distinctUntilChanged(),
+        tap(search => this.onFilterStockItems())
+      ).subscribe();
   }
 
   public onResetStockItemSearch(): void {
@@ -109,5 +119,10 @@ export class ManageStockItemsComponent implements OnInit {
           // TODO refresh the table?
         }
       })
+  }
+
+  ngOnDestroy(): void {
+    this._subscriptionSubject.next();
+    this._subscriptionSubject.complete();
   }
 }
