@@ -9,7 +9,7 @@ export const buildStockItemFormGroup = (formBuilder: FormBuilder) => {
     purchasePrice: ['', [
       Validators.required, 
       Validators.min(0), 
-      Validators.pattern(/^[\d]{1,}[.]?[\d]{1,}$/)
+      Validators.pattern(/^[\d]{1,}[.]?[\d]{0,}$/)
     ]],
     quantity: ['', [
       Validators.required, 

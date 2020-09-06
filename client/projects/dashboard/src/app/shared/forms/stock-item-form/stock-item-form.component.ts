@@ -24,6 +24,8 @@ export class StockItemFormComponent implements OnInit {
 
   public onStockroomChange(stockroom: Stockroom): void {
     this.form.get('stockItem').get('location').reset();
-    this.locations = stockroom.locations;
+    if (stockroom && stockroom.locations) {
+      this.locations = stockroom.locations;
+    }
   }
 }
