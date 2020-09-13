@@ -31,45 +31,53 @@
     </nz-form-control>
   </nz-form-item>
 
-  <!-- Sku Input -->
-  <nz-form-item>
-    <nz-form-label nzSpan="24" nzFor="sku">Sku</nz-form-label>
-    <nz-form-control nzSpan="24" nzHasFeedback>
-      <input nzSize="large" formControlName="sku" nz-input name="sku" type="text" id="sku">
-    </nz-form-control>
-  </nz-form-item> 
+  <!-- Make & Model Inputs -->
+  <nz-row [nzGutter]="['16', '0']">
+    <nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12">
+      <nz-form-item>
+        <nz-form-label nzSpan="24" nzFor="make">Make</nz-form-label>
+        <nz-form-control nzSpan="24" nzHasFeedback>
+          <input nzSize="large" formControlName="make" nz-input name="make" type="text" id="make">
+        </nz-form-control>
+      </nz-form-item>
+    </nz-col>
+    <nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12">
+      <nz-form-item>
+        <nz-form-label nzSpan="24" nzFor="model">Model</nz-form-label>
+        <nz-form-control nzSpan="24" nzHasFeedback>
+          <input nzSize="large" formControlName="model" nz-input name="model" type="text" id="model">
+        </nz-form-control>
+      </nz-form-item> 
+    </nz-col>
+  </nz-row>
 
-  <!-- Make Input -->
-  <nz-form-item>
-    <nz-form-label nzSpan="24" nzFor="make">Make</nz-form-label>
-    <nz-form-control nzSpan="24" nzHasFeedback>
-      <input nzSize="large" formControlName="make" nz-input name="make" type="text" id="make">
-    </nz-form-control>
-  </nz-form-item> 
-
-  <!-- Model Input -->
-  <nz-form-item>
-    <nz-form-label nzSpan="24" nzFor="model">Model</nz-form-label>
-    <nz-form-control nzSpan="24" nzHasFeedback>
-      <input nzSize="large" formControlName="model" nz-input name="model" type="text" id="model">
-    </nz-form-control>
-  </nz-form-item> 
-
-  <!-- Category Select -->
-  <nz-form-item>
-    <nz-form-label [nzSpan]="24" nzRequired>Category</nz-form-label>
-    <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Category is required">
-      <nz-select 
-          nzSize="large" 
-          formControlName="category" 
-          nzPlaceHolder="The product item category"
-          [compareWith]="onCompareProductItems">
-        <nz-option 
-            *ngFor="let category of categories" 
-            [nzValue]="category" 
-            [nzLabel]="category.description">
-        </nz-option>
-      </nz-select>
-    </nz-form-control>
-  </nz-form-item>
+  <!-- Sku & Category Inputs -->
+  <nz-row [nzGutter]="['16', '0']">
+    <nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12">
+      <nz-form-item>
+        <nz-form-label nzSpan="24" nzFor="sku">Sku</nz-form-label>
+        <nz-form-control nzSpan="24" nzHasFeedback>
+          <input nzSize="large" formControlName="sku" nz-input name="sku" type="text" id="sku">
+        </nz-form-control>
+      </nz-form-item> 
+    </nz-col>
+    <nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="24" nzRequired>Category</nz-form-label>
+        <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Category is required">
+          <nz-select 
+              nzSize="large" 
+              formControlName="category" 
+              nzPlaceHolder="The product item category"
+              [compareWith]="onCompareProductItems">
+            <nz-option 
+                *ngFor="let category of categories" 
+                [nzValue]="category" 
+                [nzLabel]="category.description">
+            </nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>    
+    </nz-col>
+  </nz-row>
 </div>
