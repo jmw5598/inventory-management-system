@@ -65,12 +65,12 @@
 
   <!-- Item Condition Input -->
   <nz-form-item>
-    <nz-form-label [nzSpan]="24" nzFor="itemCondition" nzRequired>Item Condition</nz-form-label>
+    <nz-form-label [nzSpan]="24" nzFor="itemConditionId" nzRequired>Item Condition</nz-form-label>
     <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Item condition is required">
-      <nz-select nzSize="large" formControlName="itemCondition" nzPlaceHolder="">
+      <nz-select nzSize="large" formControlName="itemConditionId" nzPlaceHolder="">
         <nz-option 
             *ngFor="let condition of itemConditions" 
-            [nzValue]="condition" 
+            [nzValue]="condition.id" 
             [nzLabel]="condition.description">
         </nz-option>
       </nz-select>
@@ -81,12 +81,12 @@
     <!-- Stockroom Input -->
     <nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="12" ngXl="12">
       <nz-form-item>
-        <nz-form-label [nzSpan]="24" nzFor="stockroom" nzRequired>Stockroom</nz-form-label>
+        <nz-form-label [nzSpan]="24" nzFor="stockroomId" nzRequired>Stockroom</nz-form-label>
         <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Stockroom is required">
-          <nz-select nzSize="large" formControlName="stockroom" nzPlaceHolder="" (ngModelChange)="onStockroomChange($event)">
+          <nz-select nzSize="large" formControlName="stockroomId" nzPlaceHolder="" (ngModelChange)="onStockroomChange($event)">
             <nz-option 
                 *ngFor="let stockroom of stockrooms" 
-                [nzValue]="stockroom" 
+                [nzValue]="stockroom.id" 
                 [nzLabel]="stockroom.name">
             </nz-option>
           </nz-select>
@@ -97,12 +97,12 @@
     <!-- Locaiton Select -->
     <nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="12" ngXl="12">
       <nz-form-item>
-        <nz-form-label [nzSpan]="24" nzFor="location">Location</nz-form-label>
+        <nz-form-label [nzSpan]="24" nzFor="locationId">Location</nz-form-label>
         <nz-form-control [nzSpan]="24" nzHasFeedback>
-          <nz-select nzSize="large" formControlName="location" [nzDisabled]="!form.get('stockItem').value.stockroom">
+          <nz-select nzSize="large" formControlName="locationId" [nzDisabled]="!form.get('stockItem').value.stockroomId">
             <nz-option 
                 *ngFor="let location of locations" 
-                [nzValue]="location" 
+                [nzValue]="location.id" 
                 [nzLabel]="location.description">
             </nz-option>
           </nz-select>

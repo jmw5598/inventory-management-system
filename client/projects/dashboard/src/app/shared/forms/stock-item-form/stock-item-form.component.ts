@@ -22,9 +22,13 @@ export class StockItemFormComponent implements OnInit {
     this.form = this._parentControl.control as FormGroup;
   }
 
-  public onStockroomChange(stockroom: Stockroom): void {
-    this.form.get('stockItem').get('location').reset();
+  public onStockroomChange(stockroomId: number): void {
+    this.form.get('stockItem').get('locationId').reset();
+    console.log(stockroomId);
+    const stockroom: Stockroom = this.stockrooms.find(e => e.id === stockroomId);
+    console.log("found stockroom", stockroom);
     if (stockroom && stockroom.locations) {
+      console.log("stockroom is good setting locations", stockroom.locations);
       this.locations = stockroom.locations;
     }
   }

@@ -16,12 +16,12 @@ export const buildStockItemFormGroup = (formBuilder: FormBuilder) => {
       Validators.min(1),
       Validators.pattern(/^[\d]{1,}$/)
     ]],
-    itemCondition: ['', [
+    itemConditionId: ['', [
       Validators.required
     ]],
-    stockroom: ['', [
+    stockroomId: ['', [
       Validators.required
     ]],
-    location: []
+    locationId: []
   });
 };
